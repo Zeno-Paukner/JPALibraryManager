@@ -3,7 +3,7 @@ package at.htlleonding.persistence;
 import javax.persistence.*;
 
 public class Genre {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 

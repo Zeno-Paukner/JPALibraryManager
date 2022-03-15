@@ -17,7 +17,7 @@ public class QuarkusCmdlineApp implements QuarkusApplication {
     public int run(String... args) throws Exception {
         System.out.println("Hello World from Quarkus bloat...");
 
-        libraryService.createTwins();
+        //libraryService.createTwins();
 
         List<Publication> all = libraryService.selectAll();
         for (Publication p : all) {

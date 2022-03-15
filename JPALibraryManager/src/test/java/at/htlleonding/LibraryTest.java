@@ -2,15 +2,21 @@ package at.htlleonding;
 
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
 @QuarkusTest
-public class PersonTest {
+public class LibraryTest {
     @Inject
     LibraryService ps;
 
+    @TestTransaction
+    @Test
+    public void check_createAllMediatypes(){
+
+    }
+/*
     @TestTransaction
     @Test
     public void callCreateTwins_getByName_Marry_getMarryObject() {
@@ -28,4 +34,5 @@ public class PersonTest {
         Assertions.assertNotNull(target);
         Assertions.assertEquals("Harry", target.getFirstName());
     }
+ */
 }

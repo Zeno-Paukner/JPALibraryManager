@@ -1,8 +1,11 @@
 package at.htlleonding;
 //
 import at.htlleonding.model.Person;
+import at.htlleonding.persistence.Author;
+import at.htlleonding.persistence.Mediatype;
 import at.htlleonding.persistence.Publication;
 
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.print.attribute.standard.Media;
 import javax.transaction.Transactional;
 
 // @Transactional
@@ -41,6 +45,68 @@ public class LibraryService {
         return " ";
     }
 
+    @Transactional
+    public void createAllMediatypes(){
+
+        //-------set all publications----------
+        var pub1= new Publication();
+        pub1.setTitle("Romy im Wunderland");
+        pub1.setMediatype(Mediatype.EBOOK);
+        //----
+
+        var pub2 = new Publication();
+        pub2.setTitle("Martin in Wunderland");
+        pub2.setMediatype(Mediatype.AUDIOBOOK);
+        //----
+
+        var pub3 = new Publication();
+        pub3.setTitle("Zenchen im Wunderland");
+        pub3.setMediatype(Mediatype.BOOK);
+        //----
+
+        var pub4 = new Publication();
+        pub4.setTitle("Yimme im Wunderland");
+        pub4.setMediatype(Mediatype.MAGAZINE);
+        //----
+
+        var pub5 = new Publication();
+        pub5.setTitle("Willi im Wunderland");
+        pub5.setMediatype(Mediatype.NEWSPAPER);
+        //----
+
+        var pub6 = new Publication();
+        pub5.setTitle("Robi im Wunderland");
+        pub6.setMediatype(Mediatype.REFERENCEBOOK);
+        //----
+
+        //-------set all authors-----------
+
+
+        //----------commit data-----------
+        entityManager.persist(pub1);
+        entityManager.persist(pub2);
+        entityManager.persist(pub3);
+        entityManager.persist(pub4);
+        entityManager.persist(pub5);
+        entityManager.persist(pub6);
+
+
+    }
+/*
+    @Transactional
+    public void add(Book b, Author a) {
+
+        var assoc = new BookAuthor(b, a);
+        a.getAssocBooks().add(assoc);
+        b.getAssocAuthors().add(assoc);
+
+        entityManager.persist(assoc);
+        entityManager.persist(a);
+        entityManager.persist(b);
+    }
+
+ */
+
     public Publication getSingleMedia(Integer id) {
         try {
             return entityManager.find(Publication.class, id);
@@ -51,10 +117,10 @@ public class LibraryService {
         }
     }
 
-    public Person getByAuthor(int authorId) {
+ /*   public Person getByAuthor(int authorId) {
         try {
             return entityManager
-                    .createQuery("select p from Publication p inner join Author a on a.AuthorId = p.AuthorId")
+                    .createQuery("select p from Publication p inner join Author a on Author.Id = p.AuthorId")
                     .setParameter("name", author)
                     .getSingleResult();
         }
@@ -63,4 +129,6 @@ public class LibraryService {
             return null;
         }
     }
+    */
 }
+

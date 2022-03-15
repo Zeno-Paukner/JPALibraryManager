@@ -1,23 +1,24 @@
 package at.htlleonding.persistence;
 
 
+import javax.persistence.*;
+
 //Create a Entity named Person with ID FirstName, LastName, Phonenumber with persistence
-
-import javax.persistence.Entity;
-
-@Entity
+@MappedSuperclass
 public class Person {
+
     private String firstName;
     private String lastName;
-    private String phoneNumber;
-
-    public Person() {
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     public Person(String firstName, String lastName, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+    }
+    public Person(){
+
     }
 
     public String getFirstName() {
@@ -34,13 +35,5 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }
