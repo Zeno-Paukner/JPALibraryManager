@@ -13,6 +13,9 @@ public class Publication    {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
+    @Enumerated(EnumType.STRING)
+    private Mediatype mediatype;
+
     private String Title;
 
     private MediaType mediaType;
