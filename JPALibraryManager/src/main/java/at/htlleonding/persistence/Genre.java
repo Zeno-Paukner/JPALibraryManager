@@ -1,13 +1,12 @@
 package at.htlleonding.persistence;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 public class Genre {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
+    @Enumerated(EnumType.STRING)
     private String Genre;
 }
