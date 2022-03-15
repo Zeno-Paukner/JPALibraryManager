@@ -18,8 +18,6 @@ public class Publication    {
 
     private String Title;
 
-    private MediaType mediaType;
-
     private int PublisherId;
 
     private
