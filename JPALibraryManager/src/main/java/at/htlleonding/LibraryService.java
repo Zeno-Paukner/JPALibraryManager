@@ -1,6 +1,7 @@
 package at.htlleonding;
 //
 import at.htlleonding.model.Person;
+import at.htlleonding.persistence.Publication;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,30 +27,23 @@ public class LibraryService {
     EntityManager entityManager;
 
     @Transactional
-    public List<Person> selectAll() {
+    public List<Publication> selectAll() {
         return
                 entityManager
-                .createQuery("select p from Person p")
+                .createQuery("select p from Publication p")
                 .getResultList();
     }
 
+
+    //Maybe later for data creation
     @Transactional
-    public String createTwins() {
-
-        List<Person> twins = new ArrayList<Person>();
-        Person pers = new Person("Harry","Twain", LocalDate.of(2000, 12, 31));
-        entityManager.persist(pers);
-        twins.add(pers);
-        pers = new Person("Marry","Twain", LocalDate.of(2000, 12, 31));
-        entityManager.persist(pers);
-        twins.add(pers);
-
-        return "Congrats, Harry and Marry were born!";
+    public String createData() {
+        return " ";
     }
 
-        public Person getSingle(Integer id) {
+    public Publication getSingleMedia(Integer id) {
         try {
-            return entityManager.find(Person.class, id);
+            return entityManager.find(Publication.class, id);
         }
         catch (Exception e) {
             System.out.println(e);
@@ -57,11 +51,11 @@ public class LibraryService {
         }
     }
 
-    public Person getByFirstName(String firstName) {
+    public Person getByAuthor(int authorId) {
         try {
             return entityManager
-                    .createQuery("select p from Person p where p.FirstName = :name", Person.class)
-                    .setParameter("name", firstName)
+                    .createQuery("select p from Publication p inner join Author a on a.AuthorId = p.AuthorId")
+                    .setParameter("name", author)
                     .getSingleResult();
         }
         catch (Exception e) {

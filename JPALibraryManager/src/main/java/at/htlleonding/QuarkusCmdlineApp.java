@@ -2,6 +2,7 @@ package at.htlleonding;
 
 import at.htlleonding.model.Person;
 
+import at.htlleonding.persistence.Publication;
 import io.quarkus.runtime.QuarkusApplication;
 
 import javax.inject.Inject;
@@ -18,8 +19,8 @@ public class QuarkusCmdlineApp implements QuarkusApplication {
 
         libraryService.createTwins();
 
-        List<Person> all = libraryService.selectAll();
-        for (Person p : all) {
+        List<Publication> all = libraryService.selectAll();
+        for (Publication p : all) {
             System.out.println(p);
         }
 
