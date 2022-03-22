@@ -5,10 +5,14 @@ import javax.persistence.*;
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column
     private String language;
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getLanguage () {
         return language;

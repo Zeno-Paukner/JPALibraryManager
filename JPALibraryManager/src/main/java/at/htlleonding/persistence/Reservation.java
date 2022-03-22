@@ -19,7 +19,7 @@ import java.util.Date;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Integer Id;
 /*
     @ManyToOne
     private
@@ -30,7 +30,9 @@ public class Reservation {
     @ManyToOne
     private Client ClientId;
 
-
+    public Integer getId() {
+        return Id;
+    }
 }
 
 

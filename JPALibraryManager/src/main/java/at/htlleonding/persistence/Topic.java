@@ -11,4 +11,8 @@ public class Topic {
 
     @Column
     private String topic;
+
+    public Integer getId() {
+        return id;
+    }
 }

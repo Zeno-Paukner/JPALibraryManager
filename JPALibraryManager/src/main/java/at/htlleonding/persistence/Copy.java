@@ -9,11 +9,11 @@ public class Copy {
     private Integer Id;
 
     @ManyToOne
-    @JoinColumn (name= "publication_id")
+    @JoinColumn (name= "publicationId")
     private Publication publication;
 
     @ManyToOne
-    @JoinColumn(name= "sale_id")
+    @JoinColumn(name= "saleId")
     private Sale sale;
 
     @Column

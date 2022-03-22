@@ -1,9 +1,7 @@
 package at.htlleonding;
 //
 import at.htlleonding.model.Person;
-import at.htlleonding.persistence.Author;
-import at.htlleonding.persistence.Mediatype;
-import at.htlleonding.persistence.Publication;
+import at.htlleonding.persistence.*;
 
 import java.awt.print.Book;
 import java.time.LocalDate;
@@ -14,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.print.attribute.standard.Media;
+import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 
 // @Transactional
@@ -92,20 +91,106 @@ public class LibraryService {
 
 
     }
-/*
+
     @Transactional
-    public void add(Book b, Author a) {
+    public void add(Author a) { entityManager.persist(a);  }
 
-        var assoc = new BookAuthor(b, a);
-        a.getAssocBooks().add(assoc);
-        b.getAssocAuthors().add(assoc);
+    @Transactional
+    public void add(Publication p) { entityManager.persist(p);  }
 
-        entityManager.persist(assoc);
+    @Transactional
+    public void add(Genre g) { entityManager.persist(g);  }
+
+    @Transactional
+    public void add(Publisher pu) { entityManager.persist(pu);  }
+
+    @Transactional
+    public void add(Language lang){ entityManager.persist(lang); }
+
+    @Transactional
+    public void add(Reservation r){ entityManager.persist(r); }
+
+    @Transactional
+    public void add(Topic t) { entityManager.persist(t); }
+
+    @Transactional
+    public void add(Publication p, Author a) {
+        if(p.getId() == null)
+            add(p);
+
+        if(a.getId() == null)
+            add(a);
+        p.getAuthors().add(a);
+        a.getPublications().add(p);
+
         entityManager.persist(a);
-        entityManager.persist(b);
+        entityManager.persist(p);
     }
 
- */
+    @Transactional
+    public void add(Publication p, Topic t){
+        if(p.getId() == null){
+            add(p);
+        }
+
+        if(t.getId() == null){
+            add(t);
+        }
+
+        t.getPublications().add(p);
+        p.getTopics().add(t);
+
+        entityManager.persist(t);
+        entityManager.persist(p);
+
+    }
+
+    @Transactional
+    public void add(Publication p, Publisher pu){
+        if(p.getId() == null){
+            add(p);
+        }
+        if(pu.getId() == null){
+            add(pu);
+        }
+        p.getPublisher().add(pu);
+        pu.getPublications().add(p);
+
+        entityManager.persist(pu);
+        entityManager.persist(p);
+    }
+
+    @Transactional
+    public void add(Publication p, Language lang){
+        if(p.getId() == null){
+            add(p);
+        }
+        if(lang.getId() == null){
+            add(lang);
+        }
+        p.getLanguages().add(lang);
+        lang.getPublications().add(p);
+
+        entityManager.persist(p);
+        entityManager.persist(lang);
+    }
+
+    @Transactional
+    public void add(Publication p, Reservation r){
+        if(p.getId() == null){
+            add(p);
+        }
+        if(r.getId() == null){
+            add(r);
+        }
+        p.getReservations().add(r);
+        r.getPublications().add(p);
+
+        entityManager.persist(p);
+        entityManager.persist(r);
+
+    }
+
 
     public Publication getSingleMedia(Integer id) {
         try {
@@ -117,11 +202,11 @@ public class LibraryService {
         }
     }
 
- /*   public Person getByAuthor(int authorId) {
+ public Publication getByAuthor(int authorId) {
         try {
             return entityManager
-                    .createQuery("select p from Publication p inner join Author a on Author.Id = p.AuthorId")
-                    .setParameter("name", author)
+                    .createQuery("select p from Publication p join p.authors a on a.author.id = ?1", Publication.class)
+                    .setParameter(1, authorId)
                     .getSingleResult();
         }
         catch (Exception e) {
@@ -129,6 +214,5 @@ public class LibraryService {
             return null;
         }
     }
-    */
 }
 

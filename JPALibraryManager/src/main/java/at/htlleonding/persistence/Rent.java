@@ -18,11 +18,11 @@ public class Rent {
     private int Id;
 
     @ManyToOne
-    @JoinColumn(name = "copy_id")
+    @JoinColumn(name = "copyId")
     private Copy copy;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     private String startDate;

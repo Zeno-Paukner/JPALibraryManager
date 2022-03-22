@@ -2,6 +2,7 @@ package at.htlleonding;
 
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -9,12 +10,17 @@ import javax.inject.Inject;
 @QuarkusTest
 public class LibraryTest {
     @Inject
-    LibraryService ps;
+    LibraryService target;
 
     @TestTransaction
     @Test
     public void check_createAllMediatypes(){
+        target.createAllMediatypes();
 
+        target.entityManager.flush();
+        target.entityManager.clear();
+        Assertions.assertNotNull(target);
+        Assertions.assertEquals("Romeo", target.getByAuthor(1));
     }
 /*
     @TestTransaction

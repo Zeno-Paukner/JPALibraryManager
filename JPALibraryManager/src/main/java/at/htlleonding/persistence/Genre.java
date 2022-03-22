@@ -7,6 +7,15 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Enumerated(EnumType.STRING)
-    private String Genre;
+    @Column
+    private String genre;
+
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
 }

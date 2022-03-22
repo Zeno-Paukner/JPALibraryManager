@@ -20,7 +20,7 @@ public class Client extends Person{
         return email;
     }
 
-    public void setPhonNumber(String phoneNumber){this.phoneNumber=phoneNumber; }
+    public void setPhoneNumber(String phoneNumber){this.phoneNumber=phoneNumber; }
     public void setEmail(String email){this.email=email; }
 
 }

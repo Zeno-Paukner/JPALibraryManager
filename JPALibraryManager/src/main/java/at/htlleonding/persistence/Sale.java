@@ -8,7 +8,7 @@ import java.util.Date;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer sale_id;
+    private Integer id;
 
     @OneToMany(mappedBy = "sale")
     private ArrayList<Copy> copyList = new ArrayList<Copy>();

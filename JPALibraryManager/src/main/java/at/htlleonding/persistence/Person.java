@@ -11,7 +11,7 @@ public class Person {
     private String lastName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     public Person(String firstName, String lastName, String phoneNumber) {
         this.firstName = firstName;
@@ -19,6 +19,10 @@ public class Person {
     }
     public Person(){
 
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getFirstName() {

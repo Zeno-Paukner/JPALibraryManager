@@ -12,7 +12,7 @@ public class Publication    {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer publication_id;
+    private Integer id;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -25,7 +25,33 @@ public class Publication    {
     private int publisherId;
 
     @OneToMany (mappedBy = "publication")
-    private ArrayList<Copy> copyList = new ArrayList<Copy>();
+    private ArrayList<Copy> copies = new ArrayList<>();
+
+    @OneToMany
+    private ArrayList<Author> authors = new ArrayList<>();
+
+    @OneToMany
+    private ArrayList<Topic> topics = new ArrayList<>();
+
+    public ArrayList<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(ArrayList<Author> authors) {
+        this.authors = authors;
+    }
+
+    public ArrayList<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(ArrayList<Topic> topics) {
+        this.topics = topics;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public Mediatype getMediatype() {
         return mediatype;
