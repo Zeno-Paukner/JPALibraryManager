@@ -1,5 +1,7 @@
 package at.htlleonding.persistence;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 //Create a new Entity called Invoice with the following attributes:
 //Primery Key: Id
 //mutiple Forain Key: SaleId
@@ -21,23 +23,10 @@ public class Invoice {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @ManyToOne
-    @JoinColumn(name = "sale_id")
-    private Sale sale;
+    @OneToMany(mappedBy = "invoice")
+    private List<Sale> sale = new ArrayList<>();
 
     public Invoice() {
     }
 
-    public Invoice(Sale sale) {
-        this.sale = sale;
-    }
-
-
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
-    }
 }

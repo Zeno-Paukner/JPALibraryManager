@@ -7,9 +7,9 @@ import java.util.List;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "genre")
     private List<Publication> publications = new ArrayList<Publication>();
 
     @Column
@@ -23,11 +23,11 @@ public class Genre {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getGenre() {

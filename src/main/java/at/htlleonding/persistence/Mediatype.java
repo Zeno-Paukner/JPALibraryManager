@@ -1,5 +1,7 @@
 package at.htlleonding.persistence;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //Create a new Entity called Mediatype with
@@ -11,7 +13,9 @@ import javax.persistence.*;
 
 @Entity
 public class Mediatype {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     private MediatypeEnum mediatypeEnum;
@@ -19,14 +23,16 @@ public class Mediatype {
     @Column
     private Double price;
 
-    @ManyToOne
-    @JoinColumn(name = "publication_id")
-    private Publication publication;
+    @OneToMany(mappedBy = "mediatype")
+    private List<Publication> publication = new ArrayList<>();
 
-    public Mediatype(Integer id, MediatypeEnum mediatypeEnum, Double price, Publication publication) {
+    public Mediatype(Integer id, MediatypeEnum mediatypeEnum, Double price) {
         this.mediatypeEnum = mediatypeEnum;
         this.price = price;
-        this.publication = publication;
+    }
+
+    public Mediatype() {
+
     }
 
 
@@ -44,14 +50,6 @@ public class Mediatype {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Publication getPublication() {
-        return publication;
-    }
-
-    public void setPublication(Publication publication) {
-        this.publication = publication;
     }
 }
 

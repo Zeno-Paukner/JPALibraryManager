@@ -6,15 +6,19 @@ import java.util.Date;
 public class Copy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn (name= "publicationId")
+    @JoinColumn (name= "publication_id")
     private Publication publication;
 
     @ManyToOne
-    @JoinColumn(name= "saleId")
+    @JoinColumn(name= "sale_id")
     private Sale sale;
+
+    @ManyToOne
+    @JoinColumn(name= "rent_id")
+    private Rent rent;
 
     @Column
     private Date buyDate;
@@ -23,19 +27,23 @@ public class Copy {
     private double price;
 
     public Copy(Integer id, Publication publication, Sale sale, Date buyDate, double price) {
-        Id = id;
+        this.id = id;
         this.publication = publication;
         this.sale = sale;
         this.buyDate = buyDate;
         this.price = price;
     }
 
+    public Copy() {
+
+    }
+
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public Publication getPublication() {

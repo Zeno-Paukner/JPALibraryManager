@@ -24,6 +24,10 @@ public class Publisher {
         this.publisherName = publisherName;
     }
 
+    public Publisher() {
+
+    }
+
     public Integer getId() {
         return id;
     }

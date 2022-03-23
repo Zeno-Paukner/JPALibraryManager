@@ -23,6 +23,9 @@ public class Client extends Person{
     @OneToMany (mappedBy = "rent")
     private List<Rent> rents = new ArrayList<>();
 
+    @OneToMany (mappedBy = "reservation")
+    private List<Reservation> reservations = new ArrayList<>();
+
 
     public Client(String firstName, String lastName, String phoneNumber, Integer id, String phoneNumber1, String email) {
         super(firstName, lastName, phoneNumber);
@@ -33,6 +36,10 @@ public class Client extends Person{
     public Client(Integer id, String phoneNumber, String email) {
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Client() {
+
     }
 
     public String getPhoneNumber() {

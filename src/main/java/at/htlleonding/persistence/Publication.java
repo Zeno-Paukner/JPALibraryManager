@@ -24,14 +24,19 @@ public class Publication    {
     private boolean isTranslated;
 
     @ManyToOne
-    @JoinColumn(name = "languageId")
+    @JoinColumn(name = "language_id")
     private Language language;
 
-    @OneToMany(mappedBy = "genre")
-    private ArrayList<Genre> genre = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
     @ManyToOne
-    @JoinColumn(name = "publisherId")
+    @JoinColumn(name = "mediatype_id")
+    private Mediatype mediatype;
+
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
     @OneToMany(mappedBy = "publication")

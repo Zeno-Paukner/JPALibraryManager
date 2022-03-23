@@ -12,12 +12,16 @@ public class Language {
     @Column
     private String languageCode;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "language")
     private List<Publication> publications = new ArrayList<>();
 
     public Language(Integer id, String languageCode) {
         this.id = id;
         this.languageCode = languageCode;
+    }
+
+    public Language() {
+
     }
 
     public Integer getId() {

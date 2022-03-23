@@ -16,7 +16,7 @@ public class Employee extends Person {
     @OneToMany(mappedBy = "rent")
     private List<Rent> rents = new ArrayList<>();
 
-    @OneToMany (mappedBy = "client")
+    @OneToMany (mappedBy = "sale")
     private List<Sale> sales = new ArrayList<>();
 
     public Employee(String firstName, String lastName, String phoneNumber, Integer id, String salary) {
@@ -26,6 +26,10 @@ public class Employee extends Person {
 
     public Employee(Integer id, String salary) {
         this.salary = salary;
+    }
+
+    public Employee() {
+
     }
 
     public String getSalary() {

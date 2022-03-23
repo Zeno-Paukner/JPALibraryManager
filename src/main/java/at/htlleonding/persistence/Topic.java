@@ -6,6 +6,7 @@ import java.util.ArrayList;
 @Entity
 public class Topic {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToMany
@@ -14,6 +15,10 @@ public class Topic {
     public Topic(Integer id, ArrayList<Publication> publication) {
         this.id = id;
         this.publication = publication;
+    }
+
+    public Topic() {
+
     }
 
     public Integer getId() {

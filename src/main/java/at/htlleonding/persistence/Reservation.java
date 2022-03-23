@@ -30,10 +30,18 @@ public class Reservation {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @ManyToOne
+    @JoinColumn(name = "publication_id")
+    private Publication publication;
+
     public Reservation(Integer _id, Date _reservationDate, Client _client) {
         id = _id;
         reservationDate = _reservationDate;
         client = _client;
+    }
+
+    public Reservation() {
+
     }
 
     public Integer getId() {
