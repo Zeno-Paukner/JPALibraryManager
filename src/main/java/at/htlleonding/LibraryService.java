@@ -47,7 +47,7 @@ public class LibraryService {
     @Transactional
     public void createAllMediatypes(){
 
-        //-------set all publications----------
+        /*//-------set all publications----------
         var pub1= new Publication();
         pub1.setTitle("Romy im Wunderland");
         pub1.setMediatype(Mediatype.EBOOK);
@@ -76,18 +76,18 @@ public class LibraryService {
         var pub6 = new Publication();
         pub5.setTitle("Robi im Wunderland");
         pub6.setMediatype(Mediatype.REFERENCEBOOK);
-        //----
+        //----*/
 
         //-------set all authors-----------
 
 
         //----------commit data-----------
-        entityManager.persist(pub1);
+        /*entityManager.persist(pub1);
         entityManager.persist(pub2);
         entityManager.persist(pub3);
         entityManager.persist(pub4);
         entityManager.persist(pub5);
-        entityManager.persist(pub6);
+        entityManager.persist(pub6);*/
 
 
     }

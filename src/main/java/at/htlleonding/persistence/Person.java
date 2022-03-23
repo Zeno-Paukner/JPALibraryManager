@@ -3,7 +3,7 @@ package at.htlleonding.persistence;
 
 import javax.persistence.*;
 
-//Create a Entity named Person with ID FirstName, LastName, Phonenumber with persistence
+//Create a Entity named Person with ID FirstName, LastName, PhoneNumber with persistence
 @MappedSuperclass
 public class Person {
 

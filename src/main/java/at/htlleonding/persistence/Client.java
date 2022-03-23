@@ -3,6 +3,10 @@ package at.htlleonding.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Client extends Person{
@@ -13,14 +17,37 @@ public class Client extends Person{
     @Column
     private String email;
 
+    @OneToMany (mappedBy = "client")
+    private List<Sale> sales = new ArrayList<>();
+
+    @OneToMany (mappedBy = "rent")
+    private List<Rent> rents = new ArrayList<>();
+
+
+    public Client(String firstName, String lastName, String phoneNumber, Integer id, String phoneNumber1, String email) {
+        super(firstName, lastName, phoneNumber);
+        this.phoneNumber = phoneNumber1;
+        this.email = email;
+    }
+
+    public Client(Integer id, String phoneNumber, String email) {
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    public String getEmail () {
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
         return email;
     }
 
-    public void setPhoneNumber(String phoneNumber){this.phoneNumber=phoneNumber; }
-    public void setEmail(String email){this.email=email; }
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

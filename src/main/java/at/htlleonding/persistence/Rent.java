@@ -10,20 +10,23 @@ import javax.persistence.*;
 //Column with date: Deadline
 
 @Entity
-@Table(name = "Rent")
 public class Rent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "copyId")
+    @JoinColumn(name = "copy_id")
     private Copy copy;
 
     @ManyToOne
-    @JoinColumn(name = "employeeId")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     private String startDate;
     private String endDate;

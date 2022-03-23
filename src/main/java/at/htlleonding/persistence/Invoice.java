@@ -14,7 +14,15 @@ public class Invoice {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "saleId")
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "sale_id")
     private Sale sale;
 
     public Invoice() {

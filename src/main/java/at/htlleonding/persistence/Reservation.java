@@ -9,29 +9,55 @@ package at.htlleonding.persistence;
 //A Date Column; ReservationDate
 //one-to-many: ClientId
 
+import org.graalvm.polyglot.HostAccess;
+
 import javax.persistence.*;
 import java.util.Date;
-
-
-
 
 @Entity
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 /*
     @ManyToOne
     private
-
-    @Column
-    private Date ReservationDate;
 */
+    @Column
+    private Date reservationDate;
+
     @ManyToOne
-    private Client ClientId;
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    public Reservation(Integer _id, Date _reservationDate, Client _client) {
+        id = _id;
+        reservationDate = _reservationDate;
+        client = _client;
+    }
 
     public Integer getId() {
-        return Id;
+        return id;
+    }
+
+    public void setId(Integer _id) {
+        id = _id;
+    }
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        reservationDate = reservationDate;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClientId(Client _client) {
+        client = _client;
     }
 }
 
