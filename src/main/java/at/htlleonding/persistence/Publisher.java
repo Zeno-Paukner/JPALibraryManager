@@ -20,7 +20,7 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher")
     private List<Publication> publications = new ArrayList<>();
 
-    public Publisher(Integer id, String publisherName) {
+    public Publisher(String publisherName) {
         this.id = id;
         this.publisherName = publisherName;
     }
@@ -35,10 +35,6 @@ public class Publisher {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getPublisherName() {

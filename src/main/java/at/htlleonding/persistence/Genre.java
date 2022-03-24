@@ -38,4 +38,12 @@ public class Genre {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    public List<Publication> getPublications() {
+        return publications;
+    }
+
+    public void setPublications(List<Publication> publications) {
+        this.publications = publications;
+    }
 }

@@ -15,8 +15,7 @@ public class Language {
     @OneToMany(mappedBy = "language")
     private List<Publication> publications = new ArrayList<>();
 
-    public Language(Integer id, String languageCode) {
-        this.id = id;
+    public Language(String languageCode) {
         this.languageCode = languageCode;
     }
 
@@ -30,10 +29,6 @@ public class Language {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getLanguageCode() {

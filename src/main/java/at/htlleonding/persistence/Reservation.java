@@ -34,22 +34,13 @@ public class Reservation {
     @JoinColumn(name = "publication_id")
     private Publication publication;
 
-    public Reservation(Integer _id, Date _reservationDate, Client _client) {
-        id = _id;
+    public Reservation(Date _reservationDate, Client _client) {
         reservationDate = _reservationDate;
         client = _client;
     }
 
     public Reservation() {
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer _id) {
-        id = _id;
     }
 
     public Date getReservationDate() {

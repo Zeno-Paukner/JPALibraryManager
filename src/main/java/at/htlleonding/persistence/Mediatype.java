@@ -26,7 +26,7 @@ public class Mediatype {
     @OneToMany(mappedBy = "mediatype")
     private List<Publication> publication = new ArrayList<>();
 
-    public Mediatype(Integer id, MediatypeEnum mediatypeEnum, Double price) {
+    public Mediatype(MediatypeEnum mediatypeEnum, Double price) {
         this.mediatypeEnum = mediatypeEnum;
         this.price = price;
     }

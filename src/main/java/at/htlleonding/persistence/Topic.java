@@ -10,12 +10,14 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
+    private String keyword;
+
     @ManyToMany
     private List<Publication> publications = new ArrayList<>();
 
-    public Topic(Integer id, ArrayList<Publication> publication) {
-        this.id = id;
-        this.publications = publication;
+    public Topic(String keyword) {
+        this.keyword = keyword;
     }
 
     public Topic() {
@@ -34,11 +36,15 @@ public class Topic {
         this.id = id;
     }
 
-    public List<Publication> getPublications() {
-        return publications;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setPublications(ArrayList<Publication> publication) {
-        this.publications = publication;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public List<Publication> getPublications() {
+        return publications;
     }
 }

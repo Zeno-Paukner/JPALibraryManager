@@ -17,10 +17,10 @@ public class QuarkusCmdlineApp implements QuarkusApplication {
 
         //libraryService.createTwins();
 
-        List<Publication> all = libraryService.selectAll();
-        for (Publication p : all) {
-            System.out.println(p);
-        }
+        //List<Publication> all = libraryService.selectAll();
+        //for (Publication p : all) {
+        //    System.out.println(p);
+        //}
 
         return 0;
     }
