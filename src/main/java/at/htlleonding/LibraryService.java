@@ -1,6 +1,5 @@
 package at.htlleonding;
 //
-import at.htlleonding.model.Person;
 import at.htlleonding.persistence.*;
 
 import java.awt.print.Book;
@@ -28,6 +27,12 @@ public class LibraryService {
 
     @Inject
     EntityManager entityManager;
+
+    @Transactional
+    public void FlushAndClear() {
+        entityManager.flush();
+        entityManager.clear();
+    }
 
     @Transactional
     public List<Publication> selectAll() {
@@ -153,7 +158,7 @@ public class LibraryService {
         if(pu.getId() == null){
             add(pu);
         }
-        p.getPublisher().add(pu);
+        p.setPublisher(pu);
         pu.getPublications().add(p);
 
         entityManager.persist(pu);
@@ -168,13 +173,13 @@ public class LibraryService {
         if(lang.getId() == null){
             add(lang);
         }
-        p.getLanguages().add(lang);
+        p.setLanguage(lang);
         lang.getPublications().add(p);
 
         entityManager.persist(p);
         entityManager.persist(lang);
     }
-
+/*
     @Transactional
     public void add(Publication p, Reservation r){
         if(p.getId() == null){
@@ -191,6 +196,8 @@ public class LibraryService {
 
     }
 
+ */
+
 
     public Publication getSingleMedia(Integer id) {
         try {
@@ -202,11 +209,23 @@ public class LibraryService {
         }
     }
 
- public Publication getByAuthor(int authorId) {
+
+    public List<Author> getAllAuthors() {
         try {
             return entityManager
-                    .createQuery("select p from Publication p join p.authors a on a.author.id = ?1", Publication.class)
-                    .setParameter(1, authorId)
+                    .createQuery("select a from Author a", Author.class)
+                    .getResultList();
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    public Author getByAuthorByLastName(String lastname) {
+        try {
+            return entityManager
+                    .createQuery("select a from Author a where a.lastName = ?1", Author.class)
+                    .setParameter(1, lastname)
                     .getSingleResult();
         }
         catch (Exception e) {

@@ -2,6 +2,7 @@ package at.htlleonding.persistence;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Topic {
@@ -10,11 +11,11 @@ public class Topic {
     private Integer id;
 
     @ManyToMany
-    private ArrayList<Publication> publication = new ArrayList<>();
+    private List<Publication> publications = new ArrayList<>();
 
     public Topic(Integer id, ArrayList<Publication> publication) {
         this.id = id;
-        this.publication = publication;
+        this.publications = publication;
     }
 
     public Topic() {
@@ -31,5 +32,13 @@ public class Topic {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Publication> getPublications() {
+        return publications;
+    }
+
+    public void setPublications(ArrayList<Publication> publication) {
+        this.publications = publication;
     }
 }

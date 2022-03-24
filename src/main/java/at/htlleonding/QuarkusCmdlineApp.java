@@ -1,7 +1,5 @@
 package at.htlleonding;
 
-import at.htlleonding.model.Person;
-
 import at.htlleonding.persistence.Publication;
 import io.quarkus.runtime.QuarkusApplication;
 

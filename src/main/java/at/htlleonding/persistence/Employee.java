@@ -13,10 +13,10 @@ public class Employee extends Person {
     @Column
     private String salary;
 
-    @OneToMany(mappedBy = "rent")
+    @OneToMany(mappedBy = "employee")
     private List<Rent> rents = new ArrayList<>();
 
-    @OneToMany (mappedBy = "sale")
+    @OneToMany (mappedBy = "employee")
     private List<Sale> sales = new ArrayList<>();
 
     public Employee(String firstName, String lastName, String phoneNumber, Integer id, String salary) {

@@ -24,6 +24,10 @@ public class Language {
 
     }
 
+    public List<Publication> getPublications() {
+        return publications;
+    }
+
     public Integer getId() {
         return id;
     }

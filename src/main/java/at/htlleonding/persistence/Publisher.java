@@ -2,6 +2,7 @@ package at.htlleonding.persistence;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 //Create a new Entity called Publisher with the following attributes:
 //Primery Key: Id
 //Column with date: PublisherName
@@ -17,7 +18,7 @@ public class Publisher {
     private String publisherName;
 
     @OneToMany(mappedBy = "publisher")
-    private ArrayList<Publication> publications = new ArrayList<>();
+    private List<Publication> publications = new ArrayList<>();
 
     public Publisher(Integer id, String publisherName) {
         this.id = id;
@@ -26,6 +27,10 @@ public class Publisher {
 
     public Publisher() {
 
+    }
+
+    public List<Publication> getPublications() {
+        return publications;
     }
 
     public Integer getId() {

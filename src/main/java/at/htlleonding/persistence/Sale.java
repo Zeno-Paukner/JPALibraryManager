@@ -3,6 +3,7 @@ package at.htlleonding.persistence;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Sale {
@@ -11,14 +12,14 @@ public class Sale {
     private Integer id;
 
     @OneToMany(mappedBy = "sale")
-    private ArrayList<Copy> copyList = new ArrayList<Copy>();
+    private List<Copy> copyList = new ArrayList<Copy>();
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @ManyToOne
-    @JoinColumn (name = "id")
+    @JoinColumn (name = "employee_id")
     private Employee employee;
 
     @Column
@@ -27,23 +28,30 @@ public class Sale {
     @Column
     private Integer Amount;
 
+    @ManyToOne
+    @JoinColumn (name = "invoice_id")
+    private Invoice invoice;
 
     public Sale(Integer id, ArrayList<Copy> copyList, Date saleDate, Integer amount) {
-        this.saleId = id;
+        this.id = id;
         this.copyList = copyList;
         this.saleDate = saleDate;
         Amount = amount;
     }
 
+    public Sale() {
+
+    }
+
     public Integer getId() {
-        return saleId;
+        return id;
     }
 
     public void setId(Integer id) {
-        this.saleId = id;
+        this.id = id;
     }
 
-    public ArrayList<Copy> getCopyList() {
+    public List<Copy> getCopyList() {
         return copyList;
     }
 

@@ -20,10 +20,10 @@ public class Client extends Person{
     @OneToMany (mappedBy = "client")
     private List<Sale> sales = new ArrayList<>();
 
-    @OneToMany (mappedBy = "rent")
+    @OneToMany (mappedBy = "client")
     private List<Rent> rents = new ArrayList<>();
 
-    @OneToMany (mappedBy = "reservation")
+    @OneToMany (mappedBy = "client")
     private List<Reservation> reservations = new ArrayList<>();
 
 

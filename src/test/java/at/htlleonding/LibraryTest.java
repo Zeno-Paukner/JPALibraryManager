@@ -1,5 +1,7 @@
 package at.htlleonding;
 
+import at.htlleonding.persistence.Author;
+import at.htlleonding.persistence.Publication;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
@@ -12,15 +14,30 @@ public class LibraryTest {
     @Inject
     LibraryService target;
 
+    private  void createSampleData() {
+        var author1 = new Author("Franz", "Ower", "660");
+        var author2 = new Author("Georg", "Orwell", "660");
+
+        var publication = new Publication("1984", "1960", true);
+
+        target.add(author1);
+
+        target.add(publication, author2);
+    }
+
+
+
     @TestTransaction
     @Test
-    public void check_createAllMediatypes(){
-        target.createAllMediatypes();
+    public void createSampleData_getAllAuthors_get2Authors(){
+        //target.createAllMediatypes();
+        createSampleData();
 
-        target.entityManager.flush();
-        target.entityManager.clear();
-        Assertions.assertNotNull(target);
-        Assertions.assertEquals("Romeo", target.getByAuthor(1));
+        target.FlushAndClear();
+
+        var authors = target.getAllAuthors();
+        Assertions.assertNotNull(authors);
+        Assertions.assertEquals(2, authors.size());
     }
 /*
     @TestTransaction
