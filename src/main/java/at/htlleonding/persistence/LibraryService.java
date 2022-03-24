@@ -199,7 +199,7 @@ public class LibraryService {
         }
     }
 
-
+    @Transactional
     public List<Author> getAllAuthors() {
         try {
             return entityManager
@@ -211,6 +211,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public Author getAuthorByLastName(String lastname) {
         try {
             return entityManager
@@ -223,6 +224,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Publication> getAllPublications() {
         try {
             return entityManager
@@ -234,6 +236,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public Publication getPublicationByTitle(String title) {
         try {
             return entityManager
@@ -246,6 +249,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Topic> getAllTopics() {
         try {
             return entityManager
@@ -257,6 +261,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Publication> getPublicationsByTopic(String topic) {
         try {
             return entityManager
@@ -269,6 +274,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Genre> getAllGenres() {
         try {
             return entityManager
@@ -280,6 +286,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Publication> getPublicationsByGenre(String genre) {
         try {
             return entityManager
@@ -293,6 +300,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Publisher> getAllPublisher() {
         try {
             return entityManager
@@ -304,6 +312,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public Publisher getPublisherByName(String publisherName) {
         try {
             return entityManager
@@ -316,6 +325,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Language> getAllLanguages() {
         try {
             return entityManager
@@ -327,6 +337,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public Language getLanguageByLanguageCode(String languageCode) {
         try {
             return entityManager
@@ -339,6 +350,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Reservation> getAllReservations() {
         try {
             return entityManager
@@ -350,6 +362,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Client> getAllClients() {
         try {
             return entityManager
@@ -361,6 +374,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public List<Employee> getAllEmployees() {
         try {
             return entityManager
@@ -372,6 +386,7 @@ public class LibraryService {
         }
     }
 
+    @Transactional
     public Publication getPublicationById(Integer id) {
         try {
             return entityManager
