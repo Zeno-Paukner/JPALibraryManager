@@ -1,10 +1,9 @@
 package at.htlleonding;
 
-import at.htlleonding.persistence.Publication;
+import at.htlleonding.persistence.LibraryService;
 import io.quarkus.runtime.QuarkusApplication;
 
 import javax.inject.Inject;
-import java.util.List;
 
 @io.quarkus.runtime.annotations.QuarkusMain
 public class QuarkusCmdlineApp implements QuarkusApplication {

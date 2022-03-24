@@ -1,4 +1,4 @@
-package at.htlleonding;
+package at.htlleonding.persistence;
 //
 import at.htlleonding.persistence.*;
 
@@ -34,68 +34,20 @@ public class LibraryService {
         entityManager.clear();
     }
 
-    //@Transactional
-    //public List<Publication> selectAll() {
-    //    return
-    //            entityManager
-    //            .createQuery("select p from Publication p")
-    //            .getResultList();
-    //}
-//
-//
-    ////Maybe later for data creation
-    //@Transactional
-    //public String createData() {
-    //    return " ";
-    //}
-//
-    //@Transactional
-    //public void createAllMediatypes(){
-//
-    //    //-------set all publications----------
-    //    var pub1= new Publication();
-    //    pub1.setTitle("Romy im Wunderland");
-    //    pub1.setMediatype(Mediatype.EBOOK);
-    //    //----
-//
-    //    var pub2 = new Publication();
-    //    pub2.setTitle("Martin in Wunderland");
-    //    pub2.setMediatype(Mediatype.AUDIOBOOK);
-    //    //----
-//
-    //    var pub3 = new Publication();
-    //    pub3.setTitle("Zenchen im Wunderland");
-    //    pub3.setMediatype(Mediatype.BOOK);
-    //    //----
-//
-    //    var pub4 = new Publication();
-    //    pub4.setTitle("Yimme im Wunderland");
-    //    pub4.setMediatype(Mediatype.MAGAZINE);
-    //    //----
-//
-    //    var pub5 = new Publication();
-    //    pub5.setTitle("Willi im Wunderland");
-    //    pub5.setMediatype(Mediatype.NEWSPAPER);
-    //    //----
-//
-    //    var pub6 = new Publication();
-    //    pub5.setTitle("Robi im Wunderland");
-    //    pub6.setMediatype(Mediatype.REFERENCEBOOK);
-    //    //----*/
-//
-    //    //-------set all authors-----------
-//
-//
-    //    //----------commit data-----------
-    //    /*entityManager.persist(pub1);
-    //    entityManager.persist(pub2);
-    //    entityManager.persist(pub3);
-    //    entityManager.persist(pub4);
-    //    entityManager.persist(pub5);
-    //    entityManager.persist(pub6);
-//
-//
-    //}
+    @Transactional
+    public void flush() {
+        entityManager.flush();
+    }
+
+    @Transactional
+    public void clear() {
+        entityManager.clear();
+    }
+
+    @Transactional
+    public <E> Boolean contains(E e){
+        return entityManager.contains(e);
+    }
 
     @Transactional
     public void add(Author a) {
@@ -130,6 +82,16 @@ public class LibraryService {
     @Transactional
     public void add(Topic t) {
         entityManager.persist(t);
+    }
+
+    @Transactional
+    public void add(Employee e){
+        entityManager.persist(e);
+    }
+
+    @Transactional
+    public void add(Client c){
+        entityManager.persist(c);
     }
 
     @Transactional
@@ -209,7 +171,7 @@ public class LibraryService {
         entityManager.persist(g);
     }
 
-    /*@Transactional
+    @Transactional
     public void add(Publication p, Reservation r){
         if(p.getId() == null){
             add(p);
@@ -218,13 +180,15 @@ public class LibraryService {
             add(r);
         }
         p.getReservations().add(r);
-        r.getPublications().add(p);
+        r.setPublication(p);
 
         entityManager.persist(p);
         entityManager.persist(r);
 
-    }*/
+    }
 
+    @Transactional
+    public <E> void remove(E e) {entityManager.remove(e);}
 
     public Publication getSingleMedia(Integer id) {
         try {
@@ -380,6 +344,40 @@ public class LibraryService {
             return entityManager
                     .createQuery("select r from Reservation r", Reservation.class)
                     .getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public List<Client> getAllClients() {
+        try {
+            return entityManager
+                    .createQuery("select c from Client c", Client.class)
+                    .getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public List<Employee> getAllEmployees() {
+        try {
+            return entityManager
+                    .createQuery("select e from Employee e", Employee.class)
+                    .getResultList();
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public Publication getPublicationById(Integer id) {
+        try {
+            return entityManager
+                    .createQuery("select p from Publication p where p.id = ?1", Publication.class)
+                    .setParameter(1, id)
+                    .getSingleResult();
         } catch (Exception e) {
             System.out.println(e);
             return null;

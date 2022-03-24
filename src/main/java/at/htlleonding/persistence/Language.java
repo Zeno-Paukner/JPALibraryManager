@@ -12,7 +12,7 @@ public class Language {
     @Column
     private String languageCode;
 
-    @OneToMany(mappedBy = "language")
+    @OneToMany(mappedBy = "language", cascade=CascadeType.ALL)
     private List<Publication> publications = new ArrayList<>();
 
     public Language(String languageCode) {

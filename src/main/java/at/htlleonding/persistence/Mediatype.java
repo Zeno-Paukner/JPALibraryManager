@@ -23,7 +23,7 @@ public class Mediatype {
     @Column
     private Double price;
 
-    @OneToMany(mappedBy = "mediatype")
+    @OneToMany(mappedBy = "mediatype", cascade=CascadeType.ALL)
     private List<Publication> publication = new ArrayList<>();
 
     public Mediatype(MediatypeEnum mediatypeEnum, Double price) {

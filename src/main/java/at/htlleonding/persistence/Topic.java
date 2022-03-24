@@ -13,7 +13,7 @@ public class Topic {
     @Column
     private String keyword;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<Publication> publications = new ArrayList<>();
 
     public Topic(String keyword) {

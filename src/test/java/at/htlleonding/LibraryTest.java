@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import java.util.Date;
 
 @QuarkusTest
 public class LibraryTest {
@@ -71,7 +72,12 @@ public class LibraryTest {
 
         //---Reservations
         // Create Reservation
-        // var reservation1 = new Reservation(, client1);
+        var reservation1 = new Reservation(new Date(2014, 02, 01), client1);
+        var reservation2 = new Reservation(new Date(2004, 05, 03), client1);
+        var reservation3 = new Reservation(new Date(2017, 11, 02), client2);
+        var reservation4 = new Reservation(new Date(2019, 01, 9), client2);
+        var reservation5 = new Reservation(new Date(2021, 03, 07), client3);
+        var reservation6 = new Reservation(new Date(2009, 10, 8), client3);
 
 
         //---Languages
@@ -90,10 +96,6 @@ public class LibraryTest {
         //---Sale
 
         //---Rent
-
-
-
-
 
         //---Publications and Authors
         target.add(pub1, author1);
@@ -128,13 +130,30 @@ public class LibraryTest {
         target.add(pub6, publisher3);
 
         //---Publications and Language
-
+        target.add(pub1, language1);
+        target.add(pub2, language2);
+        target.add(pub3, language3);
+        target.add(pub4, language4);
+        target.add(pub5, language1);
+        target.add(pub6, language1);
 
         //---Employees
+        target.add(employee1);
+        target.add(employee2);
+        target.add(employee3);
 
         //---Clients
+        target.add(client1);
+        target.add(client2);
+        target.add(client3);
 
-
+        //---Reservations
+        target.add(reservation1);
+        target.add(reservation2);
+        target.add(reservation3);
+        target.add(reservation4);
+        target.add(reservation5);
+        target.add(reservation6);
 
     }
 
@@ -166,7 +185,7 @@ public class LibraryTest {
 
     @TestTransaction
     @Test
-    public void createSampleData_getAllPublications_get6Publications(){
+    public void createSampleData_getAllPublications_getSixPublications(){
         createSampleData();
 
         target.FlushAndClear();
@@ -188,24 +207,21 @@ public class LibraryTest {
         Assertions.assertEquals("Romy im Wunderland", publication.getTitle());
     }
 
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllTopics_getSixTopics() {
+        createSampleData();
 
+        target.FlushAndClear();
 
-
-
-
-
-
-
-
-
-
-
-
-
+        var topics = target.getAllTopics();
+        Assertions.assertNotNull(topics);
+        Assertions.assertEquals(6, topics.size());
+    }
 
     @TestTransaction
     @Test
-    public void createSampleData_getPublicationsByTopic_get1Publication(){
+    public void createSampleData_getPublicationsByTopic_getOnePublication(){
         createSampleData();
 
         target.FlushAndClear();
@@ -215,23 +231,132 @@ public class LibraryTest {
         Assertions.assertEquals(1, publications.size());
     }
 
-/*
     @TestTransaction
     @Test
-    public void callCreateTwins_getByName_Marry_getMarryObject() {
-        ps.createTwins();
-        var target = ps.getByFirstName("Marry");
-        Assertions.assertNotNull(target);
-        Assertions.assertEquals("Marry", target.getFirstName());
+    public void createSampleData_getAllGenres_getSixGenres() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var genres = target.getAllGenres();
+        Assertions.assertNotNull(genres);
+        Assertions.assertEquals(6, genres.size());
     }
 
     @TestTransaction
     @Test
-    public void callCreateTwins_getByName_Harry_getHarryObject() {
-        ps.createTwins();
-        var target = ps.getByFirstName("Harry");
-        Assertions.assertNotNull(target);
-        Assertions.assertEquals("Harry", target.getFirstName());
+    public void createSampleData_getPublicationsByGenre_getOnePublication(){
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var publications = target.getPublicationsByGenre("Roman");
+        Assertions.assertNotNull(publications);
+        Assertions.assertEquals(1, publications.size());
     }
- */
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllPublisher_getThreePublisher() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var publisher = target.getAllPublisher();
+        Assertions.assertNotNull(publisher);
+        Assertions.assertEquals(3, publisher.size());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getPublisherByName_getHans_Peter_Verlag(){
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var publisher = target.getPublisherByName("Hans Peter Verlag");
+        Assertions.assertNotNull(publisher);
+        Assertions.assertEquals("Hans Peter Verlag", publisher.getPublisherName());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllLanguages_getFourLanguages() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var languages = target.getAllPublisher();
+        Assertions.assertNotNull(languages);
+        Assertions.assertEquals(3, languages.size());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getLanguageByLanguageCode_getOneLanguage() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var language = target.getLanguageByLanguageCode("Deutsch");
+        Assertions.assertNotNull(language);
+        Assertions.assertEquals("Deutsch", language.getLanguageCode());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllReservations_getSixReservations() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var reservations = target.getAllReservations();
+        Assertions.assertNotNull(reservations);
+        Assertions.assertEquals(6, reservations.size());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllClients_getThreeClients() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var clients = target.getAllClients();
+        Assertions.assertNotNull(clients);
+        Assertions.assertEquals(3, clients.size());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllEmployees_getSixEmployees() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var employees = target.getAllEmployees();
+        Assertions.assertNotNull(employees);
+        Assertions.assertEquals(3, employees.size());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_removeOneData_loseOneData() {
+
+        var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+
+        target.add(pub1);
+        target.flush();
+        var tmpId = pub1.getId();
+        target.clear();
+        var deleteTarget = target.getPublicationById(tmpId);
+
+        target.remove(deleteTarget);
+
+        Assertions.assertFalse(target.contains(deleteTarget));
+    }
+
+
+
 }

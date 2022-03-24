@@ -1,10 +1,7 @@
 package at.htlleonding.persistence;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +14,13 @@ public class Client extends Person{
     @Column
     private String email;
 
-    @OneToMany (mappedBy = "client")
+    @OneToMany (mappedBy = "client", cascade= CascadeType.ALL)
     private List<Sale> sales = new ArrayList<>();
 
-    @OneToMany (mappedBy = "client")
+    @OneToMany (mappedBy = "client", cascade=CascadeType.ALL)
     private List<Rent> rents = new ArrayList<>();
 
-    @OneToMany (mappedBy = "client")
+    @OneToMany (mappedBy = "client", cascade=CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
 

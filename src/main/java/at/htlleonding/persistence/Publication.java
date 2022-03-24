@@ -23,29 +23,32 @@ public class Publication    {
     @Column
     private boolean isTranslated;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "language_id")
     private Language language;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "mediatype_id")
     private Mediatype mediatype;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @OneToMany(mappedBy = "publication")
+    @OneToMany(mappedBy = "publication", cascade=CascadeType.ALL)
     private List<Copy> copies = new ArrayList<>();
 
-    @ManyToMany
+    @OneToMany(mappedBy = "publication", cascade=CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<Author> authors = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<Topic> topics = new ArrayList<>();
 
     public Publication(String title, String publishYear, boolean isTranslated) {
@@ -144,5 +147,13 @@ public class Publication    {
 
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

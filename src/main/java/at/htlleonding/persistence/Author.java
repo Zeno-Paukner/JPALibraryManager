@@ -11,7 +11,7 @@ public class Author extends Person{
     @Id
     private Integer id;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<Publication> publications = new ArrayList<>();
 
     public Author() {
@@ -23,6 +23,6 @@ public class Author extends Person{
     }
 
     public Author(String firstName, String lastName, String phoneNumber) {
-        super(firstName, lastName, phoneNumber);
+        super(firstName, lastName);
     }
 }

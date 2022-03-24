@@ -11,14 +11,14 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "sale")
+    @OneToMany(mappedBy = "sale", cascade=CascadeType.ALL)
     private List<Copy> copyList = new ArrayList<Copy>();
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "employee_id")
     private Employee employee;
 
@@ -26,16 +26,16 @@ public class Sale {
     private Date saleDate;
 
     @Column
-    private Integer Amount;
+    private Integer amount;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "invoice_id")
     private Invoice invoice;
 
     public Sale(ArrayList<Copy> copyList, Date saleDate, Integer amount) {
         this.copyList = copyList;
         this.saleDate = saleDate;
-        Amount = amount;
+        this.amount = amount;
     }
 
     public Sale() {
@@ -60,10 +60,9 @@ public class Sale {
     }
 
     public Integer getAmount() {
-        return Amount;
+        return amount;
     }
 
-    public void setAmount(Integer amount) {
-        Amount = amount;
+    public void setAmount(Integer amount) {this.amount = amount;
     }
 }

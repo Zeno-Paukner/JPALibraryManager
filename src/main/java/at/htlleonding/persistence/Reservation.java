@@ -20,11 +20,11 @@ public class Reservation {
     @Column
     private Date reservationDate;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "publication_id")
     private Publication publication;
 
@@ -36,6 +36,15 @@ public class Reservation {
     public Reservation() {
 
     }
+
+    public Publication getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Publication publication) {
+        this.publication = publication;
+    }
+
     public Integer getId() {
         return id;
     }

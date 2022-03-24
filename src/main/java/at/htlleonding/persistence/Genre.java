@@ -10,7 +10,7 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "genre")
+    @OneToMany(mappedBy = "genre", cascade=CascadeType.ALL)
     private List<Publication> publications = new ArrayList<Publication>();
 
     @Column

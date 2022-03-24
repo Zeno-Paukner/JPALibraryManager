@@ -1,9 +1,6 @@
 package at.htlleonding.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +10,10 @@ public class Employee extends Person {
     @Column
     private String salary;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade= CascadeType.ALL)
     private List<Rent> rents = new ArrayList<>();
 
-    @OneToMany (mappedBy = "employee")
+    @OneToMany (mappedBy = "employee", cascade=CascadeType.ALL)
     private List<Sale> sales = new ArrayList<>();
 
     public Employee(String firstName, String lastName, String salary) {
