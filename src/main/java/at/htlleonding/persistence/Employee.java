@@ -19,8 +19,8 @@ public class Employee extends Person {
     @OneToMany (mappedBy = "employee")
     private List<Sale> sales = new ArrayList<>();
 
-    public Employee(String firstName, String lastName, String phoneNumber, Integer id, String salary) {
-        super(firstName, lastName, phoneNumber);
+    public Employee(String firstName, String lastName, String salary) {
+        super(firstName, lastName);
         this.salary = salary;
     }
 

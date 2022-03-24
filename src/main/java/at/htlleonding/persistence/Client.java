@@ -27,16 +27,13 @@ public class Client extends Person{
     private List<Reservation> reservations = new ArrayList<>();
 
 
-    public Client(String firstName, String lastName, String phoneNumber, Integer id, String phoneNumber1, String email) {
-        super(firstName, lastName, phoneNumber);
-        this.phoneNumber = phoneNumber1;
-        this.email = email;
-    }
-
-    public Client(Integer id, String phoneNumber, String email) {
+    public Client(String firstName, String lastName, String phoneNumber, String email) {
+        super(firstName, lastName);
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
+
 
     public Client() {
 

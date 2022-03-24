@@ -35,8 +35,9 @@ public class LibraryTest {
         pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
 
         //---Clients
-        // Create 6 Clients
-        var client = new Client("Max", "Mustermann", "Musterstrasse 1", "12345", "Musterstadt", "Musterland", "Musterland", "123456789", "
+        var client1 = new Client("Peter", "Guckindieluft", "p.guck@gmail.com", "+43 660 1234567");
+        var client2 = new Client("Hans", "Rainer", "h.rainer@gmail.com", "+43 650 1234567");
+        var client3 = new Client("Rudi", "Painer", "r.painer@maio.com", "+43 630 1234567");
 
         //---Authors
         var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
@@ -45,8 +46,6 @@ public class LibraryTest {
         var author4 = new Author("William", "Lau", "+50 664 1234567");
         var author5 = new Author("Yimne", "Raid", "+49 664 1234567");
         var author6 = new Author("Max", "Mustermann", "+49 664 1234567");
-
-
 
         //---Topics
         var topic1 = new Topic("Mathematik");
@@ -72,10 +71,27 @@ public class LibraryTest {
 
         //---Reservations
         // Create Reservation
-        var reservation1 = new Reservation(, "2020-01-01",);
+        // var reservation1 = new Reservation(, client1);
 
 
         //---Languages
+        var language1 = new Language("Deutsch");
+        var language2 = new Language("Englisch");
+        var language3 = new Language("Spanisch");
+        var language4 = new Language("Französisch");
+
+        //---Employees
+        var employee1 = new Employee("Hans", "Müller", "1202");
+        var employee2 = new Employee("Peter", "Mayer", "1203");
+        var employee3 = new Employee("Buble", "Holzer", "1204");
+
+        //---Invoice
+
+        //---Sale
+
+        //---Rent
+
+
 
 
 
@@ -97,30 +113,95 @@ public class LibraryTest {
 
         //---Publications and Genres
         target.add(pub1, genre1);
+        target.add(pub2, genre2);
+        target.add(pub3, genre3);
+        target.add(pub4, genre4);
+        target.add(pub5, genre5);
+        target.add(pub6, genre6);
+
+        //---Publications and Publisher
+        target.add(pub1, publisher1);
+        target.add(pub2, publisher2);
+        target.add(pub3, publisher3);
+        target.add(pub4, publisher1);
+        target.add(pub5, publisher2);
+        target.add(pub6, publisher3);
+
+        //---Publications and Language
+
+
+        //---Employees
+
+        //---Clients
 
 
 
-
-
-
-
-        target.add(publication, topic);
     }
 
 
 
     @TestTransaction
     @Test
-    public void createSampleData_getAllAuthors_get2Authors(){
-        //target.createAllMediatypes();
+    public void createSampleData_getAllAuthors_getSixAuthors(){
         createSampleData();
 
         target.FlushAndClear();
 
         var authors = target.getAllAuthors();
         Assertions.assertNotNull(authors);
-        Assertions.assertEquals(2, authors.size());
+        Assertions.assertEquals(6, authors.size());
     }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAuthorsByLastName_getBhuiyan() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var author = target.getAuthorByLastName("Bhuiyan");
+        Assertions.assertNotNull(target);
+        Assertions.assertEquals("Bhuiyan", author.getLastName());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getAllPublications_get6Publications(){
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var publications = target.getAllPublications();
+        Assertions.assertNotNull(publications);
+        Assertions.assertEquals(6, publications.size());
+    }
+
+    @TestTransaction
+    @Test
+    public void createSampleData_getPublicationByTitle_getRomyWunderland() {
+        createSampleData();
+
+        target.FlushAndClear();
+
+        var publication = target.getPublicationByTitle("Romy im Wunderland");
+        Assertions.assertNotNull(target);
+        Assertions.assertEquals("Romy im Wunderland", publication.getTitle());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @TestTransaction
     @Test
@@ -133,6 +214,7 @@ public class LibraryTest {
         Assertions.assertNotNull(publications);
         Assertions.assertEquals(1, publications.size());
     }
+
 /*
     @TestTransaction
     @Test

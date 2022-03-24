@@ -209,9 +209,7 @@ public class LibraryService {
         entityManager.persist(g);
     }
 
-
-/*
-    @Transactional
+    /*@Transactional
     public void add(Publication p, Reservation r){
         if(p.getId() == null){
             add(p);
@@ -225,9 +223,7 @@ public class LibraryService {
         entityManager.persist(p);
         entityManager.persist(r);
 
-    }
-
- */
+    }*/
 
 
     public Publication getSingleMedia(Integer id) {

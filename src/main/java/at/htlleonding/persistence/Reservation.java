@@ -2,12 +2,6 @@ package at.htlleonding.persistence;
 
 
 
-//Create a new Entity called Reservation with
-//the following attributes:
-//Primary Key: Id
-//Foreign Key: PublicationId
-//A Date Column; ReservationDate
-//one-to-many: ClientId
 
 import org.graalvm.polyglot.HostAccess;
 
@@ -41,6 +35,9 @@ public class Reservation {
 
     public Reservation() {
 
+    }
+    public Integer getId() {
+        return id;
     }
 
     public Date getReservationDate() {
