@@ -1,6 +1,6 @@
 package at.htlleonding;
 
-import at.htlleonding.persistence.LibraryService;
+import at.htlleonding.repository.LibraryRepository;
 import io.quarkus.runtime.QuarkusApplication;
 
 import javax.inject.Inject;
@@ -8,7 +8,7 @@ import javax.inject.Inject;
 @io.quarkus.runtime.annotations.QuarkusMain
 public class QuarkusCmdlineApp implements QuarkusApplication {
     @Inject
-    LibraryService libraryService;
+    LibraryRepository libraryService;
 
     @Override
     public int run(String... args) throws Exception {

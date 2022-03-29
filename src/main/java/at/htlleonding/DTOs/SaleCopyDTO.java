@@ -8,13 +8,13 @@ public class SaleCopyDTO {
 
     private Integer sale_id;
 
-    private List<Integer> copyIdList = new ArrayList<Integer>();
+    private Integer copy_id;
 
-    public List<Integer> getCopyIdList() {
-        return copyIdList;
+    public Integer getCopy_id() {
+        return copy_id;
     }
 
-    public Integer getSale_id() {
+    public static Integer getSale_id() {
         return sale_id;
     }
 }

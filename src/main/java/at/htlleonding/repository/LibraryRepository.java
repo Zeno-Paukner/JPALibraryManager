@@ -1,17 +1,12 @@
-package at.htlleonding.persistence;
+package at.htlleonding.repository;
 //
 import at.htlleonding.persistence.*;
 
-import java.awt.print.Book;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.print.attribute.standard.Media;
-import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 
 // @Transactional
@@ -23,7 +18,7 @@ import javax.transaction.Transactional;
 // We recommend doing so at your application entry point boundaries like your REST endpoint controllers.
 
 @ApplicationScoped
-public class LibraryService {
+public class LibraryRepository {
 
     @Inject
     EntityManager entityManager;
