@@ -24,7 +24,7 @@ public class Mediatype {
     private Double price;
 
     @OneToMany(mappedBy = "mediatype", cascade=CascadeType.ALL)
-    private List<Publication> publication = new ArrayList<>();
+    private final List<Publication> publication = new ArrayList<>();
 
     public Mediatype(MediatypeEnum mediatypeEnum, Double price) {
         this.mediatypeEnum = mediatypeEnum;
@@ -35,6 +35,9 @@ public class Mediatype {
 
     }
 
+    public Integer getId() {
+        return id;
+    }
 
     public MediatypeEnum getMediatypeEnum() {
         return mediatypeEnum;

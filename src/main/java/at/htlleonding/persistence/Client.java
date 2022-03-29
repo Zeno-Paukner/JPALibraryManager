@@ -15,13 +15,13 @@ public class Client extends Person{
     private String email;
 
     @OneToMany (mappedBy = "client", cascade= CascadeType.ALL)
-    private List<Sale> sales = new ArrayList<>();
+    private final List<Sale> sales = new ArrayList<>();
 
     @OneToMany (mappedBy = "client", cascade=CascadeType.ALL)
-    private List<Rent> rents = new ArrayList<>();
+    private final List<Rent> rents = new ArrayList<>();
 
     @OneToMany (mappedBy = "client", cascade=CascadeType.ALL)
-    private List<Reservation> reservations = new ArrayList<>();
+    private final List<Reservation> reservations = new ArrayList<>();
 
 
     public Client(String firstName, String lastName, String phoneNumber, String email) {

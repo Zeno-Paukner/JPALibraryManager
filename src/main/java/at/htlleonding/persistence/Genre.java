@@ -11,7 +11,7 @@ public class Genre {
     private Integer id;
 
     @OneToMany(mappedBy = "genre", cascade=CascadeType.ALL)
-    private List<Publication> publications = new ArrayList<Publication>();
+    private final List<Publication> publications = new ArrayList<Publication>();
 
     @Column
     private String genre;

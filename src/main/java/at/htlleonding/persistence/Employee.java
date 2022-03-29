@@ -11,10 +11,10 @@ public class Employee extends Person {
     private String salary;
 
     @OneToMany(mappedBy = "employee", cascade= CascadeType.ALL)
-    private List<Rent> rents = new ArrayList<>();
+    private final List<Rent> rents = new ArrayList<>();
 
     @OneToMany (mappedBy = "employee", cascade=CascadeType.ALL)
-    private List<Sale> sales = new ArrayList<>();
+    private final List<Sale> sales = new ArrayList<>();
 
     public Employee(String firstName, String lastName, String salary) {
         super(firstName, lastName);

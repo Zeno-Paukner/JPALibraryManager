@@ -13,7 +13,7 @@ public class Language {
     private String languageCode;
 
     @OneToMany(mappedBy = "language", cascade=CascadeType.ALL)
-    private List<Publication> publications = new ArrayList<>();
+    private final List<Publication> publications = new ArrayList<>();
 
     public Language(String languageCode) {
         this.languageCode = languageCode;

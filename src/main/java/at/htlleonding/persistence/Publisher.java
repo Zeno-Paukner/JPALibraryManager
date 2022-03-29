@@ -18,7 +18,7 @@ public class Publisher {
     private String publisherName;
 
     @OneToMany(mappedBy = "publisher", cascade=CascadeType.ALL)
-    private List<Publication> publications = new ArrayList<>();
+    private final List<Publication> publications = new ArrayList<>();
 
     public Publisher(String publisherName) {
         this.publisherName = publisherName;

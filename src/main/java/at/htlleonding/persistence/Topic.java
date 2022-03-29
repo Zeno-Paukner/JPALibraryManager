@@ -14,7 +14,7 @@ public class Topic {
     private String keyword;
 
     @ManyToMany(cascade=CascadeType.ALL)
-    private List<Publication> publications = new ArrayList<>();
+    private final List<Publication> publications = new ArrayList<>();
 
     public Topic(String keyword) {
         this.keyword = keyword;

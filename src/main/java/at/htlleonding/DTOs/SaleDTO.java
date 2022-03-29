@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SaleDTO {
 
-    private List<Integer> copy_id = new ArrayList<>();
+    private final List<Integer> copy_id = new ArrayList<>();
 
     private Integer client_id;
 

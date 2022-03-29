@@ -24,7 +24,7 @@ public class Invoice {
     private Employee employee;
 
     @OneToMany(mappedBy = "invoice")
-    private List<Sale> sale = new ArrayList<>();
+    private final List<Sale> sale = new ArrayList<>();
 
     public Invoice() {
     }

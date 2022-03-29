@@ -40,16 +40,16 @@ public class Publication    {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "publication", cascade=CascadeType.ALL)
-    private List<Copy> copies = new ArrayList<>();
+    private final List<Copy> copies = new ArrayList<>();
 
     @OneToMany(mappedBy = "publication", cascade=CascadeType.ALL)
-    private List<Reservation> reservations = new ArrayList<>();
+    private final List<Reservation> reservations = new ArrayList<>();
 
     @ManyToMany(cascade=CascadeType.ALL)
-    private List<Author> authors = new ArrayList<>();
+    private final List<Author> authors = new ArrayList<>();
 
     @ManyToMany(cascade=CascadeType.ALL)
-    private List<Topic> topics = new ArrayList<>();
+    private final List<Topic> topics = new ArrayList<>();
 
     public Publication(String title, String publishYear, boolean isTranslated) {
         this.title = title;
