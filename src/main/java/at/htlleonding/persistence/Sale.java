@@ -1,6 +1,7 @@
 package at.htlleonding.persistence;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,14 +51,13 @@ public class Sale {
         return saleDate;
     }
 
-    public void setSaleDate(Date saleDate) {
-        this.saleDate = saleDate;
-    }
-
     public Integer getAmount() {
         return amount;
     }
 
     public void setAmount(Integer amount) {this.amount = amount;
+    }
+
+    public void setClient(Integer client_id) {
     }
 }

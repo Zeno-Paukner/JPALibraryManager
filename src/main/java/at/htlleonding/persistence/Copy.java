@@ -20,17 +20,11 @@ public class Copy {
     @JoinColumn(name= "rent_id")
     private Rent rent;
 
-    @Column
-    private Date buyDate;
 
-    @Column
-    private double price;
 
-    public Copy(Publication publication, Sale sale, Date buyDate, double price) {
+    public Copy(Publication publication, Sale sale, Date buyDate) {
         this.publication = publication;
         this.sale = sale;
-        this.buyDate = buyDate;
-        this.price = price;
     }
 
     public Copy() {
@@ -57,19 +51,5 @@ public class Copy {
         this.sale = sale;
     }
 
-    public Date getBuyDate() {
-        return buyDate;
-    }
 
-    public void setBuyDate(Date buyDate) {
-        this.buyDate = buyDate;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

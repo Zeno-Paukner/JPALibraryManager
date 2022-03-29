@@ -1,21 +1,34 @@
-import at.htlleonding.persistence.*;
+import at.htlleonding.DTOs.SaleCopyDTO;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 @ApplicationScoped
 public class LibraryLogic {
 
     @Inject
     EntityManager entityManager;
 
-    createNewSalewithCopies(){
-
+/*    addCopystoSale(SaleCopyDTO saleDTO){
+        Sale sale = entityManager.find(Sale.class, saleDTO.getId());
+        for(SaleCopyDTO copyDTO : saleDTO.getSaleCopies()){
+            SaleCopy copy = entityManager.find(SaleCopy.class, copyDTO.getId());
+            sale.addCopy(copy);
+        }
+        entityManager.persist(sale);
+    }
 
     }
+
+
+    }*/
+
+
+
+
+
+
 
 
 
