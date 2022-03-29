@@ -29,4 +29,15 @@ public class Invoice {
     public Invoice() {
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public List<Sale> getSale() {
+        return sale;
+    }
 }

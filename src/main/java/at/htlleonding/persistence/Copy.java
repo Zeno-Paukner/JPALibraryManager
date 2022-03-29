@@ -26,8 +26,7 @@ public class Copy {
     @Column
     private double price;
 
-    public Copy(Integer id, Publication publication, Sale sale, Date buyDate, double price) {
-        this.id = id;
+    public Copy(Publication publication, Sale sale, Date buyDate, double price) {
         this.publication = publication;
         this.sale = sale;
         this.buyDate = buyDate;
@@ -40,10 +39,6 @@ public class Copy {
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Publication getPublication() {

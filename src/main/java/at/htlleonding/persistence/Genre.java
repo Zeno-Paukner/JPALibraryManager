@@ -27,10 +27,6 @@ public class Genre {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getGenre() {
         return genre;
     }
@@ -41,9 +37,5 @@ public class Genre {
 
     public List<Publication> getPublications() {
         return publications;
-    }
-
-    public void setPublications(List<Publication> publications) {
-        this.publications = publications;
     }
 }

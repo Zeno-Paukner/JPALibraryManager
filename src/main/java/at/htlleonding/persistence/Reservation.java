@@ -13,10 +13,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-/*
-    @ManyToOne
-    private
-*/
+
     @Column
     private Date reservationDate;
 

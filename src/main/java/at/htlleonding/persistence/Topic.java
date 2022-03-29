@@ -32,10 +32,6 @@ public class Topic {
         this.id = id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getKeyword() {
         return keyword;
     }

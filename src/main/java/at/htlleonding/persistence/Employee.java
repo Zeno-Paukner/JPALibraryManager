@@ -21,12 +21,20 @@ public class Employee extends Person {
         this.salary = salary;
     }
 
-    public Employee(Integer id, String salary) {
+    public Employee(String salary) {
         this.salary = salary;
     }
 
     public Employee() {
 
+    }
+
+    public List<Rent> getRents() {
+        return rents;
+    }
+
+    public List<Sale> getSales() {
+        return sales;
     }
 
     public String getSalary() {

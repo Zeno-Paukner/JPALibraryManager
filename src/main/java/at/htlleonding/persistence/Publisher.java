@@ -21,7 +21,6 @@ public class Publisher {
     private List<Publication> publications = new ArrayList<>();
 
     public Publisher(String publisherName) {
-        this.id = id;
         this.publisherName = publisherName;
     }
 

@@ -65,10 +65,6 @@ public class Publication    {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -109,6 +105,10 @@ public class Publication    {
         this.genre = genre;
     }
 
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
     public Mediatype getMediatype() {
         return mediatype;
     }
@@ -121,39 +121,20 @@ public class Publication    {
         return publisher;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
     public List<Copy> getCopies() {
         return copies;
-    }
-
-    public void setCopies(List<Copy> copies) {
-        this.copies = copies;
     }
 
     public List<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
     public List<Topic> getTopics() {
         return topics;
-    }
-
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
     }
 
     public List<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 }

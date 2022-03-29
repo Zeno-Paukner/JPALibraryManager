@@ -9,6 +9,7 @@ public class Person {
 
     private String firstName;
     private String lastName;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -32,8 +32,7 @@ public class Sale {
     @JoinColumn (name = "invoice_id")
     private Invoice invoice;
 
-    public Sale(ArrayList<Copy> copyList, Date saleDate, Integer amount) {
-        this.copyList = copyList;
+    public Sale(Date saleDate, Integer amount) {
         this.saleDate = saleDate;
         this.amount = amount;
     }
@@ -45,10 +44,6 @@ public class Sale {
 
     public List<Copy> getCopyList() {
         return copyList;
-    }
-
-    public void setCopyList(ArrayList<Copy> copyList) {
-        this.copyList = copyList;
     }
 
     public Date getSaleDate() {
