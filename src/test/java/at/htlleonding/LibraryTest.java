@@ -14,7 +14,86 @@ public class LibraryTest {
     @Inject
     LibraryService target;
 
-    private  void createSampleData() {
+    private void createPublicationsWithAuthors(){
+        //---Publications
+        var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+
+        var pub2 = new Publication("Zeno im Wunderland", "1901", false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
+
+        var pub3 = new Publication("Martin im Wunderland", "1902", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
+
+        var pub4 = new Publication("Willi im Wunderland", "1903", false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
+
+        var pub5 = new Publication("Yimme im Wunderland", "1904", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
+
+        var pub6 = new Publication("Robi im Wunderland", "1905", false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+
+        //---Authors
+        var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
+        var author2 = new Author("Zeno", "Paukner", "+44 664 1234567");
+        var author3 = new Author("Martin", "Hausleitner", "+45 664 1234567");
+
+
+        target.add(pub1, author1);
+        target.add(pub2, author2);
+        target.add(pub3, author3);
+
+        target.add(pub1, author3);
+        target.add(pub2, author1);
+        target.add(pub3, author2);
+
+        target.add(pub4, author3);
+        target.add(pub5, author2);
+        target.add(pub6, author1);
+
+
+    }
+
+    private void createPublicationsWithTopics(){
+
+        //---Publications
+        var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+
+        var pub2 = new Publication("Zeno im Wunderland", "1901", false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
+
+        var pub3 = new Publication("Martin im Wunderland", "1902", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
+
+        var pub4 = new Publication("Willi im Wunderland", "1903", false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
+
+        var pub5 = new Publication("Yimme im Wunderland", "1904", true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
+
+        var pub6 = new Publication("Robi im Wunderland", "1905", false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+
+        //---Topics
+        var topic1 = new Topic("Mathematik");
+        var topic2 = new Topic("Chemie");
+        var topic3 = new Topic("Physik");
+        var topic4 = new Topic("Biologie");
+        var topic5 = new Topic("Informatik");
+        var topic6 = new Topic("Wirtschaft");
+
+        //---Publications and Topics
+        target.add(pub1, topic1);
+        target.add(pub2, topic2);
+        target.add(pub3, topic3);
+        target.add(pub4, topic4);
+        target.add(pub5, topic5);
+        target.add(pub6, topic6);
+    }
+
+    private void createSampleData() {
 
         //---Publications
         var pub1 = new Publication("Romy im Wunderland", "1900", true);
@@ -157,6 +236,9 @@ public class LibraryTest {
 
     }
 
+    @TestTransaction
+    @Test
+    public
 
 
     @TestTransaction
