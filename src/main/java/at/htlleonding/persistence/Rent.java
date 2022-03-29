@@ -1,5 +1,6 @@
 package at.htlleonding.persistence;
 import javax.persistence.*;
+import java.util.Date;
 
 //Create a new Entity called Rent with the following attributes:
 //Primery Key: Id
@@ -28,21 +29,30 @@ public class Rent {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    private String startDate;
-    private String endDate;
-    private String deadline;
+    @Column
+    private Date startDate;
 
-    public Rent() {
-    }
+    @Column
+    private Date endDate;
 
-    public Rent(Copy copy, Employee employee, String startDate, String endDate, String deadline) {
+    @Column
+    private Date deadline;
+
+    @Column
+    private boolean needEmployeeToRentAgain;
+
+    public Rent(Copy copy, Employee employee, Client client, Date startDate, Date endDate, Date deadline, boolean needEmployeeToRentAgain) {
         this.copy = copy;
         this.employee = employee;
+        this.client = client;
         this.startDate = startDate;
         this.endDate = endDate;
         this.deadline = deadline;
+        this.needEmployeeToRentAgain = needEmployeeToRentAgain;
     }
 
+    public Rent() {
+    }
 
     public Copy getCopy() {
         return copy;
@@ -60,28 +70,44 @@ public class Rent {
         this.employee = employee;
     }
 
-    public String getStartDate() {
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    public boolean isNeedEmployeeToRentAgain() {
+        return needEmployeeToRentAgain;
+    }
+
+    public void setNeedEmployeeToRentAgain(boolean needEmployeeToRentAgain) {
+        this.needEmployeeToRentAgain = needEmployeeToRentAgain;
     }
 }
 

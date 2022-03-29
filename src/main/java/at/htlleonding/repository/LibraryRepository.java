@@ -29,6 +29,13 @@ public class LibraryRepository {
         entityManager.clear();
     }
 
+    //create a generic add method for all entities
+
+
+    public Sale findSale(int id) {
+        return entityManager.find(Sale.class, id);
+    }
+
     @Transactional
     public void flush() {
         entityManager.flush();

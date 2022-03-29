@@ -20,11 +20,22 @@ public class Copy {
     @JoinColumn(name= "rent_id")
     private Rent rent;
 
+    @Column
+    private Date dateOfPurchase;
 
 
-    public Copy(Publication publication, Sale sale, Date buyDate) {
-        this.publication = publication;
+    public Copy(Sale sale, Rent rent, Date dateOfPurchase) {
         this.sale = sale;
+        this.rent = rent;
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public Date getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
     }
 
     public Copy() {
