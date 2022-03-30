@@ -6,7 +6,9 @@ import at.htlleonding.persistence.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +28,16 @@ public class LibraryLogic {
             }
         }
         sale.setSaleDate(new Date());
-        sale.setClient(entityManager.find(Client.class, saleDTO.getClient_id()));
+        //sum all Prices form Copys with the Mediatype Price and set it to TotalPrice
+        sale.setTotalPrice(saleDTO.getCopy_ids().stream().mapToDouble(copy_id -> entityManager.find(Copy.class, copy_id).getPublication().getMediatype().getPrice()).sum());
+
+        //if Client is null the Totalprice is minus 20%
+        if (saleDTO.getClient_id() == null) {
+            sale.setTotalPrice(saleDTO.getTotalPrice() * 0.8);
+        }
+        else {
+            sale.setClient(entityManager.find(Client.class, saleDTO.getClient_id()));
+        }
         sale.setEmployee(entityManager.find(Employee.class, saleDTO.getEmployee_id()));
         //create sale for each copy
         for (Integer copy_id : saleDTO.getCopy_ids()) {
@@ -156,15 +167,16 @@ public class LibraryLogic {
     }
 
     @Transactional
-    public void createAuthor(AuthorDTO authorDTO) {
+    public Integer createAuthor(AuthorDTO authorDTO) {
         Author author = new Author();
         author.setFirstName(authorDTO.getFirstName());
         author.setLastName(authorDTO.getLastName());
         entityManager.persist(author);
+        return author.getId();
     }
 
     @Transactional
-    public void createTopic(TopicDTO topicDTO) {
+    public List<Integer> createTopic(TopicDTO topicDTO) {
         Topic topic = new Topic();
         //check every if the topic name is already in the database
         for (Topic topic1 : entityManager.createQuery("SELECT t FROM Topic t", Topic.class).getResultList()) {
@@ -175,10 +187,12 @@ public class LibraryLogic {
 
         topic.setKeyword(topicDTO.getKeyword());
         entityManager.persist(topic);
+
+        return Arrays.asList(topic.getId());
     }
 
     @Transactional
-    public void createGenre(GenreDTO genreDTO) {
+    public Integer createGenre(GenreDTO genreDTO) {
         Genre genre = new Genre();
         for (Genre genre1 : entityManager.createQuery("SELECT g FROM Genre g", Genre.class).getResultList()) {
             if (genre1.getGenre().equals(genreDTO.getGenre())) {
@@ -187,10 +201,11 @@ public class LibraryLogic {
         }
         genre.setGenre(genreDTO.getGenre());
         entityManager.persist(genre);
+        return genre.getId();
     }
 
     @Transactional
-    public void createLanguage(LanguageDTO languageDTO) {
+    public Integer createLanguage(LanguageDTO languageDTO) {
         Language language = new Language();
         //check if the language is 2 letters
         if (languageDTO.getLanguageCode().length() != 2) {
@@ -198,6 +213,7 @@ public class LibraryLogic {
         }
         language.setLanguageCode(languageDTO.getLanguageCode());
         entityManager.persist(language);
+        return  language.getId();
     }
 
     @Transactional
@@ -212,28 +228,46 @@ public class LibraryLogic {
 
     @Transactional
     //Mediatype
-    public void createMediatype(MediatypeDTO mediatypeDTO) {
+    public Integer createMediatype(MediatypeDTO mediatypeDTO) {
         Mediatype mediatype = new Mediatype();
-        mediatype.setMediatypeEnum(mediatypeDTO.getMediatypeEnum());
+        //sompare String Mediatype with enum MediatypeEnum
+        for (MediatypeEnum mediatypeEnum : MediatypeEnum.values()) {
+            if (mediatypeDTO.getMediatype().equals(mediatypeEnum.toString())) {
+                mediatype.setMediatypeEnum(mediatypeEnum);
+            }
+        }
         mediatype.setPrice(mediatypeDTO.getPrice());
         entityManager.persist(mediatype);
+        return mediatype.getId();
     }
 
     //Invoice
     @Transactional
-    public void CreateInvoice(InvoiceDTO invoiceDTO) {
+    public void createInvoice(InvoiceDTO invoiceDTO) {
         Invoice invoice = new Invoice();
+        //if the client is null
         invoice.setClient(entityManager.find(Client.class, invoiceDTO.getClient_id()));
         invoice.setSaleDate(new Date());
-        // select all copy publication_id
-        List<Copy> copies = (List<Copy>) entityManager.createQuery("SELECT c FROM Copy c WHERE c.publication.id = :publication_id", Copy.class);
-        // set TotalPrice and sum all publication media type price
-        for (Copy copy : copies) {
-            invoice.setTotalPrice(invoice.getTotalPrice() + copy.getPublication().getMediatype().getPrice());
+        Double totalSalePrice = 0.0;
+        //create a list of all Sales
+        List<Sale> sales = entityManager.createQuery("SELECT s FROM Sale s", Sale.class).getResultList();
+        //sum all TotalPrice from Sales_id and save it to TotalPrice2
+        for (Sale sale : sales) {
+            totalSalePrice += sale.getTotalPrice();
         }
-        // sum the total price with percentage of tax and set it to invoice after
-        invoice.setTotalPriceAfterTax(invoice.getTotalPrice() + (invoice.getTotalPrice() * 0.2));
-        invoice.setAmount(copies.size());
+        //set the total price of the invoice
+        invoice.setTotalSalesPrice(totalSalePrice);
+
+        //sum all totalCopiesAmount from Sales_id and save it to TotalCopiesAmount
+        Double totalCopiesAmount = 0.0;
+        for (Sale sale : sales) {
+            totalCopiesAmount += sale.getTotalCopiesAmount();
+        }
+        invoice.setTotalSalesPrice(totalCopiesAmount);
+
+
+
+
 
         entityManager.persist(invoice);
     }

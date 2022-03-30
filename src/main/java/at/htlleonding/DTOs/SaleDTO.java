@@ -12,6 +12,8 @@ public class SaleDTO {
 
     private Integer employee_id;
 
+    private Double totalPrice;
+
     public List<Integer> getCopy_ids() {
         return copy_id;
     }
@@ -22,6 +24,10 @@ public class SaleDTO {
 
     public Integer getEmployee_id() {
         return employee_id;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
 

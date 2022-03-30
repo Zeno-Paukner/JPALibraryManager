@@ -27,28 +27,21 @@ public class Invoice {
     @Column
     private Date saleDate;
 
-    public Double getTotalPriceAfterTax() {
-        return TotalPriceAfterTax;
-    }
+    @Column
+    private Integer copiesAmount;
 
-    public void setTotalPriceAfterTax(Double totalPriceAfterTax) {
-        TotalPriceAfterTax = totalPriceAfterTax;
-    }
-
-    private Integer Amount;
-    private Integer Tax;
-    private Double TotalPrice;
-    private Double TotalPriceAfterTax;
+    @Column
+    private Double totalSalesPrice;
 
     @OneToMany(mappedBy = "invoice")
     private final List<Sale> sale = new ArrayList<>();
 
-    public Date getSaleDate() {
-        return saleDate;
-    }
-
-    public void setSaleDate(Date saleDate) {
+    public Invoice(Client client, Employee employee, Date saleDate, Integer amount, Double totalSalesPrices) {
+        this.client = client;
+        this.employee = employee;
         this.saleDate = saleDate;
+        this.copiesAmount = amount;
+        this.totalSalesPrice = totalSalesPrices;
     }
 
     public Invoice() {
@@ -78,30 +71,28 @@ public class Invoice {
         this.employee = employee;
     }
 
-    public Integer getAmount() {
-        return Amount;
+    public Date getSaleDate() {
+        return saleDate;
     }
 
-    public void setAmount(Integer amount) {
-        Amount = amount;
+    public void setSaleDate(Date saleDate) {
+        this.saleDate = saleDate;
     }
 
-
-
-    public Integer getTax() {
-        return Tax;
+    public Integer getCopiesAmount() {
+        return copiesAmount;
     }
 
-    public void setTax(Integer tax) {
-        Tax = tax;
+    public void setCopiesAmount(Integer copiesAmount) {
+        this.copiesAmount = copiesAmount;
     }
 
-    public Double getTotalPrice() {
-        return TotalPrice;
+    public Double getTotalSalesPrice() {
+        return totalSalesPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
-        TotalPrice = totalPrice;
+    public void setTotalSalesPrice(Double totalSalesPrice) {
+        this.totalSalesPrice = totalSalesPrice;
     }
 
     public List<Sale> getSale() {

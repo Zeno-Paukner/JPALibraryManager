@@ -6,15 +6,23 @@ import javax.persistence.Column;
 
 public class MediatypeDTO {
 
-    private MediatypeEnum mediatypeEnum;
+    private String mediatype;
 
     private Double price;
 
-    public MediatypeEnum getMediatypeEnum() {
-        return mediatypeEnum;
+    public String getMediatype() {
+        return mediatype;
+    }
+
+    public void setMediatype(String mediatype) {
+        this.mediatype = mediatype;
     }
 
     public Double getPrice() {
         return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

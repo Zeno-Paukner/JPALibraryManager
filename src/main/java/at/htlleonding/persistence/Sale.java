@@ -27,7 +27,18 @@ public class Sale {
     private Date saleDate;
 
     @Column
+    private double totalPrice;
 
+    public Integer getTotalCopiesAmount() {
+        return totalCopiesAmount;
+    }
+
+    public void setTotalCopiesAmount(Integer totalCopiesAmount) {
+        this.totalCopiesAmount = totalCopiesAmount;
+    }
+
+    @Column
+    private Integer totalCopiesAmount;
 
 
 
@@ -35,16 +46,29 @@ public class Sale {
     @JoinColumn (name = "invoice_id")
     private Invoice invoice;
 
-    public Sale() {
-    }
-
-    public Sale(List<Copy> copyList, Client client, Employee employee, Date saleDate,  Invoice invoice) {
+    public Sale(List<Copy> copyList, Client client, Employee employee, Date saleDate, double totalPrice, Invoice invoice , Integer totalCopiesAmount) {
         this.copyList = copyList;
         this.client = client;
         this.employee = employee;
         this.saleDate = saleDate;
-
+        this.totalPrice = totalPrice;
         this.invoice = invoice;
+        this.totalCopiesAmount = copyList.size();
+    }
+
+    public void totalCopiesAmount(){
+        this.totalCopiesAmount = copyList.size();
+    }
+
+    public Sale() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public List<Copy> getCopyList() {
@@ -79,6 +103,13 @@ public class Sale {
         this.saleDate = saleDate;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public Invoice getInvoice() {
         return invoice;

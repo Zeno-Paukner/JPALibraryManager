@@ -76,4 +76,6 @@ public class Copy {
     public void setRented(Boolean rented) {
         isRented = rented;
     }
+
+
 }

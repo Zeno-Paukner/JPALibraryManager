@@ -7,4 +7,8 @@ public class LanguageDTO {
     public String getLanguageCode() {
         return languageCode;
     }
+
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+    }
 }

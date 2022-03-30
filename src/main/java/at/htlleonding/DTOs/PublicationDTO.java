@@ -29,6 +29,42 @@ public class PublicationDTO {
 
     private final List<Integer> topics_id = new ArrayList<>();
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPublishYear(Date publishYear) {
+        this.publishYear = publishYear;
+    }
+
+    public void setTranslated(boolean translated) {
+        isTranslated = translated;
+    }
+
+    public void setLanguage_id(String language_id) {
+        this.language_id = language_id;
+    }
+
+    public void setGenre_id(String genre_id) {
+        this.genre_id = genre_id;
+    }
+
+    public void setMediatype_id(String mediatype_id) {
+        this.mediatype_id = mediatype_id;
+    }
+
+    public void setPublisher_id(String publisher_id) {
+        this.publisher_id = publisher_id;
+    }
+
+    public List<Integer> setAuthors_id(List<Integer> authors_id) {
+        return this.authors_id;
+    }
+
+    public List<Integer> setTopics_id(List<Integer> topics_id) {
+        return this.topics_id;
+    }
+
     public String getTitle() {
         return title;
     }
