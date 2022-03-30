@@ -1,21 +1,16 @@
 package at.htlleonding.Logic;
+
 import at.htlleonding.DTOs.*;
-import at.htlleonding.persistence.Author;
-import at.htlleonding.persistence.Mediatype;
-import at.htlleonding.persistence.Publication;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import at.htlleonding.Logic.LibraryLogic;
 
 
 public class CSVimportLogic {
@@ -29,15 +24,23 @@ public class CSVimportLogic {
     //create importCSV for method with method insertLineToEnties
     public void importCSV(String fileName) {
         Path pathToFile = Paths.get(fileName);
+        Boolean insertClient = false;
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
             String line = br.readLine();
+            //if line hast more more then 3 elements
+            if (line.split(",").length > 3) {
+                insertClient = true;
+            }
             while (line != null) {
-                insertLineToEnties(line.split(","));
+                if (insertClient) {
+                    insertClientLineToEnties(line.split(","));
+                } else {
+                    insertMediaLineToEnties(line.split(";"));
+                }
                 line = br.readLine();
             }
 
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
@@ -45,8 +48,7 @@ public class CSVimportLogic {
     }
 
 
-
-    public void insertLineToEnties(String[] line) throws ParseException {
+    public void insertMediaLineToEnties(String[] line) throws ParseException {
         //---publication
         PublicationDTO publicationDTO = new PublicationDTO();
         publicationDTO.setTitle(line[0]);
@@ -94,12 +96,21 @@ public class CSVimportLogic {
             TopicDTO topicDTO = new TopicDTO();
             topicDTO.setKeyword(topic);
         }
+        //publicationDTO.setTopics_id(createTopics(topics));
+
+    }
+
+    // 0: ClientDTO.firstName 1: ClientDTO.lastName 2: ClientDTO.phoneNumber 3: ClientDTO.email
+    public void insertClientLineToEnties(String[] line) throws ParseException {
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.setFirstName(line[0]);
+        clientDTO.setLastName(line[1]);
+        clientDTO.setPhoneNumber(line[2]);
+        clientDTO.setEmail(line[3]);
+    }
 
 }
 
 
 
 
-
-
-}

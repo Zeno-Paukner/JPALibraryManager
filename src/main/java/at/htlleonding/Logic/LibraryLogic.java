@@ -118,14 +118,13 @@ public class LibraryLogic {
         //set genre in publication
         publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
 
-        // set all PublicationDTO authors int the publication
+        // set all PublicationDTO authors into the publication
         for (Integer author_id : publicationDTO.getAuthors_ids()) {
-            publication.getAuthors().add(entityManager.find(Author.class, author_id));
+            Author author = entityManager.find(Author.class, author_id);
         }
-        //set all PublicationDTO Topics int the publication
-        for (Integer topic_id : publicationDTO.getTopics_ids()) {
-            publication.getTopics().add(entityManager.find(Topic.class, topic_id));
-        }
+        //?????????????????
+        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
+        //publication.setAuthor(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
         entityManager.persist(publication);
     }
 
@@ -264,10 +263,6 @@ public class LibraryLogic {
             totalCopiesAmount += sale.getTotalCopiesAmount();
         }
         invoice.setTotalSalesPrice(totalCopiesAmount);
-
-
-
-
 
         entityManager.persist(invoice);
     }
