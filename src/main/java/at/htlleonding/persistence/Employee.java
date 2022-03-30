@@ -8,7 +8,7 @@ import java.util.List;
 public class Employee extends Person {
 
     @Column
-    private String salary;
+    private Integer salary;
 
     @OneToMany(mappedBy = "employee", cascade= CascadeType.ALL)
     private final List<Rent> rents = new ArrayList<>();
@@ -16,12 +16,12 @@ public class Employee extends Person {
     @OneToMany (mappedBy = "employee", cascade=CascadeType.ALL)
     private final List<Sale> sales = new ArrayList<>();
 
-    public Employee(String firstName, String lastName, String salary) {
+    public Employee(String firstName, String lastName, Integer salary) {
         super(firstName, lastName);
         this.salary = salary;
     }
 
-    public Employee(String salary) {
+    public Employee(Integer salary) {
         this.salary = salary;
     }
 
@@ -37,11 +37,11 @@ public class Employee extends Person {
         return sales;
     }
 
-    public String getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 }

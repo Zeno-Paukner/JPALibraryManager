@@ -1,21 +1,18 @@
 package at.htlleonding.DTOs;
 
 
-import at.htlleonding.persistence.Copy;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class SaleDTO {
 
-    private final List<Integer> copy_id = new ArrayList<>();
+    private List<Integer> copy_id = new ArrayList<>();
 
     private Integer client_id;
 
     private Integer employee_id;
 
-    public Collection<? extends Copy> getCopy_id() {
+    public List<Integer> getCopy_ids() {
         return copy_id;
     }
 
@@ -26,4 +23,8 @@ public class SaleDTO {
     public Integer getEmployee_id() {
         return employee_id;
     }
+
+
+
+
 }

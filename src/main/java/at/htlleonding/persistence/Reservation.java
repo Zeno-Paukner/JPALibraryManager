@@ -25,13 +25,38 @@ public class Reservation {
     @JoinColumn(name = "publication_id")
     private Publication publication;
 
-    public Reservation(Date _reservationDate, Client _client) {
-        reservationDate = _reservationDate;
-        client = _client;
-    }
 
     public Reservation() {
+    }
 
+    public Reservation(Date reservationDate, Client client, Publication publication) {
+        this.reservationDate = reservationDate;
+        this.client = client;
+        this.publication = publication;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Publication getPublication() {
@@ -40,26 +65,6 @@ public class Reservation {
 
     public void setPublication(Publication publication) {
         this.publication = publication;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Date getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(Date reservationDate) {
-        reservationDate = reservationDate;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClientId(Client _client) {
-        client = _client;
     }
 }
 

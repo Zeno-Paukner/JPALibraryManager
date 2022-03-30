@@ -23,27 +23,18 @@ public class Copy {
     @Column
     private Date dateOfPurchase;
 
+    @Column
+    Boolean isRented = false;
 
-    public Copy(Sale sale, Rent rent, Date dateOfPurchase) {
+    public Copy(Publication publication, Sale sale, Rent rent, Date dateOfPurchase, Boolean isRented) {
+        this.publication = publication;
         this.sale = sale;
         this.rent = rent;
         this.dateOfPurchase = dateOfPurchase;
-    }
-
-    public Date getDateOfPurchase() {
-        return dateOfPurchase;
-    }
-
-    public void setDateOfPurchase(Date dateOfPurchase) {
-        this.dateOfPurchase = dateOfPurchase;
+        this.isRented = isRented;
     }
 
     public Copy() {
-
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public Publication getPublication() {
@@ -62,5 +53,27 @@ public class Copy {
         this.sale = sale;
     }
 
+    public Rent getRent() {
+        return rent;
+    }
 
+    public void setRent(Rent rent) {
+        this.rent = rent;
+    }
+
+    public Date getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public void setDateOfPurchase(Date dateOfPurchase) {
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public Boolean getRented() {
+        return isRented;
+    }
+
+    public void setRented(Boolean rented) {
+        isRented = rented;
+    }
 }

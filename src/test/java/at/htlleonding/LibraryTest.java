@@ -1,11 +1,13 @@
 package at.htlleonding;
 
+import at.htlleonding.DTOs.AuthorDTO;
 import at.htlleonding.persistence.*;
 import at.htlleonding.repository.LibraryRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import at.htlleonding.Logic.*;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -152,12 +154,12 @@ public class LibraryTest {
 
         //---Reservations
         // Create Reservation
-        var reservation1 = new Reservation(new Date(2014, 02, 01), client1);
+        /*var reservation1 = new Reservation(new Date(2014, 02, 01), client1);
         var reservation2 = new Reservation(new Date(2004, 05, 03), client1);
         var reservation3 = new Reservation(new Date(2017, 11, 02), client2);
         var reservation4 = new Reservation(new Date(2019, 01, 9), client2);
         var reservation5 = new Reservation(new Date(2021, 03, 07), client3);
-        var reservation6 = new Reservation(new Date(2009, 10, 8), client3);
+        var reservation6 = new Reservation(new Date(2009, 10, 8), client3);*/
 
 
         //---Languages
@@ -167,9 +169,9 @@ public class LibraryTest {
         var language4 = new Language("Französisch");
 
         //---Employees
-        var employee1 = new Employee("Hans", "Müller", "1202");
-        var employee2 = new Employee("Peter", "Mayer", "1203");
-        var employee3 = new Employee("Buble", "Holzer", "1204");
+        var employee1 = new Employee("Hans", "Müller", 1202);
+        var employee2 = new Employee("Peter", "Mayer", 1203);
+        var employee3 = new Employee("Buble", "Holzer", 1204);
 
         //---Invoice
 
@@ -250,6 +252,8 @@ public class LibraryTest {
         Assertions.assertNotNull(authors);
         Assertions.assertEquals(6, authors.size());
     }
+
+
 
     @TestTransaction
     @Test

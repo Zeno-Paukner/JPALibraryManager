@@ -26,6 +26,9 @@ public class Sale {
     @Column
     private Date saleDate;
 
+    @Column
+
+
 
 
     @ManyToOne(cascade=CascadeType.ALL)

@@ -18,6 +18,7 @@ public class GenericRepository {
             entityManager.clear();
         }
 
+
         @Transactional
         public <T> void add(T entity) {
             entityManager.persist(entity);

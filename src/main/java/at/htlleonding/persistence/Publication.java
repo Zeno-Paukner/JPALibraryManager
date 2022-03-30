@@ -5,6 +5,7 @@ import org.hibernate.annotations.common.reflection.XProperty;
 import javax.persistence.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Publication    {
     private String title;
 
     @Column
-    private String publishYear;
+    private Date publishYear;
 
     @Column
     private boolean isTranslated;
@@ -51,18 +52,17 @@ public class Publication    {
     @ManyToMany(cascade=CascadeType.ALL)
     private final List<Topic> topics = new ArrayList<>();
 
-    public Publication(String title, String publishYear, boolean isTranslated) {
+    public Publication(String title, Date publishYear, boolean isTranslated, Language language, Genre genre, Mediatype mediatype, Publisher publisher) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;
+        this.language = language;
+        this.genre = genre;
+        this.mediatype = mediatype;
+        this.publisher = publisher;
     }
 
     public Publication() {
-
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getTitle() {
@@ -73,11 +73,15 @@ public class Publication    {
         this.title = title;
     }
 
-    public String getPublishYear() {
+    public Date getPublishYear() {
         return publishYear;
     }
 
-    public void setPublishYear(String publishYear) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setPublishYear(Date publishYear) {
         this.publishYear = publishYear;
     }
 
@@ -105,10 +109,6 @@ public class Publication    {
         this.genre = genre;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
     public Mediatype getMediatype() {
         return mediatype;
     }
@@ -121,8 +121,16 @@ public class Publication    {
         return publisher;
     }
 
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
     public List<Copy> getCopies() {
         return copies;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
     public List<Author> getAuthors() {
@@ -132,9 +140,4 @@ public class Publication    {
     public List<Topic> getTopics() {
         return topics;
     }
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
 }
