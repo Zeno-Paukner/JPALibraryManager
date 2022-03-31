@@ -1,6 +1,9 @@
-package at.htlleonding.Logic;
+package at.htlleonding.importExport;
 
 import at.htlleonding.DTOs.*;
+import at.htlleonding.Logic.*;
+import at.htlleonding.persistence.Author;
+import at.htlleonding.persistence.Topic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +14,8 @@ import java.nio.file.Paths;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CSVimportLogic {
@@ -50,11 +55,12 @@ public class CSVimportLogic {
 
     public void insertMediaLineToEnties(String[] line) throws ParseException {
         //---publication
+        PublicationLogic publicationLogic = new PublicationLogic();
         PublicationDTO publicationDTO = new PublicationDTO();
         publicationDTO.setTitle(line[0]);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         //CreatePublication with PublicationDTO
-        //LibraryLogic.createPublication(publicationDTO);
+
 
 
         // Convert "1972" to Date and insert into setPublishYear
@@ -63,41 +69,59 @@ public class CSVimportLogic {
 
 
         //---language
+        LanguageLogic languageLogic = new LanguageLogic();
         LanguageDTO languageDTO = new LanguageDTO();
         languageDTO.setLanguageCode(line[3]);
+        publicationDTO.setLanguage_id(languageLogic.createLanguage(languageDTO));
 
         //---genre
+        GenreLogic genreLogic = new GenreLogic();
         GenreDTO genreDTO = new GenreDTO();
         genreDTO.setGenre(line[4]);
+        publicationDTO.setGenre_id(genreLogic.createGenre(genreDTO));
+
 
         //---mediatype
+        MediatypeLogic mediatypeLogic = new MediatypeLogic();
         MediatypeDTO mediatypeDTO = new MediatypeDTO();
         mediatypeDTO.setMediatype(line[5]);
+        publicationDTO.setMediatype_id(mediatypeLogic.createMediatype(mediatypeDTO));
+
 
         //---publisher
+        LibraryLogic libraryLogic = new LibraryLogic();
         PublisherDTO publisherDTO = new PublisherDTO();
         publisherDTO.setPublisherName(line[6]);
+        publicationDTO.setPublisher_id(libraryLogic.createPublisher(publisherDTO));
+
 
 
         //---Authors
+        Author author = new Author();
+        List<Integer> allAuthors = new ArrayList<>();
         String[] authors = line[7].split(",");
         //Split authors into firstname and lastname
-        for (String author : authors) {
-            String[] authorSplit = author.split(" ");
+        for (String author2 : authors) {
+            String[] authorSplit = author2.split(" ");
             AuthorDTO authorDTO = new AuthorDTO();
             authorDTO.setFirstName(authorSplit[0]);
             authorDTO.setLastName(authorSplit[1]);
+            allAuthors.add(libraryLogic.createAuthor(authorDTO));
         }
+        publicationDTO.setAuthors_id(allAuthors);
         //publicationDTO.setAuthors_id(createAuthors(authors));
 
         //---Topics
+        TopicDTO topicDTO = new TopicDTO();
+        TopicLogic topicLogic = new TopicLogic();
         String[] topics = line[8].split(",");
-        for (String topic : topics) {
-            TopicDTO topicDTO = new TopicDTO();
-            topicDTO.setKeyword(topic);
+        List<Integer> allTopics = new ArrayList<>();
+        for (String topic2 : topics) {
+            topicDTO.setKeyword(topic2);
+            allTopics.add(topicLogic.createTopic(topicDTO));
         }
-        //publicationDTO.setTopics_id(createTopics(topics));
-
+        publicationDTO.setTopics_id(allTopics);
+        publicationLogic.createPublication(publicationDTO);
     }
 
     // 0: ClientDTO.firstName 1: ClientDTO.lastName 2: ClientDTO.phoneNumber 3: ClientDTO.email

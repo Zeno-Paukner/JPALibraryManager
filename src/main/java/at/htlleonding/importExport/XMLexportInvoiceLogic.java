@@ -1,4 +1,4 @@
-package at.htlleonding.Logic;
+package at.htlleonding.importExport;
 
 import at.htlleonding.persistence.Invoice;
 
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class XMLexportInvoiceLogic {
 
     public void exportInvoice(Invoice invoice) throws JAXBException, IOException {
-        
+
 
 
 

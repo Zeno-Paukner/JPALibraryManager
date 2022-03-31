@@ -37,6 +37,11 @@ public class Copy {
     public Copy() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+
     public Publication getPublication() {
         return publication;
     }
