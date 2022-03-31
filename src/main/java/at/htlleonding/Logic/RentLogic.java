@@ -5,7 +5,6 @@ import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Copy;
 import at.htlleonding.persistence.Employee;
 import at.htlleonding.persistence.Rent;
-import at.htlleonding.Logic.LibraryLogic;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -61,7 +60,7 @@ public class RentLogic {
     }
 
     @Transactional
-    public void endRent(Integer rent_id) {
+    public void endRentCopy(Integer rent_id) {
         Rent rent = entityManager.find(Rent.class, rent_id);
         rent.getCopy().setRented(false);
         rent.setEndDate(new Date());

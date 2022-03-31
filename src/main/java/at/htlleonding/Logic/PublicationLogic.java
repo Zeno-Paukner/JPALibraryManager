@@ -41,13 +41,11 @@ public class PublicationLogic {
         publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO.getMediatype_id()));
         //set genre in publication
         publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
-
-        // set all PublicationDTO authors into the publication
-        for (Integer author_id : publicationDTO.getAuthors_ids()) {
-            Author author = entityManager.find(Author.class, author_id);
-        }
-        //?????????????????
         publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
+
+        //TODO: Set all Authors and Topics
+        //set authors in publication
+
         //publication.setAuthor(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
         entityManager.persist(publication);
     }

@@ -76,17 +76,6 @@ public class LibraryLogic {
         return publisher.getId();
     }
 
-
-
-
-
-
-
-    //Invoice
-
-
-
-
 }
 
 

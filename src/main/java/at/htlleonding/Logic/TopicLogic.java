@@ -22,7 +22,7 @@ public class TopicLogic {
         //check every if the topic name is already in the database
         for (Topic topic1 : entityManager.createQuery("SELECT t FROM Topic t", Topic.class).getResultList()) {
             if (topic1.getKeyword().equals(topicDTO.getKeyword())) {
-                throw new RuntimeException("Topic already exists");
+                return topic1.getId();
             }
         }
 

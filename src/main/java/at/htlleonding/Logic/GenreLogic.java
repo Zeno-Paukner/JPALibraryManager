@@ -18,7 +18,7 @@ public class GenreLogic {
         Genre genre = new Genre();
         for (Genre genre1 : entityManager.createQuery("SELECT g FROM Genre g", Genre.class).getResultList()) {
             if (genre1.getGenre().equals(genreDTO.getGenre())) {
-                throw new RuntimeException("Genre already exists");
+                return genre1.getId();
             }
         }
         genre.setGenre(genreDTO.getGenre());

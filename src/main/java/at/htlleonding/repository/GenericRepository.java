@@ -24,11 +24,6 @@ public class GenericRepository {
             entityManager.persist(entity);
         }
 
-        @Transactional
-        public <T> void update(T entity) {
-            entityManager.merge(entity);
-        }
-
         public <T> T find(Class<T> className, Object id) {
             return entityManager.find(className, id);
         }
