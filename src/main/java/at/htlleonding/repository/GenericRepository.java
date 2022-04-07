@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 public class GenericRepository {
     @ApplicationScoped
-    public class LibraryRepository {
+
 
         @Inject
         EntityManager entityManager;
@@ -33,4 +33,4 @@ public class GenericRepository {
             entityManager.remove(entity);
         }
     }
-}
+
