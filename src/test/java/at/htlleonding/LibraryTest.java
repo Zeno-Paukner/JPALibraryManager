@@ -19,7 +19,7 @@ public class LibraryTest {
 
     private void createPublicationsWithAuthors(){
         //---Publications
-        var pub1 = new Publication("Romy im Wunderland", "1900", true);
+       /* var pub1 = new Publication("Romy im Wunderland", "1900", true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
 
         var pub2 = new Publication("Zeno im Wunderland", "1901", false);
@@ -35,7 +35,7 @@ public class LibraryTest {
         pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
 
         var pub6 = new Publication("Robi im Wunderland", "1905", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
 
         //---Authors
         var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
@@ -43,7 +43,7 @@ public class LibraryTest {
         var author3 = new Author("Martin", "Hausleitner", "+45 664 1234567");
 
 
-        target.add(pub1, author1);
+       /* target.add(pub1, author1);
         target.add(pub2, author2);
         target.add(pub3, author3);
 
@@ -53,7 +53,7 @@ public class LibraryTest {
 
         target.add(pub4, author3);
         target.add(pub5, author2);
-        target.add(pub6, author1);
+        target.add(pub6, author1);*/
 
 
     }
@@ -61,7 +61,7 @@ public class LibraryTest {
     private void createPublicationsWithTopics(){
 
         //---Publications
-        var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        /*var pub1 = new Publication("Romy im Wunderland", "1900", true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
 
         var pub2 = new Publication("Zeno im Wunderland", "1901", false);
@@ -77,7 +77,7 @@ public class LibraryTest {
         pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
 
         var pub6 = new Publication("Robi im Wunderland", "1905", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
 
         //---Topics
         var topic1 = new Topic("Mathematik");
@@ -88,18 +88,18 @@ public class LibraryTest {
         var topic6 = new Topic("Wirtschaft");
 
         //---Publications and Topics
-        target.add(pub1, topic1);
+        /*target.add(pub1, topic1);
         target.add(pub2, topic2);
         target.add(pub3, topic3);
         target.add(pub4, topic4);
         target.add(pub5, topic5);
-        target.add(pub6, topic6);
+        target.add(pub6, topic6);*/
     }
 
     private void createSampleData() {
 
         //---Publications
-        var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        /*var pub1 = new Publication("Romy im Wunderland", "1900", true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
 
         var pub2 = new Publication("Zeno im Wunderland", "1901", false);
@@ -115,7 +115,7 @@ public class LibraryTest {
         pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
 
         var pub6 = new Publication("Robi im Wunderland", "1905", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
 
         //---Clients
         var client1 = new Client("Peter", "Guckindieluft", "p.guck@gmail.com", "+43 660 1234567");
@@ -180,7 +180,7 @@ public class LibraryTest {
         //---Rent
 
         //---Publications and Authors
-        target.add(pub1, author1);
+      /*  target.add(pub1, author1);
         target.add(pub2, author2);
         target.add(pub3, author3);
         target.add(pub4, author4);
@@ -217,7 +217,7 @@ public class LibraryTest {
         target.add(pub3, language3);
         target.add(pub4, language4);
         target.add(pub5, language1);
-        target.add(pub6, language1);
+        target.add(pub6, language1);*/
 
         //---Employees
         target.add(employee1);
@@ -230,12 +230,12 @@ public class LibraryTest {
         target.add(client3);
 
         //---Reservations
-        target.add(reservation1);
+       /* target.add(reservation1);
         target.add(reservation2);
         target.add(reservation3);
         target.add(reservation4);
         target.add(reservation5);
-        target.add(reservation6);
+        target.add(reservation6);*/
 
     }
     
@@ -423,7 +423,7 @@ public class LibraryTest {
         Assertions.assertEquals(3, employees.size());
     }
 
-    @TestTransaction
+   /* @TestTransaction
     @Test
     public void createSampleData_removeOneData_loseOneData() {
 
@@ -439,7 +439,7 @@ public class LibraryTest {
         //target.remove(deleteTarget);
 
         Assertions.assertFalse(target.contains(deleteTarget));
-    }
+    }*/
 
 
 

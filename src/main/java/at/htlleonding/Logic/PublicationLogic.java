@@ -46,9 +46,8 @@ public class PublicationLogic {
         //TODO: Set all Authors and Topics
         //set authors in publication
 
+
         //publication.setAuthor(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
         entityManager.persist(publication);
     }
-
-
 }

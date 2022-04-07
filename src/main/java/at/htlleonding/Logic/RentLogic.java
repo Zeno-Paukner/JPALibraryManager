@@ -55,8 +55,6 @@ public class RentLogic {
         } else {
             throw new RuntimeException("Das Buch ist nicht mehr verfügbar");
         }
-
-
     }
 
     @Transactional
@@ -66,6 +64,4 @@ public class RentLogic {
         rent.setEndDate(new Date());
         entityManager.persist(rent);
     }
-
-
 }
