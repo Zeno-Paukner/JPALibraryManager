@@ -19,7 +19,7 @@ public class MediatypeLogic {
     //Mediatype
     public Integer createMediatype(MediatypeDTO mediatypeDTO) {
         Mediatype mediatype = new Mediatype();
-        //sompare String Mediatype with enum MediatypeEnum
+        //compare String Mediatype with enum MediatypeEnum
         for (MediatypeEnum mediatypeEnum : MediatypeEnum.values()) {
             if (mediatypeDTO.getMediatype().equals(mediatypeEnum.toString())) {
                 mediatype.setMediatypeEnum(mediatypeEnum);
