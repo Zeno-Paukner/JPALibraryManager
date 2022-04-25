@@ -8,21 +8,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 public class MediaTypeLogicTest {
+
     @Inject
     TopicLogic topicLogic;
     GenreLogic genreLogic;
     SaleLogic saleLogic;
     LibraryLogic libraryLogic;
-
+    EntityManager em;
     @TestTransaction
     @Test
     public void CheckIfTheWritingIsRight() {
         MediatypeDTO mediatypeDTO= new MediatypeDTO("Book");
         var mediaTypeid = MediatypeLogic.createMediatype(mediatypeDTO);
-        var topicID2 = topicLogic.createTopic(topicDTO2);
-
-        Assertions.assertEquals(topicID, topicID2);
+        Assertions.assertEquals();
     }
 }

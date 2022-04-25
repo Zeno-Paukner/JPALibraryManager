@@ -16,7 +16,6 @@ public class MediatypeLogic {
     EntityManager entityManager;
 
     @Transactional
-    //Mediatype
     public  Integer createMediatype(MediatypeDTO mediatypeDTO) {
         Mediatype mediatype = new Mediatype();
         //compare String Mediatype with enum MediatypeEnum
