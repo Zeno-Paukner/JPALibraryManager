@@ -5,6 +5,9 @@ import at.htlleonding.persistence.MediatypeEnum;
 import javax.persistence.Column;
 
 public class MediatypeDTO {
+    public MediatypeDTO(String mediaTypeDTO){
+        this.mediatype=mediaTypeDTO;
+    }
 
     private String mediatype;
 

@@ -17,7 +17,7 @@ public class MediatypeLogic {
 
     @Transactional
     //Mediatype
-    public Integer createMediatype(MediatypeDTO mediatypeDTO) {
+    public  Integer createMediatype(MediatypeDTO mediatypeDTO) {
         Mediatype mediatype = new Mediatype();
         //compare String Mediatype with enum MediatypeEnum
         for (MediatypeEnum mediatypeEnum : MediatypeEnum.values()) {
