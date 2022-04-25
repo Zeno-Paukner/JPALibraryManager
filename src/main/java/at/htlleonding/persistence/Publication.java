@@ -28,7 +28,7 @@ public class Publication    {
     @JoinColumn(name = "language_id")
     private Language language;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "genre_id")
     private Genre genre;
 

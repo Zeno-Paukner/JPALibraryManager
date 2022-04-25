@@ -9,6 +9,17 @@ public class ClientDTO {
     private String phoneNumber;
     private String email;
 
+    public ClientDTO(String firstName, String lastName, String phoneNumber, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public ClientDTO() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
