@@ -25,9 +25,8 @@ public class SaleLogicTest {
 
     @TestTransaction
     @Test
-    public void CheckDateBeforeSale() {
-        var copyDto= new CopyDTO();
-       var copyid = LibraryLogic.createCopy();
+    public void CheckSalePrice() {
+
 
     }
 }

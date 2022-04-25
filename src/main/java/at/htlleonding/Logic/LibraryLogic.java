@@ -18,6 +18,7 @@ public class LibraryLogic {
     @Inject
     EntityManager entityManager;
 
+
     @Transactional
     //create Client
     public void createClient(ClientDTO clientDTO) {
@@ -59,7 +60,7 @@ public class LibraryLogic {
 
     @Transactional
     //createCopy
-    public Integer createCopy(CopyDTO copyDTO) {
+    public  Integer createCopy(CopyDTO copyDTO) {
         Copy copy = new Copy();
         copy.setPublication(entityManager.find(Publication.class, copyDTO.getPublication_id()));
         copy.setDateOfPurchase(new Date());
