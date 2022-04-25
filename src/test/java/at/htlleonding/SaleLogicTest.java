@@ -1,20 +1,13 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOs.CopyDTO;
-import at.htlleonding.DTOs.GenreDTO;
 import at.htlleonding.DTOs.SaleDTO;
-import at.htlleonding.Logic.GenreLogic;
-import at.htlleonding.Logic.LibraryLogic;
 import at.htlleonding.Logic.SaleLogic;
-import at.htlleonding.Logic.TopicLogic;
-import at.htlleonding.persistence.Client;
-import at.htlleonding.persistence.Copy;
-import at.htlleonding.persistence.Genre;
+import at.htlleonding.persistence.Sale;
+
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -25,8 +18,26 @@ public class SaleLogicTest {
 
     @TestTransaction
     @Test
-    public void CheckSalePrice() {
+    public void checkIfSaleIsCreated() {
+        SaleDTO saleDTO1 = new SaleDTO();
+        var SaleID = saleLogic.createSale(saleDTO1);
+        Assertions.assertEquals(SaleID, 1);
+    }
 
+    @TestTransaction
+    @Test
+    public void checkIfaSaleCanBeaDuplicate() {
+        SaleDTO saleDTO1 = new SaleDTO();
+        SaleDTO saleDTO2 = new SaleDTO();
+        var saleID = saleLogic.createSale(saleDTO1);
+        var saleID2 = saleLogic.createSale(saleDTO2);
 
+        Assertions.assertEquals(saleID, saleID2);
+    }
+
+    @TestTransaction
+    @Test
+    public void checkIfCopyIsAvailableToPurchase() {
+        var saleID = saleLogic.checkIfCopyIsAvailableToPurchase(1);
     }
 }
