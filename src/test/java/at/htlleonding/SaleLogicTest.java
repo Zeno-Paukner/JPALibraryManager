@@ -1,5 +1,6 @@
 package at.htlleonding;
 
+import at.htlleonding.DTOs.CopyDTO;
 import at.htlleonding.DTOs.GenreDTO;
 import at.htlleonding.DTOs.SaleDTO;
 import at.htlleonding.Logic.GenreLogic;
@@ -24,19 +25,9 @@ public class SaleLogicTest {
 
     @TestTransaction
     @Test
-    public void checkIfaGenreCanBeaDuplicate() {
-        GenreDTO genreDTO1 = new GenreDTO("Action");
-        GenreDTO genreDTO2 = new GenreDTO("Action");
-        var genreID = GenreLogic.createGenre(genreDTO1);
-        var genreID2 = GenreLogic.createGenre(genreDTO2);
+    public void CheckDateBeforeSale() {
+        var copyDto= new CopyDTO();
+       var copyid = LibraryLogic.createCopy();
 
-        Assertions.assertEquals(genreID, genreID2);
-
-        Copy cy1 = new Copy();
-        Client ct
-
-        SaleDTO saleDTO = new SaleDTO(c1.getId(), );
-
-        saleLogic.createSale(saleDTO);
     }
 }
