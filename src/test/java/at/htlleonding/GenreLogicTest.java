@@ -5,6 +5,7 @@ import at.htlleonding.Logic.GenreLogic;
 import at.htlleonding.Logic.LibraryLogic;
 import at.htlleonding.Logic.SaleLogic;
 import at.htlleonding.Logic.TopicLogic;
+import at.htlleonding.persistence.Genre;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
@@ -32,5 +33,15 @@ public class GenreLogicTest {
         Assertions.assertEquals(genreID, genreID2);
     }
 
+    @TestTransaction
+    @Test
+
+    public void checkGenresPublications() {
+        Genre genreDTO1 = new Genre("Action");
+        var publication= genreDTO1.getPublications();
+
+
+        Assertions.assertNotNull(publication, "Publication Exists");
+    }
 
 }
