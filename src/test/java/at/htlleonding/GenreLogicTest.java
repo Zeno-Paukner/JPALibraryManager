@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 @QuarkusTest
 public class GenreLogicTest {
@@ -20,6 +21,7 @@ public class GenreLogicTest {
     GenreLogic genreLogic;
     SaleLogic saleLogic;
     LibraryLogic libraryLogic;
+    EntityManager entityManager;
 
     @TestTransaction
     @Test
@@ -31,17 +33,6 @@ public class GenreLogicTest {
         var genreID2 = genreLogic.createGenre(genreDTO2);
 
         Assertions.assertEquals(genreID, genreID2);
-    }
-
-    @TestTransaction
-    @Test
-
-    public void checkGenresPublications() {
-        Genre genreDTO1 = new Genre("Action");
-        var publication= genreDTO1.getPublications();
-
-
-        Assertions.assertNotNull(publication, "Publication Exists");
     }
 
 }

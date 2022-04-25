@@ -10,8 +10,8 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 public class GenreLogic {
 
-    @Inject
-    EntityManager entityManager;
+        @Inject
+        EntityManager entityManager;
 
     @Transactional
     public Integer createGenre(GenreDTO genreDTO) {
