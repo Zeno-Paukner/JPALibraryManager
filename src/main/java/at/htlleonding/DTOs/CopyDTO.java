@@ -9,7 +9,6 @@ import java.util.Date;
 
 public class CopyDTO {
 
-
     private Integer publication_id;
 
     public Integer getPublication_id() {

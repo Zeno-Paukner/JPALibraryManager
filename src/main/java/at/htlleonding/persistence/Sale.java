@@ -46,7 +46,7 @@ public class Sale {
     @JoinColumn (name = "invoice_id")
     private Invoice invoice;
 
-    public Sale(List<Copy> copyList, Client client, Employee employee, Date saleDate, double totalPrice, Invoice invoice , Integer totalCopiesAmount) {
+    public Sale(List<Copy> copyList, Client client, Employee employee, Date saleDate, double totalPrice, Invoice invoice, Integer totalCopiesAmount) {
         this.copyList = copyList;
         this.client = client;
         this.employee = employee;

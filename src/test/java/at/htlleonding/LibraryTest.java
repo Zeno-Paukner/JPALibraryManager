@@ -118,9 +118,9 @@ public class LibraryTest {
         pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
 
         //---Clients
-        var client1 = new Client("Peter", "Guckindieluft", "p.guck@gmail.com", "+43 660 1234567");
-        var client2 = new Client("Hans", "Rainer", "h.rainer@gmail.com", "+43 650 1234567");
-        var client3 = new Client("Rudi", "Painer", "r.painer@maio.com", "+43 630 1234567");
+        var client1 = new Client("Peter", "Guckindieluft", "+43 660 1234567", "p.guck@gmail.com");
+        var client2 = new Client("Hans", "Rainer", "+43 650 1234567", "h.rainer@gmail.com");
+        var client3 = new Client("Rudi", "Painer", "+43 630 1234567", "r.painer@maio.com");
 
         //---Authors
         var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
