@@ -34,7 +34,7 @@ public class Invoice {
     private Double totalSalesPrice;
 
     @OneToMany(mappedBy = "invoice")
-    private final List<Sale> sale = new ArrayList<>();
+    private final List<Sale> sales = new ArrayList<>();
 
     public Invoice(Client client, Employee employee, Date saleDate, Integer amount, Double totalSalesPrices) {
         this.client = client;
@@ -95,7 +95,7 @@ public class Invoice {
         this.totalSalesPrice = totalSalesPrice;
     }
 
-    public List<Sale> getSale() {
-        return sale;
+    public List<Sale> getSales() {
+        return sales;
     }
 }
