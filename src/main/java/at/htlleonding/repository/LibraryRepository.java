@@ -60,6 +60,10 @@ public class LibraryRepository {
     public void add(Publication p) {
         entityManager.persist(p);
     }
+    @Transactional
+    public void add(Mediatype m){
+        entityManager.persist(m);
+    }
 
     @Transactional
     public void add(Genre g) {
@@ -107,6 +111,21 @@ public class LibraryRepository {
         a.getPublications().add(p);
 
         entityManager.persist(a);
+        entityManager.persist(p);
+    }
+
+    @Transactional
+    public void add(Publication p, Mediatype m) {
+        if (p.getId() == null)
+            add(p);
+
+        if (m.getId() == null)
+            add(m);
+
+        p.setMediatype(m);
+        m.getPublications().add(p);
+
+        entityManager.persist(m);
         entityManager.persist(p);
     }
 

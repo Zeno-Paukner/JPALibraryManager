@@ -28,4 +28,12 @@ public class MediatypeDTO {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public MediatypeDTO(String mediatype, Double price) {
+        this.mediatype = mediatype;
+        this.price = price;
+    }
+
+    public MediatypeDTO() {
+    }
 }

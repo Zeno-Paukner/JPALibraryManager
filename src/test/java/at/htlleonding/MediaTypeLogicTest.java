@@ -18,11 +18,11 @@ public class MediaTypeLogicTest {
     SaleLogic saleLogic;
     LibraryLogic libraryLogic;
     EntityManager em;
-    @TestTransaction
-    @Test
-    public void CheckIfTheWritingIsRight() {
-        MediatypeDTO mediatypeDTO= new MediatypeDTO("Book");
-        var mediaTypeid = MediatypeLogic.createMediatype(mediatypeDTO);
-        Assertions.assertEquals();
-    }
+    //@TestTransaction
+    //@Test
+    //public void CheckIfTheWritingIsRight() {
+    //    MediatypeDTO mediatypeDTO= new MediatypeDTO("Book");
+    //    var mediaTypeid = MediatypeLogic.createMediatype(mediatypeDTO);
+    //    Assertions.assertEquals();
+    //}
 }

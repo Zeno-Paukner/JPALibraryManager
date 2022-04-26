@@ -29,10 +29,9 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Date reservationDate, Client client, Publication publication) {
+    public Reservation(Date reservationDate, Client client) {
         this.reservationDate = reservationDate;
         this.client = client;
-        this.publication = publication;
     }
 
     public Integer getId() {

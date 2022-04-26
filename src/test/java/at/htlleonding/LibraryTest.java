@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import at.htlleonding.Logic.*;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @QuarkusTest
@@ -17,25 +19,26 @@ public class LibraryTest {
     @Inject
     LibraryRepository target;
 
+
     private void createPublicationsWithAuthors(){
         //---Publications
-       /* var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        var pub1 = new Publication("Romy im Wunderland", 1900, true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
 
-        var pub2 = new Publication("Zeno im Wunderland", "1901", false);
+        var pub2 = new Publication("Zeno im Wunderland", 1901, false);
         pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
 
-        var pub3 = new Publication("Martin im Wunderland", "1902", true);
+        var pub3 = new Publication("Martin im Wunderland", 1902, true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
 
-        var pub4 = new Publication("Willi im Wunderland", "1903", false);
+        var pub4 = new Publication("Willi im Wunderland", 1903, false);
         pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
 
-        var pub5 = new Publication("Yimme im Wunderland", "1904", true);
+        var pub5 = new Publication("Yimme im Wunderland", 1904, true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
 
-        var pub6 = new Publication("Robi im Wunderland", "1905", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
+        var pub6 = new Publication("Robi im Wunderland", 1905, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
 
         //---Authors
         var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
@@ -43,7 +46,7 @@ public class LibraryTest {
         var author3 = new Author("Martin", "Hausleitner", "+45 664 1234567");
 
 
-       /* target.add(pub1, author1);
+        target.add(pub1, author1);
         target.add(pub2, author2);
         target.add(pub3, author3);
 
@@ -53,31 +56,30 @@ public class LibraryTest {
 
         target.add(pub4, author3);
         target.add(pub5, author2);
-        target.add(pub6, author1);*/
+        target.add(pub6, author1);
 
 
     }
 
     private void createPublicationsWithTopics(){
-
         //---Publications
-        /*var pub1 = new Publication("Romy im Wunderland", "1900", true);
+        var pub1 = new Publication("Romy im Wunderland", 1900, true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
 
-        var pub2 = new Publication("Zeno im Wunderland", "1901", false);
+        var pub2 = new Publication("Zeno im Wunderland", 1901, false);
         pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
 
-        var pub3 = new Publication("Martin im Wunderland", "1902", true);
+        var pub3 = new Publication("Martin im Wunderland", 1902, true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
 
-        var pub4 = new Publication("Willi im Wunderland", "1903", false);
+        var pub4 = new Publication("Willi im Wunderland", 1903, false);
         pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
 
-        var pub5 = new Publication("Yimme im Wunderland", "1904", true);
+        var pub5 = new Publication("Yimme im Wunderland", 1904, true);
         pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
 
-        var pub6 = new Publication("Robi im Wunderland", "1905", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
+        var pub6 = new Publication("Robi im Wunderland", 1905, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
 
         //---Topics
         var topic1 = new Topic("Mathematik");
@@ -88,34 +90,149 @@ public class LibraryTest {
         var topic6 = new Topic("Wirtschaft");
 
         //---Publications and Topics
-        /*target.add(pub1, topic1);
+        target.add(pub1, topic1);
         target.add(pub2, topic2);
         target.add(pub3, topic3);
         target.add(pub4, topic4);
         target.add(pub5, topic5);
-        target.add(pub6, topic6);*/
+        target.add(pub6, topic6);
     }
+
+    private void createPublicationsAndGenres(){
+        //---Publications
+        var pub1 = new Publication("Romy im Wunderland", 1900, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+
+        var pub2 = new Publication("Zeno im Wunderland", 1901, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
+
+        var pub3 = new Publication("Martin im Wunderland", 1902, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
+
+        var pub4 = new Publication("Willi im Wunderland", 1903, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
+
+        var pub5 = new Publication("Yimme im Wunderland", 1904, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
+
+        var pub6 = new Publication("Robi im Wunderland", 1905, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+
+        //---Genres
+        var genre1 = new Genre("Roman");
+        var genre2 = new Genre("Krimi");
+        var genre3 = new Genre("Fantasy");
+        var genre4 = new Genre("SciFi");
+        var genre5 = new Genre("Horror");
+        var genre6 = new Genre("Komödie");
+
+        target.add(pub1, genre6);
+        target.add(pub2, genre5);
+        target.add(pub3, genre4);
+        target.add(pub4, genre3);
+        target.add(pub5, genre2);
+        target.add(pub6, genre1);
+
+        target.add(pub1, genre1);
+        target.add(pub2, genre2);
+        target.add(pub3, genre3);
+        target.add(pub4, genre4);
+        target.add(pub5, genre5);
+        target.add(pub6, genre6);
+
+
+    }
+    private void createPublicationsAndPublisher(){
+        //---Publications
+        var pub1 = new Publication("Romy im Wunderland", 1900, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+
+        var pub2 = new Publication("Zeno im Wunderland", 1901, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
+
+        var pub3 = new Publication("Martin im Wunderland", 1902, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
+
+        var pub4 = new Publication("Willi im Wunderland", 1903, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
+
+        var pub5 = new Publication("Yimme im Wunderland", 1904, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
+
+        var pub6 = new Publication("Robi im Wunderland", 1905, false);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+
+        //--- Publisher
+        var publisher1 = new Publisher("Hans Peter Verlag");
+        var publisher2 = new Publisher("Veritas");
+        var publisher3 = new Publisher("Delta Verlag");
+
+        //---Publications and Publisher
+        target.add(pub1, publisher1);
+        target.add(pub2, publisher2);
+        target.add(pub3, publisher3);
+        target.add(pub4, publisher1);
+        target.add(pub5, publisher2);
+        target.add(pub6, publisher3);
+    }
+
+    private void createPublicationsAndLanguages() {
+
+        //---Publications
+        var pub1 = new Publication("Romy im Wunderland", 1900, true);
+        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+
+        var pub2 = new Publication("Zeno im Wunderland", 1901, false);
+        pub2.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
+
+        var pub3 = new Publication("Martin im Wunderland", 1902, true);
+        pub3.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
+
+        var pub4 = new Publication("Willi im Wunderland", 1903, false);
+        pub4.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
+
+        var pub5 = new Publication("Yimme im Wunderland", 1904, true);
+        pub5.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
+
+        var pub6 = new Publication("Robi im Wunderland", 1905, false);
+        pub6.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
+
+        //---Languages
+        var language1 = new Language("Deutsch");
+        var language2 = new Language("Englisch");
+        var language3 = new Language("Spanisch");
+        var language4 = new Language("Französisch");
+
+        //---Publications and Language
+        target.add(pub1, language1);
+        target.add(pub2, language2);
+        target.add(pub3, language3);
+        target.add(pub4, language4);
+        target.add(pub5, language1);
+        target.add(pub6, language1);
+    }
+
 
     private void createSampleData() {
 
         //---Publications
-        /*var pub1 = new Publication("Romy im Wunderland", "1900", true);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+        var pub1 = new Publication("Romy im Wunderland", 1900, true);
+        var media1 = new Mediatype(MediatypeEnum.BOOK,0.99);
 
-        var pub2 = new Publication("Zeno im Wunderland", "1901", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.AUDIOBOOK,1.99));
+        var pub2 = new Publication("Zeno im Wunderland", 1901, false);
+        var media2 = new Mediatype(MediatypeEnum.AUDIOBOOK,1.99);
 
-        var pub3 = new Publication("Martin im Wunderland", "1902", true);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.EBOOK,2.99));
+        var pub3 = new Publication("Martin im Wunderland", 1902, true);
+        var media3 = new Mediatype(MediatypeEnum.EBOOK,2.99);
 
-        var pub4 = new Publication("Willi im Wunderland", "1903", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.NEWSPAPER,3.99));
+        var pub4 = new Publication("Willi im Wunderland", 1903, false);
+        var media4 = new Mediatype(MediatypeEnum.NEWSPAPER,3.99);
 
-        var pub5 = new Publication("Yimme im Wunderland", "1904", true);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.MAGAZINE,4.99));
+        var pub5 = new Publication("Yimme im Wunderland", 1904, true);
+        var media5 = new Mediatype(MediatypeEnum.MAGAZINE,4.99);
 
-        var pub6 = new Publication("Robi im Wunderland", "1905", false);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));*/
+        var pub6 = new Publication("Robi im Wunderland", 1905, false);
+        var media6 = new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99);
 
         //---Clients
         var client1 = new Client("Peter", "Guckindieluft", "+43 660 1234567", "p.guck@gmail.com");
@@ -127,7 +244,7 @@ public class LibraryTest {
         var author2 = new Author("Zeno", "Paukner", "+44 664 1234567");
         var author3 = new Author("Martin", "Hausleitner", "+45 664 1234567");
         var author4 = new Author("William", "Lau", "+50 664 1234567");
-        var author5 = new Author("Yimne", "Raid", "+49 664 1234567");
+        var author5 = new Author("Yimme", "Raid", "+49 664 1234567");
         var author6 = new Author("Max", "Mustermann", "+49 664 1234567");
 
         //---Topics
@@ -153,13 +270,12 @@ public class LibraryTest {
         var publisher3 = new Publisher("Delta Verlag");
 
         //---Reservations
-        // Create Reservation
-        /*var reservation1 = new Reservation(new Date(2014, 02, 01), client1);
+        var reservation1 = new Reservation(new Date(2014, 02, 01), client1);
         var reservation2 = new Reservation(new Date(2004, 05, 03), client1);
         var reservation3 = new Reservation(new Date(2017, 11, 02), client2);
         var reservation4 = new Reservation(new Date(2019, 01, 9), client2);
         var reservation5 = new Reservation(new Date(2021, 03, 07), client3);
-        var reservation6 = new Reservation(new Date(2009, 10, 8), client3);*/
+        var reservation6 = new Reservation(new Date(2009, 10, 8), client3);
 
 
         //---Languages
@@ -179,8 +295,16 @@ public class LibraryTest {
 
         //---Rent
 
+        //---Publication and Mediatypes
+        target.add(pub1, media1);
+        target.add(pub2, media2);
+        target.add(pub3, media3);
+        target.add(pub4, media4);
+        target.add(pub5, media5);
+        target.add(pub6, media6);
+
         //---Publications and Authors
-      /*  target.add(pub1, author1);
+        target.add(pub1, author1);
         target.add(pub2, author2);
         target.add(pub3, author3);
         target.add(pub4, author4);
@@ -217,7 +341,7 @@ public class LibraryTest {
         target.add(pub3, language3);
         target.add(pub4, language4);
         target.add(pub5, language1);
-        target.add(pub6, language1);*/
+        target.add(pub6, language1);
 
         //---Employees
         target.add(employee1);
@@ -230,12 +354,12 @@ public class LibraryTest {
         target.add(client3);
 
         //---Reservations
-       /* target.add(reservation1);
+        target.add(reservation1);
         target.add(reservation2);
         target.add(reservation3);
         target.add(reservation4);
         target.add(reservation5);
-        target.add(reservation6);*/
+        target.add(reservation6);
 
     }
     
@@ -259,7 +383,6 @@ public class LibraryTest {
     @Test
     public void createSampleData_getAuthorsByLastName_getBhuiyan() {
         createSampleData();
-
         target.FlushAndClear();
 
         var author = target.getAuthorByLastName("Bhuiyan");

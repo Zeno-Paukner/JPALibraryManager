@@ -1,7 +1,6 @@
 package at.htlleonding.Logic;
 
 import at.htlleonding.persistence.AuditLog;
-import org.h2.api.Trigger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

@@ -23,7 +23,12 @@ public class Client extends Person{
     @OneToMany (mappedBy = "client", cascade=CascadeType.ALL)
     private final List<Reservation> reservations = new ArrayList<>();
 
+<<<<<<< Updated upstream
     public Client(String firstName, String lastName, String phoneNumber, String email) {
+=======
+
+    public Client(String firstName, String lastName, String email, String phoneNumber ) {
+>>>>>>> Stashed changes
         super(firstName, lastName);
         this.phoneNumber = phoneNumber;
         this.email = email;
