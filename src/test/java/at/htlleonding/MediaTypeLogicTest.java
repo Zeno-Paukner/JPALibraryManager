@@ -23,6 +23,6 @@ public class MediaTypeLogicTest {
     public void CheckIfTheWritingIsRight() {
         MediatypeDTO mediatypeDTO= new MediatypeDTO("Book");
         var mediaTypeid = MediatypeLogic.createMediatype(mediatypeDTO);
-        Assertions.assertEquals("");
+        Assertions.assertEquals();
     }
 }
