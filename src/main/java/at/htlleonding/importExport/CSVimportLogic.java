@@ -81,11 +81,11 @@ public class CSVimportLogic {
         publicationDTO.setGenre_id(genreLogic.createGenre(genreDTO));
 
 
-        //---mediatype
+        /*//---mediatype
         MediatypeLogic mediatypeLogic = new MediatypeLogic();
         MediatypeDTO mediatypeDTO = new MediatypeDTO();
         mediatypeDTO.setMediatype(line[5]);
-        publicationDTO.setMediatype_id(mediatypeLogic.createMediatype(mediatypeDTO));
+        publicationDTO.setMediatype_id(mediatypeLogic.createMediatype(mediatypeDTO));*/
 
 
         //---publisher
