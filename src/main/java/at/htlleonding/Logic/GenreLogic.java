@@ -7,11 +7,13 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
+
 @ApplicationScoped
 public class GenreLogic {
 
-        @Inject
-        EntityManager entityManager;
+    @Inject
+    EntityManager entityManager;
 
     @Transactional
     public Genre createGenre(GenreDTO genreDTO) {
