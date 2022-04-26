@@ -64,4 +64,13 @@ public class RentLogic {
         rent.setEndDate(new Date());
         entityManager.persist(rent);
     }
+
+    //endRentbyCopyID
+    @Transactional
+    public void endRentbyCopyID(Integer copy_id) {
+        Rent rent = entityManager.find(Rent.class, entityManager.createQuery("SELECT r FROM Rent r WHERE r.copy = :copy", Rent.class).setParameter("copy", entityManager.find(Copy.class, copy_id)).getSingleResult().getId());
+        rent.getCopy().setRented(false);
+        rent.setEndDate(new Date());
+        entityManager.persist(rent);
+    }
 }

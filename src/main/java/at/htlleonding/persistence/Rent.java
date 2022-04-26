@@ -54,6 +54,10 @@ public class Rent {
     public Rent() {
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Copy getCopy() {
         return copy;
     }

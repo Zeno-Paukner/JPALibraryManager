@@ -30,4 +30,18 @@ public class RentDTO {
     public Integer getClient_id() {
         return client_id;
     }
+
+    public void setCopy_id(Integer copy_id) {
+        this.copy_id = copy_id;
+    }
+
+    public void setEmployee_id(Integer employee_id) {
+        this.employee_id = employee_id;
+    }
+
+    public void setClient_id(Integer client_id) {
+        this.client_id = client_id;
+    }
+
+
 }
