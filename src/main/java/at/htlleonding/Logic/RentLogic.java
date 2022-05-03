@@ -18,11 +18,11 @@ public class RentLogic {
     @Inject
     EntityManager entityManager;
 
-    @Transactional
-    public Boolean checkifCopyofPublicationIsAvailable(Integer publication_id) {
-        List<Copy> copies = (List<Copy>) entityManager.createQuery("SELECT c FROM Copy c WHERE c.publication.id = :publication_id AND c.status.id = 1", Copy.class);
-        return copies.size() > 0;
-    }
+   //@Transactional
+   //public Boolean checkifCopyofPublicationIsAvailable(Integer publication_id) {
+   //    List<Copy> copies = (List<Copy>) entityManager.createQuery("SELECT c FROM Copy c WHERE c.publication.id = :publication_id AND c.status.id = 1", Copy.class);
+   //    return copies.size() > 0;
+   //}
 
     @Transactional
     public Boolean checkIfCopyIsRented(Integer copy_id) {
@@ -32,8 +32,12 @@ public class RentLogic {
 
     @Transactional
     public void rentCopy(RentDTO rentDTO) {
-        if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
+        //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
             if (!checkIfCopyIsRented(rentDTO.getCopy())) {
+
+        //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy_id()).getPublication().getId())) {
+            if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {
+
                 Rent rent = new Rent();
                 List<Rent> rents = (List<Rent>) entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = :client AND r.copy = :copy", Rent.class);
                 if (rents.size() > 3) {
@@ -52,13 +56,13 @@ public class RentLogic {
             } else {
                 throw new RuntimeException("Das Buch ist bereits ausgeliehen");
             }
-        } else {
-            throw new RuntimeException("Das Buch ist nicht mehr verfügbar");
-        }
+        //} else {
+        //    throw new RuntimeException("Das Buch ist nicht mehr verfügbar");
+        //}
     }
 
     @Transactional
-    public void endRentCopy(Integer rent_id) {
+    public void endRentCopy(Integer rent.) {
         Rent rent = entityManager.find(Rent.class, rent_id);
         rent.getCopy().setRented(false);
         rent.setEndDate(new Date());

@@ -24,7 +24,7 @@ public class SaleLogic {
     }
 
     @Transactional
-    public Integer createSale(SaleDTO saleDTO) {
+    public Sale createSale(SaleDTO saleDTO) {
         Sale sale = new Sale();
         //check if all copys are available to purchase
         for (Integer copy_id : saleDTO.getCopy()) {
@@ -49,6 +49,6 @@ public class SaleLogic {
             sale.getCopyList().add(entityManager.find(Copy.class, copy_id));
         }
         entityManager.persist(sale);
-        return sale.getId();
+        return sale;
     }
 }

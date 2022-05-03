@@ -39,40 +39,45 @@ public class LibraryLogic {
 
     @Transactional
     // Reservation
-    public void createReservation(ReservationDTO reservationDTO) {
+    public Reservation createReservation(ReservationDTO reservationDTO) {
         Reservation reservation = new Reservation();
         reservation.setClient(entityManager.find(Client.class, reservationDTO.getClient()));
         reservation.setPublication(entityManager.find(Publication.class, reservationDTO.getPublication()));
         reservation.setReservationDate(new Date());
         entityManager.persist(reservation);
+
+        return reservation;
     }
 
     @Transactional
-    public void createEmployee(EmployeeDTO employeeDTO) {
+    public Employee createEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
         employee.setSalary(employeeDTO.getSalary());
         entityManager.persist(employee);
+
+        return employee;
     }
 
     @Transactional
     //createCopy
-    public  Integer createCopy(CopyDTO copyDTO) {
+    public Copy createCopy(CopyDTO copyDTO) {
         Copy copy = new Copy();
         copy.setPublication(entityManager.find(Publication.class, copyDTO.getPublication_id()));
         copy.setDateOfPurchase(new Date());
         entityManager.persist(copy);
-        return copy.getId();
+        return copy;
+
     }
 
     //createPublisher
     @Transactional
-    public Integer createPublisher(PublisherDTO publisherDTO) {
+    public Publisher createPublisher(PublisherDTO publisherDTO) {
         Publisher publisher = new Publisher();
         publisher.setPublisherName(publisherDTO.getPublisherName());
         entityManager.persist(publisher);
-        return publisher.getId();
+        return publisher;
     }
 
 }

@@ -13,12 +13,13 @@ public class TriggerLogic {
     @Inject
     EntityManager entityManager;
 
-    public void createAuditLog(String entity, String action, String userId) {
+    public AuditLog createAuditLog(String entity, String action, String userId) {
         AuditLog auditLog = new AuditLog();
         auditLog.setEntity(entity);
         auditLog.setAction(action);
         auditLog.setTimestamp(new Date());
         entityManager.persist(auditLog);
+        return auditLog;
     }
 
     //create a trigger to log all changes to the database with the createAuditLog method

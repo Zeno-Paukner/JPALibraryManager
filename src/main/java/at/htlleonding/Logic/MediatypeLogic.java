@@ -7,6 +7,7 @@ import at.htlleonding.persistence.MediatypeEnum;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.print.attribute.standard.Media;
 import javax.transaction.Transactional;
 
 @ApplicationScoped
@@ -16,7 +17,7 @@ public class MediatypeLogic {
     EntityManager entityManager;
 
     @Transactional
-    public  Integer createMediatype(MediatypeDTO mediatypeDTO) {
+    public Mediatype createMediatype(MediatypeDTO mediatypeDTO) {
         Mediatype mediatype = new Mediatype();
         //compare String Mediatype with enum MediatypeEnum
         for (MediatypeEnum mediatypeEnum : MediatypeEnum.values()) {
@@ -26,7 +27,7 @@ public class MediatypeLogic {
         }
         mediatype.setPrice(mediatypeDTO.getPrice());
         entityManager.persist(mediatype);
-        return mediatype.getId();
+        return mediatype;
     }
 
 }
