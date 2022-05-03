@@ -1,14 +1,12 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.TopicDTO;
+import at.htlleonding.DTOsOLD.TopicDTO;
 import at.htlleonding.persistence.Topic;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
 
 @ApplicationScoped
 public class TopicLogic {

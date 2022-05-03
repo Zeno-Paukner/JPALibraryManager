@@ -1,52 +1,54 @@
 package at.htlleonding.DTOs;
 
-import at.htlleonding.persistence.Client;
-import at.htlleonding.persistence.Employee;
 import at.htlleonding.persistence.Sale;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class InvoiceDTO {
+public class InvoiceDTO implements Serializable {
+    private final ClientDTO client;
+    private final EmployeeDTO employee;
+    private final List<SaleDTO> sales = new ArrayList<>();
 
-    private Client client;
 
-    private Employee employee;
+    public InvoiceDTO(ClientDTO client, EmployeeDTO employee, List<SaleDTO> sales) {
+        this.client = client;
+        this.employee = employee;
+        this.sales.addAll(sales);
+    }
 
-    private List<Sale> sale = new ArrayList<>();
-
-    public Client getClient() {
+    public ClientDTO getClient() {
         return client;
     }
 
-    public Employee getEmployee() {
+    public EmployeeDTO getEmployee() {
         return employee;
     }
 
-    public List<Sale> getSale() {
-        return sale;
+    public List<SaleDTO> getSales() {
+        return sales;
     }
 
-    public InvoiceDTO(Client client, Employee employee, List<Sale> sale) {
-        this.client = client;
-        this.employee = employee;
-        this.sale = sale;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InvoiceDTO entity = (InvoiceDTO) o;
+        return Objects.equals(this.client, entity.client) &&
+                Objects.equals(this.employee, entity.employee);
     }
 
-    public void setSale(List<Sale> sale) {
-        this.sale = sale;
+    @Override
+    public int hashCode() {
+        return Objects.hash(client, employee);
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public void setEmployee(Employee employee) {this.employee = employee;}
-
-    public InvoiceDTO() {
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "client = " + client + ", " +
+                "employee = " + employee + ")";
     }
 }

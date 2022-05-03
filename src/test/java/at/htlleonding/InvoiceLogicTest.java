@@ -1,14 +1,11 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOs.InvoiceDTO;
-import at.htlleonding.DTOs.TopicDTO;
+import at.htlleonding.DTOsOLD.InvoiceDTO;
 import at.htlleonding.Logic.InvoiceLogic;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Employee;
-import at.htlleonding.repository.LibraryRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;

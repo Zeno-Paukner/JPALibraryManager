@@ -1,63 +1,52 @@
 package at.htlleonding.DTOs;
 
-
-import at.htlleonding.persistence.Client;
-import at.htlleonding.persistence.Copy;
-import at.htlleonding.persistence.Employee;
-
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
-public class SaleDTO {
+public class SaleDTO implements Serializable {
+    private final List<CopyDTO> copyList;
+    private final ClientDTO client;
+    private final EmployeeDTO employee;
 
-    private List<Integer> copy = new ArrayList<>();
-
-    private Client client;
-
-    private Employee employee;
-
-    private Double totalPrice;
-
-    public List<Integer> getCopy() {
-        return copy;
+    public SaleDTO(List<CopyDTO> copyList, ClientDTO client, EmployeeDTO employee) {
+        this.copyList = copyList;
+        this.client = client;
+        this.employee = employee;
     }
 
-    public Client getClient() {
+    public List<CopyDTO> getCopyList() {
+        return copyList;
+    }
+
+    public ClientDTO getClient() {
         return client;
     }
 
-    public Employee getEmployee() {
+    public EmployeeDTO getEmployee() {
         return employee;
     }
 
-    public Double getTotalPrice() {
-        return totalPrice;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SaleDTO entity = (SaleDTO) o;
+        return Objects.equals(this.copyList, entity.copyList) &&
+                Objects.equals(this.client, entity.client) &&
+                Objects.equals(this.employee, entity.employee);
     }
 
-    public SaleDTO(List<Integer> copy_id, Integer client_id, Integer employee_id, Double totalPrice) {
-        this.copy_id = copy_id;
-        this.client_id = client_id;
-        this.employee_id = employee_id;
-        this.totalPrice = totalPrice;
+    @Override
+    public int hashCode() {
+        return Objects.hash(copyList, client, employee);
     }
 
-    public SaleDTO() {
-
-    }
-
-    public void setCopy_id(List<Integer> copy_id) {
-        this.copy_id = copy_id;
-    }
-
-    public void setClient_id(Integer client_id) {
-        this.client_id = client_id;
-    }
-
-    public void setEmployee_id(Integer employee_id) {
-        this.employee_id = employee_id;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "copyList = " + copyList + ", " +
+                "client = " + client + ", " +
+                "employee = " + employee + ")";
     }
 }

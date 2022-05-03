@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.RentDTO;
+import at.htlleonding.DTOsOLD.RentDTO;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Copy;
 import at.htlleonding.persistence.Employee;

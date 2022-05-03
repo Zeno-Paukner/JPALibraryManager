@@ -1,17 +1,43 @@
 package at.htlleonding.DTOs;
 
-import at.htlleonding.persistence.Publication;
-import at.htlleonding.persistence.Rent;
-import at.htlleonding.persistence.Sale;
+import java.io.Serializable;
+import java.util.Objects;
 
-import javax.persistence.*;
-import java.util.Date;
+public class CopyDTO implements Serializable {
+    private final PublicationDTO publication;
+    private final SaleDTO sale;
 
-public class CopyDTO {
+    public CopyDTO(PublicationDTO publication, SaleDTO sale) {
+        this.publication = publication;
+        this.sale = sale;
+    }
 
-    private Publication publication;
-
-    public Publication getPublication_id() {
+    public PublicationDTO getPublication() {
         return publication;
+    }
+
+    public SaleDTO getSale() {
+        return sale;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CopyDTO entity = (CopyDTO) o;
+        return Objects.equals(this.publication, entity.publication) &&
+                Objects.equals(this.sale, entity.sale);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(publication, sale);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "publication = " + publication + ", " +
+                "sale = " + sale + ")";
     }
 }

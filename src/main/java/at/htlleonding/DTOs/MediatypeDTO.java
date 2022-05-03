@@ -2,38 +2,44 @@ package at.htlleonding.DTOs;
 
 import at.htlleonding.persistence.MediatypeEnum;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import java.util.Objects;
 
-public class MediatypeDTO {
-    public MediatypeDTO(String mediaTypeDTO){
-        this.mediatype=mediaTypeDTO;
+public class MediatypeDTO implements Serializable {
+    private final MediatypeEnum mediatypeEnum;
+    private final Double price;
+
+    public MediatypeDTO(MediatypeEnum mediatypeEnum, Double price) {
+        this.mediatypeEnum = mediatypeEnum;
+        this.price = price;
     }
 
-    private String mediatype;
-
-    private Double price;
-
-    public String getMediatype() {
-        return mediatype;
-    }
-
-    public void setMediatype(String mediatype) {
-        this.mediatype = mediatype;
+    public MediatypeEnum getMediatypeEnum() {
+        return mediatypeEnum;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MediatypeDTO entity = (MediatypeDTO) o;
+        return Objects.equals(this.mediatypeEnum, entity.mediatypeEnum) &&
+                Objects.equals(this.price, entity.price);
     }
 
-    public MediatypeDTO(String mediatype, Double price) {
-        this.mediatype = mediatype;
-        this.price = price;
+    @Override
+    public int hashCode() {
+        return Objects.hash(mediatypeEnum, price);
     }
 
-    public MediatypeDTO() {
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "mediatypeEnum = " + mediatypeEnum + ", " +
+                "price = " + price + ")";
     }
 }

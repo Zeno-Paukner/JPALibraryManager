@@ -1,12 +1,11 @@
 package at.htlleonding;
 
 
-import at.htlleonding.DTOs.GenreDTO;
+import at.htlleonding.DTOsOLD.GenreDTO;
 import at.htlleonding.Logic.GenreLogic;
 import at.htlleonding.Logic.LibraryLogic;
 import at.htlleonding.Logic.SaleLogic;
 import at.htlleonding.Logic.TopicLogic;
-import at.htlleonding.persistence.Genre;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;

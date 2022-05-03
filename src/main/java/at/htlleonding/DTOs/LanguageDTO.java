@@ -1,14 +1,35 @@
 package at.htlleonding.DTOs;
 
-public class LanguageDTO {
+import java.io.Serializable;
+import java.util.Objects;
 
-    private String languageCode;
+public class LanguageDTO implements Serializable {
+    private final String languageCode;
+
+    public LanguageDTO(String languageCode) {
+        this.languageCode = languageCode;
+    }
 
     public String getLanguageCode() {
         return languageCode;
     }
 
-    public void setLanguageCode(String languageCode) {
-        this.languageCode = languageCode;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LanguageDTO entity = (LanguageDTO) o;
+        return Objects.equals(this.languageCode, entity.languageCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(languageCode);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "languageCode = " + languageCode + ")";
     }
 }

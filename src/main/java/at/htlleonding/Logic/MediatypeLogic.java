@@ -1,13 +1,12 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.MediatypeDTO;
+import at.htlleonding.DTOsOLD.MediatypeDTO;
 import at.htlleonding.persistence.Mediatype;
 import at.htlleonding.persistence.MediatypeEnum;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.print.attribute.standard.Media;
 import javax.transaction.Transactional;
 
 @ApplicationScoped

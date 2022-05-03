@@ -1,17 +1,13 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOs.AuthorDTO;
 import at.htlleonding.persistence.*;
 import at.htlleonding.repository.LibraryRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import at.htlleonding.Logic.*;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @QuarkusTest

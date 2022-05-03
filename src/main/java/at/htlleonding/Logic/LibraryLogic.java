@@ -1,6 +1,8 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.*;
+import at.htlleonding.DTOs.CopyDTO;
+import at.htlleonding.DTOs.ReservationDTO;
+import at.htlleonding.DTOsOLD.*;
 import at.htlleonding.persistence.*;
 
 import javax.enterprise.context.ApplicationScoped;

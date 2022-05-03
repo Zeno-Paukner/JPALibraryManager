@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.LanguageDTO;
+import at.htlleonding.DTOsOLD.LanguageDTO;
 import at.htlleonding.persistence.Language;
 
 import javax.enterprise.context.ApplicationScoped;

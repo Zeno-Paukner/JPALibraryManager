@@ -36,6 +36,7 @@ public class Invoice {
     @OneToMany(mappedBy = "invoice")
     private final List<Sale> sales = new ArrayList<>();
 
+
     public Invoice(Client client, Employee employee, Date saleDate, Integer amount, Double totalSalesPrices) {
         this.client = client;
         this.employee = employee;

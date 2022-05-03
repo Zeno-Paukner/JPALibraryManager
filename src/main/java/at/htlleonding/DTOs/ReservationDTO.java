@@ -1,22 +1,43 @@
 package at.htlleonding.DTOs;
 
-import at.htlleonding.persistence.Client;
-import at.htlleonding.persistence.Publication;
+import java.io.Serializable;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+public class ReservationDTO implements Serializable {
+    private final ClientDTO client;
+    private final PublicationDTO publication;
 
-public class ReservationDTO {
-    private Client client;
+    public ReservationDTO(ClientDTO client, PublicationDTO publication) {
+        this.client = client;
+        this.publication = publication;
+    }
 
-    private Publication publication;
-
-    public Client getClient() {
+    public ClientDTO getClient() {
         return client;
     }
 
-    public Publication getPublication() {
+    public PublicationDTO getPublication() {
         return publication;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReservationDTO entity = (ReservationDTO) o;
+        return Objects.equals(this.client, entity.client) &&
+                Objects.equals(this.publication, entity.publication);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(client, publication);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "client = " + client + ", " +
+                "publication = " + publication + ")";
     }
 }

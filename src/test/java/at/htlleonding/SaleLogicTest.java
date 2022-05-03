@@ -1,15 +1,13 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOs.SaleDTO;
+import at.htlleonding.DTOsOLD.SaleDTO;
 import at.htlleonding.Logic.SaleLogic;
-import at.htlleonding.persistence.Sale;
 
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 @QuarkusTest
 public class SaleLogicTest {

@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.InvoiceDTO;
+import at.htlleonding.DTOsOLD.InvoiceDTO;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Invoice;
 import at.htlleonding.persistence.Sale;

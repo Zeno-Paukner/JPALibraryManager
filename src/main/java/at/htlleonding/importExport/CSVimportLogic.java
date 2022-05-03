@@ -1,22 +1,5 @@
 package at.htlleonding.importExport;
 
-import at.htlleonding.DTOs.*;
-import at.htlleonding.Logic.*;
-import at.htlleonding.persistence.Author;
-import at.htlleonding.persistence.Topic;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class CSVimportLogic {
 

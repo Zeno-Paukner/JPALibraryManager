@@ -1,23 +1,19 @@
 package at.htlleonding.DTOs;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import java.util.Objects;
 
-public class ClientDTO {
-
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String email;
+public class ClientDTO implements Serializable {
+    private final String firstName;
+    private final String lastName;
+    private final String phoneNumber;
+    private final String email;
 
     public ClientDTO(String firstName, String lastName, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-    }
-
-    public ClientDTO() {
-
     }
 
     public String getFirstName() {
@@ -36,19 +32,28 @@ public class ClientDTO {
         return email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientDTO entity = (ClientDTO) o;
+        return Objects.equals(this.firstName, entity.firstName) &&
+                Objects.equals(this.lastName, entity.lastName) &&
+                Objects.equals(this.phoneNumber, entity.phoneNumber) &&
+                Objects.equals(this.email, entity.email);
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, phoneNumber, email);
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "firstName = " + firstName + ", " +
+                "lastName = " + lastName + ", " +
+                "phoneNumber = " + phoneNumber + ", " +
+                "email = " + email + ")";
     }
 }
