@@ -18,22 +18,23 @@ public class LibraryLogic {
 
     @Transactional
     //create Client
-    public void createClient(ClientDTO clientDTO) {
+    public Client createClient(ClientDTO clientDTO) {
         Client client = new Client();
         client.setFirstName(clientDTO.getFirstName());
         client.setLastName(clientDTO.getLastName());
         client.setPhoneNumber(clientDTO.getPhoneNumber());
         client.setEmail(clientDTO.getEmail());
         entityManager.persist(client);
+        return client;
     }
 
     @Transactional
-    public Integer createAuthor(AuthorDTO authorDTO) {
+    public Author createAuthor(AuthorDTO authorDTO) {
         Author author = new Author();
         author.setFirstName(authorDTO.getFirstName());
         author.setLastName(authorDTO.getLastName());
         entityManager.persist(author);
-        return author.getId();
+        return author;
     }
 
     @Transactional

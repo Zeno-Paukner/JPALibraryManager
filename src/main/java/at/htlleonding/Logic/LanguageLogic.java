@@ -15,7 +15,7 @@ public class LanguageLogic {
     EntityManager entityManager;
 
     @Transactional
-    public Integer createLanguage(LanguageDTO languageDTO) {
+    public Language createLanguage(LanguageDTO languageDTO) {
         Language language = new Language();
         //check if String languageDTO.getLanguageCode() is already in the database at language.getLanguageCode()
         //not finished
@@ -27,7 +27,7 @@ public class LanguageLogic {
             language.setLanguageCode(languageDTO.getLanguageCode());
             entityManager.persist(language);
         }
-        return language.getId();
+        return language;
     }
 
 

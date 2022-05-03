@@ -1,6 +1,7 @@
 package at.htlleonding.DTOs;
 
 import at.htlleonding.persistence.*;
+import com.github.dockerjava.zerodep.shaded.org.apache.commons.codec.language.bm.Lang;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,17 +14,17 @@ public class PublicationDTO {
 
     private String title;
 
-    private Date publishYear;
+    private int publishYear;
 
     private boolean isTranslated;
 
-    private Integer language_id;
+    private Language language;
 
-    private Integer genre_id;
+    private Genre genre;
 
-    private Integer mediatype_id;
+    private Mediatype mediatype;
 
-    private Integer publisher_id;
+    private Publisher publisher;
 
     private final List<Integer> authors_id = new ArrayList<>();
 
@@ -32,14 +33,14 @@ public class PublicationDTO {
     public PublicationDTO() {
     }
 
-    public PublicationDTO(String title, Date publishYear, boolean isTranslated, Integer language_id, Integer genre_id, Integer mediatype_id, Integer publisher_id) {
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, Language language, Genre genre, Mediatype mediatype_id, Publisher publisher) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;
-        this.language_id = language_id;
-        this.genre_id = genre_id;
-        this.mediatype_id = mediatype_id;
-        this.publisher_id = publisher_id;
+        this.language = language;
+        this.genre = genre;
+        this.mediatype= mediatype;
+        this.publisher = publisher;
     }
 
     public String getTitle() {
@@ -50,13 +51,11 @@ public class PublicationDTO {
         this.title = title;
     }
 
-    public Date getPublishYear() {
+    public int getPublishYear() {
         return publishYear;
     }
 
-    public void setPublishYear(Date publishYear) {
-        this.publishYear = publishYear;
-    }
+    public void setPublishYear(int publishYear) {this.publishYear = publishYear;}
 
     public boolean isTranslated() {
         return isTranslated;
@@ -66,36 +65,36 @@ public class PublicationDTO {
         isTranslated = translated;
     }
 
-    public Integer getLanguage_id() {
-        return language_id;
+    public Language getLanguage_id() {
+        return language;
     }
 
-    public void setLanguage_id(Integer language_id) {
-        this.language_id = language_id;
+    public void setLanguage_id(Language language_id) {
+        this.language = language;
     }
 
-    public Integer getGenre_id() {
-        return genre_id;
+    public Genre getGenre_id() {
+        return genre;
     }
 
-    public void setGenre_id(Integer genre_id) {
-        this.genre_id = genre_id;
+    public void setGenre_id(Genre genre) {
+        this.genre = genre;
     }
 
-    public Integer getMediatype_id() {
-        return mediatype_id;
+    public Mediatype getMediatype_id() {
+        return mediatype;
     }
 
-    public void setMediatype_id(Integer mediatype_id) {
-        this.mediatype_id = mediatype_id;
+    public void setMediatype_id(Mediatype mediatype_id) {
+        this.mediatype = mediatype_id;
     }
 
-    public Integer getPublisher_id() {
-        return publisher_id;
+    public Publisher getPublisher_id() {
+        return publisher;
     }
 
-    public void setPublisher_id(Integer publisher_id) {
-        this.publisher_id = publisher_id;
+    public void setPublisher_id(Publisher publisher_id) {
+        this.publisher = publisher;
     }
 
     public List<Integer> setAuthors_id(List<Integer> authors) {

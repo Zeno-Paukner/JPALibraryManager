@@ -27,6 +27,9 @@ public class CSVimportLogic {
     // 0: PublicationDTO.setTitle 1: PublicationDTO.setPublishYear 2: PublicationDTO.setIsTranslated 3: LanguageDTO.setLanguageCode 4: GenreDTO.setGenre 5: MediatypeDTO.setMediaType 6: PublisherDTO.setPublisherName 7: TopicsDTO.setAuthors 8: PublisherDTO.setTopics
 
     //create importCSV for method with method insertLineToEnties
+
+
+    /*
     public void importCSV(String fileName) {
         Path pathToFile = Paths.get(fileName);
         Boolean insertClient = false;
@@ -81,14 +84,15 @@ public class CSVimportLogic {
         publicationDTO.setGenre_id(genreLogic.createGenre(genreDTO));
 
 
-        /*//---mediatype
+        //---mediatype
         MediatypeLogic mediatypeLogic = new MediatypeLogic();
         MediatypeDTO mediatypeDTO = new MediatypeDTO();
         mediatypeDTO.setMediatype(line[5]);
-        publicationDTO.setMediatype_id(mediatypeLogic.createMediatype(mediatypeDTO));*/
+        publicationDTO.setMediatype_id(mediatypeLogic.createMediatype(mediatypeDTO));
 
 
         //---publisher
+
         LibraryLogic libraryLogic = new LibraryLogic();
         PublisherDTO publisherDTO = new PublisherDTO();
         publisherDTO.setPublisherName(line[6]);
@@ -132,6 +136,7 @@ public class CSVimportLogic {
         clientDTO.setPhoneNumber(line[2]);
         clientDTO.setEmail(line[3]);
     }
+    */
 
 }
 

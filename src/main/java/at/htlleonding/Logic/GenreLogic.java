@@ -14,15 +14,15 @@ public class GenreLogic {
         EntityManager entityManager;
 
     @Transactional
-    public Integer createGenre(GenreDTO genreDTO) {
+    public Genre createGenre(GenreDTO genreDTO) {
         Genre genre = new Genre();
         for (Genre genre1 : entityManager.createQuery("SELECT g FROM Genre g", Genre.class).getResultList()) {
             if (genre1.getGenre().equals(genreDTO.getGenre())) {
-                return genre1.getId();
+                return genre1;
             }
         }
         genre.setGenre(genreDTO.getGenre());
         entityManager.persist(genre);
-        return genre.getId();
+        return genre;
     }
 }
