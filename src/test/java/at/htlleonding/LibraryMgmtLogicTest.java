@@ -1,7 +1,12 @@
 package at.htlleonding;
 
+import at.htlleonding.Logic.GenreLogic;
 import at.htlleonding.Logic.LibraryLogic;
 //import at.htlleonding.persistence.LibraryMgmtRepository;
+import at.htlleonding.Logic.PublicationLogic;
+import at.htlleonding.Logic.TopicLogic;
+import at.htlleonding.persistence.Mediatype;
+import at.htlleonding.repository.LibraryRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +19,14 @@ import java.time.LocalDate;
 class LibraryMgmtLogicTest {
 
     @Inject
-    LibraryLogic target;
+    LibraryRepository target;
+    LibraryLogic libTarget;
+    PublicationLogic pubTarget;
+    Mediatype mediaTarget;
+    GenreLogic genreTarget;
+    TopicLogic topicTarget;
+
+
 
     /*
     Add rentable items to the library, of each media type, with multiple authors and attributes.

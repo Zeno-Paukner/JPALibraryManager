@@ -19,7 +19,7 @@ public class PublicationLogic {
     EntityManager entityManager;
 
     @Transactional
-    public  void createPublication(PublicationDTO publicationDTO) {
+    public Publication createPublication(PublicationDTO publicationDTO) {
         //when the mediatype is a BOOK or EBOOK or AUDIOBOOK or REFERENCEBOOK then Author, Publisher Language isTranslated is required
         Publication publication = new Publication();
         if (publication.getMediatype().getId() == 1 || publication.getMediatype().getId() == 2 || publication.getMediatype().getId() == 3 || publication.getMediatype().getId() == 4) {
@@ -35,13 +35,13 @@ public class PublicationLogic {
         }
         //fill Publication with getter from PublicationDTO
         publication.setTitle(publicationDTO.getTitle());
-        publication.setPublisher(entityManager.find(Publisher.class, publicationDTO.getPublisher_id()));
-        publication.setLanguage(entityManager.find(Language.class, publicationDTO.getLanguage_id()));
+        publication.setPublisher(entityManager.find(Publisher.class, publicationDTO));
+        publication.setLanguage(entityManager.find(Language.class, publicationDTO));
         publication.setTranslated(publicationDTO.isTranslated());
-        publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO.getMediatype_id()));
+        publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO));
         //set genre in publication
-        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
-        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
+        publication.setGenre(entityManager.find(Genre.class, publicationDTO));
+        publication.setGenre(entityManager.find(Genre.class, publicationDTO));
 
         //TODO: Set all Authors and Topics
         //set authors in publication
@@ -49,5 +49,7 @@ public class PublicationLogic {
 
         //publication.setAuthor(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
         entityManager.persist(publication);
+
+        return publication;
     }
 }
