@@ -1,29 +1,33 @@
 package at.htlleonding.DTOs;
 
 
+import at.htlleonding.persistence.Client;
+import at.htlleonding.persistence.Copy;
+import at.htlleonding.persistence.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SaleDTO {
 
-    private List<Integer> copy_id = new ArrayList<>();
+    private List<Integer> copy = new ArrayList<>();
 
-    private Integer client_id;
+    private Client client;
 
-    private Integer employee_id;
+    private Employee employee;
 
     private Double totalPrice;
 
-    public List<Integer> getCopy_ids() {
-        return copy_id;
+    public List<Integer> getCopy() {
+        return copy;
     }
 
-    public Integer getClient_id() {
-        return client_id;
+    public Client getClient() {
+        return client;
     }
 
-    public Integer getEmployee_id() {
-        return employee_id;
+    public Employee getEmployee() {
+        return employee;
     }
 
     public Double getTotalPrice() {

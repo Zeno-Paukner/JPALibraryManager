@@ -41,8 +41,8 @@ public class LibraryLogic {
     // Reservation
     public void createReservation(ReservationDTO reservationDTO) {
         Reservation reservation = new Reservation();
-        reservation.setClient(entityManager.find(Client.class, reservationDTO.getClient_id()));
-        reservation.setPublication(entityManager.find(Publication.class, reservationDTO.getPublication_id()));
+        reservation.setClient(entityManager.find(Client.class, reservationDTO.getClient()));
+        reservation.setPublication(entityManager.find(Publication.class, reservationDTO.getPublication()));
         reservation.setReservationDate(new Date());
         entityManager.persist(reservation);
     }

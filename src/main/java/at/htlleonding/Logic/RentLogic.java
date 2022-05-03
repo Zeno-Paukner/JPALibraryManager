@@ -32,8 +32,8 @@ public class RentLogic {
 
     @Transactional
     public void rentCopy(RentDTO rentDTO) {
-        if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy_id()).getPublication().getId())) {
-            if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {
+        if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
+            if (!checkIfCopyIsRented(rentDTO.getCopy())) {
                 Rent rent = new Rent();
                 List<Rent> rents = (List<Rent>) entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = :client AND r.copy = :copy", Rent.class);
                 if (rents.size() > 3) {
@@ -41,12 +41,12 @@ public class RentLogic {
                     throw new RuntimeException("Der Kunde muss zu einen Mitarbeiter um das Buch ein weiteres Mal auszuleihen");
                 }
 
-                rent.setCopy(entityManager.find(Copy.class, rentDTO.getCopy_id()));
+                rent.setCopy(entityManager.find(Copy.class, rentDTO.getCopy()));
                 rent.setStartDate(new Date());
                 rent.setDeadline(new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000));
-                rent.setClient(entityManager.find(Client.class, rentDTO.getClient_id()));
-                rent.setEmployee(entityManager.find(Employee.class, rentDTO.getEmployee_id()));
-                entityManager.find(Copy.class, rentDTO.getCopy_id()).setRented(true);
+                rent.setClient(entityManager.find(Client.class, rentDTO.getClient()));
+                rent.setEmployee(entityManager.find(Employee.class, rentDTO.getEmployee()));
+                entityManager.find(Copy.class, rentDTO.getCopy()).setRented(true);
                 entityManager.persist(rent);
 
             } else {

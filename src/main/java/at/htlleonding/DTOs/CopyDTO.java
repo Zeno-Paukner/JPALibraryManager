@@ -9,9 +9,9 @@ import java.util.Date;
 
 public class CopyDTO {
 
-    private Integer publication_id;
+    private Publication publication;
 
-    public Integer getPublication_id() {
-        return publication_id;
+    public Publication getPublication_id() {
+        return publication;
     }
 }

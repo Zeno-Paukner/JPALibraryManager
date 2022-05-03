@@ -21,12 +21,12 @@ public class InvoiceLogic {
     public void createInvoice(InvoiceDTO invoiceDTO) {
         Invoice invoice = new Invoice();
 
-        invoice.setClient(entityManager.find(Client.class, invoiceDTO.getClient_id()));
+        invoice.setClient(entityManager.find(Client.class, invoiceDTO.getClient()));
         invoice.setSaleDate(new Date());
         Double totalSalePrice = 0.0;
         //create a list of all Sales
         List<Sale> sales = entityManager.createQuery("SELECT s FROM Sale s WHERE s.id IN (:sale_ids)", Sale.class)
-                .setParameter("sale_ids", invoiceDTO.getSale_ids()).getResultList();
+                .setParameter("sale_ids", invoiceDTO.getSale()).getResultList();
 
         //sum all TotalPrice from Sales_id and save it to TotalPrice2
         for (Sale sale : sales) {

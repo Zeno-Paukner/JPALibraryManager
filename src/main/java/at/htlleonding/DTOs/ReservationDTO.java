@@ -8,15 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 public class ReservationDTO {
-    private Integer client_id;
+    private Client client;
 
-    private Integer publication_id;
+    private Publication publication;
 
-    public Integer getClient_id() {
-        return client_id;
+    public Client getClient() {
+        return client;
     }
 
-    public Integer getPublication_id() {
-        return publication_id;
+    public Publication getPublication() {
+        return publication;
     }
 }

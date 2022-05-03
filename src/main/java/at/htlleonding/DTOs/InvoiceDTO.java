@@ -13,41 +13,39 @@ import java.util.List;
 
 public class InvoiceDTO {
 
-    private Integer client_id;
+    private Client client;
 
-    private Integer employee_id;
+    private Employee employee;
 
-    private List<Integer> sale_ids = new ArrayList<>();
+    private List<Sale> sale = new ArrayList<>();
 
-    public Integer getClient_id() {
-        return client_id;
+    public Client getClient() {
+        return client;
     }
 
-    public Integer getEmployee_id() {
-        return employee_id;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public List<Integer> getSale_ids() {
-        return sale_ids;
+    public List<Sale> getSale() {
+        return sale;
     }
 
-    public InvoiceDTO(Integer client_id, Integer employee_id, List<Integer> sale_ids) {
-        this.client_id = client_id;
-        this.employee_id = employee_id;
-        this.sale_ids = sale_ids;
+    public InvoiceDTO(Client client, Employee employee, List<Sale> sale) {
+        this.client = client;
+        this.employee = employee;
+        this.sale = sale;
     }
 
-    public void setSale_ids(List<Integer> sale_ids) {
-        this.sale_ids = sale_ids;
+    public void setSale(List<Sale> sale) {
+        this.sale = sale;
     }
 
-    public void setClient_id(Integer client_id) {
-        this.client_id = client_id;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public void setEmployee_id(Integer employee_id) {
-        this.employee_id = employee_id;
-    }
+    public void setEmployee(Employee employee) {this.employee = employee;}
 
     public InvoiceDTO() {
     }

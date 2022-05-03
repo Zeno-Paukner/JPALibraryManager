@@ -26,14 +26,14 @@ public class PublicationDTO {
 
     private Publisher publisher;
 
-    private final List<Integer> authors_id = new ArrayList<>();
+    private final List<Author> authors = new ArrayList<>();
 
-    private final List<Integer> topics_id = new ArrayList<>();
+    private final List<Topic> topics = new ArrayList<>();
 
     public PublicationDTO() {
     }
 
-    public PublicationDTO(String title, int publishYear, boolean isTranslated, Language language, Genre genre, Mediatype mediatype_id, Publisher publisher) {
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, Language language, Genre genre, Mediatype mediatype, Publisher publisher) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;
@@ -65,57 +65,55 @@ public class PublicationDTO {
         isTranslated = translated;
     }
 
-    public Language getLanguage_id() {
+    public Language getLanguage() {
         return language;
     }
 
-    public void setLanguage_id(Language language_id) {
+    public void setLanguage(Language language) {
         this.language = language;
     }
 
-    public Genre getGenre_id() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre_id(Genre genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
-    public Mediatype getMediatype_id() {
+    public Mediatype getMediatype() {
         return mediatype;
     }
 
-    public void setMediatype_id(Mediatype mediatype_id) {
-        this.mediatype = mediatype_id;
-    }
+    public void setMediatype(Mediatype mediatype) {this.mediatype = mediatype;}
 
-    public Publisher getPublisher_id() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
-    public void setPublisher_id(Publisher publisher_id) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 
-    public List<Integer> setAuthors_id(List<Integer> authors) {
-        for (Integer author : authors) {
-            this.authors_id.add(author);
+    public List<Author> setAuthors(List<Author> authors) {
+        for (Author author : authors) {
+            this.authors.add(author);
         }
-        return this.authors_id;
+        return this.authors;
     }
 
-    public List<Integer> setTopics_id(List<Integer> topics) {
-        for (Integer topic : topics) {
-            this.topics_id.add(topic);
+    public List<Topic> setTopics(List<Topic> topics) {
+        for (Topic topic : topics) {
+            this.topics.add(topic);
         }
-        return this.topics_id;
+        return this.topics;
     }
 
-    public List<Integer> getAuthors_id() {
-        return authors_id;
+    public List<Author> getAuthors() {
+        return authors;
     }
 
-    public List<Integer> getTopics_id() {
-        return topics_id;
+    public List<Topic> getTopics() {
+        return topics;
     }
 }

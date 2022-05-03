@@ -35,13 +35,13 @@ public class PublicationLogic {
         }
         //fill Publication with getter from PublicationDTO
         publication.setTitle(publicationDTO.getTitle());
-        publication.setPublisher(entityManager.find(Publisher.class, publicationDTO.getPublisher_id()));
-        publication.setLanguage(entityManager.find(Language.class, publicationDTO.getLanguage_id()));
+        publication.setPublisher(entityManager.find(Publisher.class, publicationDTO.getPublisher()));
+        publication.setLanguage(entityManager.find(Language.class, publicationDTO.getLanguage()));
         publication.setTranslated(publicationDTO.isTranslated());
-        publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO.getMediatype_id()));
+        publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO.getMediatype()));
         //set genre in publication
-        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
-        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre_id()));
+        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre()));
+        publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre()));
 
         //TODO: Set all Authors and Topics
         //set authors in publication
