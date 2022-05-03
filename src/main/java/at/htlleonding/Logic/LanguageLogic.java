@@ -27,9 +27,6 @@ public class LanguageLogic {
             language.setLanguageCode(languageDTO.getLanguageCode());
             entityManager.persist(language);
         }
-
-
-
         return language.getId();
     }
 
