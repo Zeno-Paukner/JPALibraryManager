@@ -37,6 +37,7 @@ public class Copy {
     public Copy() {
     }
 
+
     public Integer getId() {
         return id;
     }

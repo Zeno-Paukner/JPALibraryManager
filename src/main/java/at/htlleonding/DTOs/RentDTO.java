@@ -6,30 +6,15 @@ import at.htlleonding.persistence.Employee;
 
 public class RentDTO {
 
-    private Integer copy;
+    private CopyDTO copyDTO;
 
-    private Employee employee;
+    private EmployeeDTO employeeDTO;
 
+    private ClientDTO clientDTO;
 
-    private Client client;
-
-    public Integer getCopy() {
-        return copy;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Client getClient() {return client;}
-
-    public void setCopy(Integer copy) {this.copy = copy;}
-
-    public void setEmployee(Employee employee) {
+    public RentDTO(Copy copy, Employee employee, Client client) {
+        this.copy = copy;
         this.employee = employee;
-    }
-
-    public void setClient(Client client) {
         this.client = client;
     }
 

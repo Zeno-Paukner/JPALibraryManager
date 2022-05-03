@@ -47,10 +47,10 @@ public class Publication    {
     @OneToMany(mappedBy = "publication", cascade=CascadeType.ALL)
     private final List<Reservation> reservations = new ArrayList<>();
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(mappedBy = "publications")
     private final List<Author> authors = new ArrayList<>();
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(mappedBy = "publications")
     private final List<Topic> topics = new ArrayList<>();
 
     public Publication(String title, int publishYear, boolean isTranslated) {
@@ -134,7 +134,4 @@ public class Publication    {
         return authors;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
-    }
 }

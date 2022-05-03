@@ -129,23 +129,23 @@ public class LibraryRepository {
         entityManager.persist(p);
     }
 
-    @Transactional
-    public void add(Publication p, Topic t) {
-        if (p.getId() == null) {
-            add(p);
-        }
-
-        if (t.getId() == null) {
-            add(t);
-        }
-
-        t.getPublications().add(p);
-        p.getTopics().add(t);
-
-        entityManager.persist(t);
-        entityManager.persist(p);
-
-    }
+//    @Transactional
+//    public void add(Publication p, Topic t) {
+//        if (p.getId() == null) {
+//            add(p);
+//        }
+//
+//        if (t.getId() == null) {
+//            add(t);
+//        }
+//
+//        t.getPublications().add(p);
+//        p.getTopics().add(t);
+//
+//        entityManager.persist(t);
+//        entityManager.persist(p);
+//
+//    }
 
     @Transactional
     public void add(Publication p, Publisher pu) {

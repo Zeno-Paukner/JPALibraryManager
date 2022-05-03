@@ -11,8 +11,8 @@ public class Author extends Person{
     @Id
     private Integer id;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    private final List<Publication> publications = new ArrayList<>();
+    @ManyToMany()
+    private List<Publication> publications = new ArrayList<>();
 
     public Author() {
 

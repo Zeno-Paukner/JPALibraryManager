@@ -18,25 +18,35 @@ public class RentLogic {
     @Inject
     EntityManager entityManager;
 
-   //@Transactional
-   //public Boolean checkifCopyofPublicationIsAvailable(Integer publication_id) {
-   //    List<Copy> copies = (List<Copy>) entityManager.createQuery("SELECT c FROM Copy c WHERE c.publication.id = :publication_id AND c.status.id = 1", Copy.class);
-   //    return copies.size() > 0;
-   //}
 
-    @Transactional
+    //check if a publication has a copy available
+
+    //@Transactional
+    //public Boolean checkifCopyofPublicationIsAvailable(Integer publication_id) {
+    //    List<Copy> copies = (List<Copy>) entityManager.createQuery("SELECT c FROM Copy c WHERE c.publication.id = :publication_id AND c.status.id = 1", Copy.class);
+    //    return copies.size() > 0;
+    //}
+
+    //check if a copy is available with copy object with  isRented
+    public Boolean checkifCopyIsAvailable(Copy copy) {
+        return copy.getRented();
+    }
+
+
+
+    /*@Transactional
     public Boolean checkIfCopyIsRented(Integer copy_id) {
         Copy copy = entityManager.find(Copy.class, copy_id);
         return copy.getRented() && copy.getRent().getEndDate() != null;
-    }
+    }*/
 
     @Transactional
     public void rentCopy(RentDTO rentDTO) {
         //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
-            if (!checkIfCopyIsRented(rentDTO.getCopy())) {
+        if (!checkifCopyIsAvailable(rentDTO.getCopy())) {
 
-        //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy_id()).getPublication().getId())) {
-            if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {
+            //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy_id()).getPublication().getId())) {
+            //if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {
 
                 Rent rent = new Rent();
                 List<Rent> rents = (List<Rent>) entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = :client AND r.copy = :copy", Rent.class);
@@ -56,25 +66,19 @@ public class RentLogic {
             } else {
                 throw new RuntimeException("Das Buch ist bereits ausgeliehen");
             }
-        //} else {
-        //    throw new RuntimeException("Das Buch ist nicht mehr verfügbar");
-        //}
+            //} else {
+            //    throw new RuntimeException("Das Buch ist nicht mehr verfügbar");
+            //}
+        }
+
+
+
+
+    //end Rent by Copy object
+    @Transactional
+    public void endRentCopy(Copy copy) {
+        Rent rent = entityManager.find(Rent.class, copy.getRent().getId());
+        rent.getCopy().setRented(false);
     }
 
-    @Transactional
-    public void endRentCopy(Integer rent.) {
-        Rent rent = entityManager.find(Rent.class, rent_id);
-        rent.getCopy().setRented(false);
-        rent.setEndDate(new Date());
-        entityManager.persist(rent);
-    }
-
-    //endRentbyCopyID
-    @Transactional
-    public void endRentbyCopyID(Integer copy_id) {
-        Rent rent = entityManager.find(Rent.class, entityManager.createQuery("SELECT r FROM Rent r WHERE r.copy = :copy", Rent.class).setParameter("copy", entityManager.find(Copy.class, copy_id)).getSingleResult().getId());
-        rent.getCopy().setRented(false);
-        rent.setEndDate(new Date());
-        entityManager.persist(rent);
-    }
 }
