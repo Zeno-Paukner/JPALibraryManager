@@ -5,9 +5,15 @@ import java.util.Objects;
 
 public class GenreDTO implements Serializable {
     private final String genre;
+    private final Integer id;
 
+    public GenreDTO(String genre, Integer id) {
+        this.genre = genre;
+        this.id = id;
+    }
     public GenreDTO(String genre) {
         this.genre = genre;
+        this.id = 0;
     }
 
     public String getGenre() {
@@ -31,5 +37,9 @@ public class GenreDTO implements Serializable {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "genre = " + genre + ")";
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

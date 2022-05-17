@@ -8,13 +8,24 @@ public class ClientDTO implements Serializable {
     private final String lastName;
     private final String phoneNumber;
     private final String email;
+    private final Integer id;
 
     public ClientDTO(String firstName, String lastName, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.id = 0;
     }
+
+    public ClientDTO(String firstName, String lastName, String phoneNumber, String email, Integer id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.id = id;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -30,6 +41,10 @@ public class ClientDTO implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

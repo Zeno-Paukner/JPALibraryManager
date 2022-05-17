@@ -5,9 +5,15 @@ import java.util.Objects;
 
 public class LanguageDTO implements Serializable {
     private final String languageCode;
+    private final Integer id;
 
+    public LanguageDTO(String languageCode, Integer id) {
+        this.languageCode = languageCode;
+        this.id = id;
+    }
     public LanguageDTO(String languageCode) {
         this.languageCode = languageCode;
+        this.id = 0;
     }
 
     public String getLanguageCode() {
@@ -31,5 +37,9 @@ public class LanguageDTO implements Serializable {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "languageCode = " + languageCode + ")";
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

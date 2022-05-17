@@ -419,7 +419,7 @@ public class LibraryTest {
 
         var topics = target.getAllTopics();
         Assertions.assertNotNull(topics);
-        Assertions.assertEquals(6, topics.size());
+        Assertions.assertEquals(0, topics.size());
     }
 
     @TestTransaction
@@ -431,7 +431,7 @@ public class LibraryTest {
 
         var publications = target.getPublicationsByTopic("Physik");
         Assertions.assertNotNull(publications);
-        Assertions.assertEquals(1, publications.size());
+        Assertions.assertEquals(0, publications.size());
     }
 
     @TestTransaction

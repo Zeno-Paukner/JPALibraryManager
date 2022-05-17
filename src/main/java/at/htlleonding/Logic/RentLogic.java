@@ -17,7 +17,10 @@ import java.util.List;
 public class RentLogic {
     @Inject
     EntityManager entityManager;
+    @Inject
     LibraryLogic libraryLogic;
+    @Inject
+    ClientLogic clientLogic;
 
 
     //check if a publication has a copy available
@@ -50,7 +53,10 @@ public class RentLogic {
             //if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {
 
                 Rent rent = new Rent();
-                List<Rent> rents = (List<Rent>) entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = :client AND r.copy = :copy", Rent.class);
+                List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = ?1 AND r.copy = ?2", Rent.class)
+                        .setParameter(1, clientLogic.createClient(rentDTO.getClient()))
+                        .setParameter(2, rentDTO.getCopy())
+                        .getResultList();
                 if (rents.size() > 3) {
                     rent.setNeedEmployeeToRentAgain(true);
                     throw new RuntimeException("Der Kunde muss zu einen Mitarbeiter um das Buch ein weiteres Mal auszuleihen");

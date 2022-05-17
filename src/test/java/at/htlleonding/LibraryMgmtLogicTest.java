@@ -1,14 +1,9 @@
 package at.htlleonding;
 
-import at.htlleonding.Logic.GenreLogic;
-import at.htlleonding.Logic.LibraryLogic;
+import at.htlleonding.DTOs.*;
+import at.htlleonding.Logic.*;
 //import at.htlleonding.persistence.LibraryMgmtRepository;
-import at.htlleonding.Logic.PublicationLogic;
-import at.htlleonding.Logic.TopicLogic;
-import at.htlleonding.persistence.Author;
-import at.htlleonding.persistence.Mediatype;
-import at.htlleonding.persistence.MediatypeEnum;
-import at.htlleonding.persistence.Publication;
+import at.htlleonding.persistence.*;
 import at.htlleonding.repository.LibraryRepository;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;
@@ -17,17 +12,28 @@ import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static at.htlleonding.persistence.MediatypeEnum.BOOK;
 
 @QuarkusTest
-class LibraryMgmtLogicTest {
+public class LibraryMgmtLogicTest {
 
     @Inject
     LibraryRepository target;
+    @Inject
     LibraryLogic libTarget;
+    @Inject
     PublicationLogic pubTarget;
-    Mediatype mediaTarget;
+    @Inject
     GenreLogic genreTarget;
+    @Inject
     TopicLogic topicTarget;
+    @Inject
+    RentLogic rentTarget;
+    @Inject
+    ClientLogic clientTarget;
 
 
 
@@ -39,13 +45,22 @@ class LibraryMgmtLogicTest {
     @TestTransaction
     public void addPaperBookWithOneAuthor_makeRentable_canBeRented()
     {
-        var pub1 = new Publication("Romy im Wunderland", 1900, true);
-        pub1.setMediatype(new Mediatype(MediatypeEnum.BOOK,0.99));
+        var mediatypeBOOK = new MediatypeDTO(BOOK, 0.99);
+        var languageEN = new LanguageDTO("EN");
+        var genreFantasy = new GenreDTO("Fantasy");
+        var publisherIrgendwas = new PublisherDTO("IrgendwasHilfe");
+        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeBOOK, publisherIrgendwas);
 
-        var author1 = new Author("Romeo", "Bhuiyan");
-        target.add(pub1, author1);
+        var publicationsRomy = new ArrayList<PublicationDTO>();
+        publicationsRomy.add(pub1);
+        var author1 = new AuthorDTO("Romeo", "Bhuiyan", publicationsRomy);
 
+        var copy1 = new CopyDTO(pub1, null, 0);
+        var employee1 = new EmployeeDTO("Zeno", "Paukner", 1000);
+        var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
+        var rent1 = new RentDTO(copy1, employee1, client1);
 
+        rentTarget.rentCopy(rent1);
     }
 
     @Test

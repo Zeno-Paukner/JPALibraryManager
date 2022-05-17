@@ -5,9 +5,16 @@ import java.util.Objects;
 
 public class PublisherDTO implements Serializable {
     private final String publisherName;
+    private final Integer id;
+
+    public PublisherDTO(String publisherName, Integer id) {
+        this.publisherName = publisherName;
+        this.id = id;
+    }
 
     public PublisherDTO(String publisherName) {
         this.publisherName = publisherName;
+        this.id = 0;
     }
 
     public String getPublisherName() {
@@ -31,5 +38,9 @@ public class PublisherDTO implements Serializable {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "publisherName = " + publisherName + ")";
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

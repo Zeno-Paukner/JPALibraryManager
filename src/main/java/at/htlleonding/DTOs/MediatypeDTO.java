@@ -8,10 +8,17 @@ import java.util.Objects;
 public class MediatypeDTO implements Serializable {
     private final MediatypeEnum mediatypeEnum;
     private final Double price;
+    private final Integer id;
 
     public MediatypeDTO(MediatypeEnum mediatypeEnum, Double price) {
         this.mediatypeEnum = mediatypeEnum;
         this.price = price;
+        this.id = 0;
+    }
+    public MediatypeDTO(MediatypeEnum mediatypeEnum, Double price, Integer id) {
+        this.mediatypeEnum = mediatypeEnum;
+        this.price = price;
+        this.id = id;
     }
 
     public MediatypeEnum getMediatypeEnum() {
@@ -45,5 +52,9 @@ public class MediatypeDTO implements Serializable {
 
     public MediatypeEnum getMediatype() {
         return mediatypeEnum;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

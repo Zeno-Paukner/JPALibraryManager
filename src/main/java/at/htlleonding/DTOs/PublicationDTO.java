@@ -11,6 +11,18 @@ public class PublicationDTO implements Serializable {
     private final GenreDTO genre;
     private final MediatypeDTO mediatype;
     private final PublisherDTO publisher;
+    private final Integer id;
+
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, Integer id) {
+        this.title = title;
+        this.publishYear = publishYear;
+        this.isTranslated = isTranslated;
+        this.language = language;
+        this.genre = genre;
+        this.mediatype = mediatype;
+        this.publisher = publisher;
+        this.id = id;
+    }
 
     public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher) {
         this.title = title;
@@ -20,7 +32,9 @@ public class PublicationDTO implements Serializable {
         this.genre = genre;
         this.mediatype = mediatype;
         this.publisher = publisher;
+        this.id = 0;
     }
+
 
     public String getTitle() {
         return title;
@@ -79,5 +93,9 @@ public class PublicationDTO implements Serializable {
                 "genre = " + genre + ", " +
                 "mediatype = " + mediatype + ", " +
                 "publisher = " + publisher + ")";
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

@@ -17,9 +17,13 @@ public class LibraryLogic {
 
     @Inject
     EntityManager entityManager;
+    @Inject
     LanguageLogic languageLogic;
+    @Inject
     GenreLogic genreLogic;
+    @Inject
     RentLogic rentLogic;
+    @Inject
     MediatypeLogic mediatypeLogic;
 
 
