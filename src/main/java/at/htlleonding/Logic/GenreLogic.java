@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOsOLD.GenreDTO;
+import at.htlleonding.DTOs.GenreDTO;
 import at.htlleonding.persistence.Genre;
 
 import javax.enterprise.context.ApplicationScoped;
