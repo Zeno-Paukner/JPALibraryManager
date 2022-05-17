@@ -37,9 +37,9 @@ public class LibraryTest {
         pub1.setMediatype(new Mediatype(MediatypeEnum.REFERENCEBOOK,5.99));
 
         //---Authors
-        var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
-        var author2 = new Author("Zeno", "Paukner", "+44 664 1234567");
-        var author3 = new Author("Martin", "Hausleitner", "+45 664 1234567");
+        var author1 = new Author("Romeo", "Bhuiyan");
+        var author2 = new Author("Zeno", "Paukner");
+        var author3 = new Author("Martin", "Hausleitner");
 
 
         target.add(pub1, author1);
@@ -236,12 +236,12 @@ public class LibraryTest {
         var client3 = new Client("Rudi", "Painer", "+43 630 1234567", "r.painer@maio.com");
 
         //---Authors
-        var author1 = new Author("Romeo", "Bhuiyan", "+43 664 1234567");
-        var author2 = new Author("Zeno", "Paukner", "+44 664 1234567");
-        var author3 = new Author("Martin", "Hausleitner", "+45 664 1234567");
-        var author4 = new Author("William", "Lau", "+50 664 1234567");
-        var author5 = new Author("Yimme", "Raid", "+49 664 1234567");
-        var author6 = new Author("Max", "Mustermann", "+49 664 1234567");
+        var author1 = new Author("Romeo", "Bhuiyan");
+        var author2 = new Author("Zeno", "Paukner");
+        var author3 = new Author("Martin", "Hausleitner");
+        var author4 = new Author("William", "Lau");
+        var author5 = new Author("Yimme", "Raid");
+        var author6 = new Author("Max", "Mustermann");
 
         //---Topics
         var topic1 = new Topic("Mathematik");
