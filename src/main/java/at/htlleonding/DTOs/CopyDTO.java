@@ -11,6 +11,13 @@ public class CopyDTO implements Serializable {
     public CopyDTO(PublicationDTO publication, SaleDTO sale) {
         this.publication = publication;
         this.sale = sale;
+        this.id = 0;
+    }
+
+    public CopyDTO(PublicationDTO publication, SaleDTO sale, int id) {
+        this.publication = publication;
+        this.sale = sale;
+        this.id = id;
     }
 
     public PublicationDTO getPublication() {
@@ -41,5 +48,8 @@ public class CopyDTO implements Serializable {
                 "publication = " + publication + ", " +
                 "sale = " + sale + ")";
     }
-    
+
+    public int getId() {
+        return id;
+    }
 }

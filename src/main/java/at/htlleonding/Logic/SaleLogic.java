@@ -31,25 +31,28 @@ public class SaleLogic {
 
         saleDTO.getCopyList();
 
-        for (Integer copy_id : saleDTO.getCopyList()) {
+        for (var copy : saleDTO.getCopyList()) {
+            var copy_id = copy.getId();
             if (!checkIfCopyIsAvailableToPurchase(copy_id)) {
                 throw new RuntimeException("Das Buch " + copy_id + " kann noch nicht verkauft werden");
             }
         }
         sale.setSaleDate(new Date());
-        // sum all Prices form copies with the mediatype Price and set it to TotalPrice
-        sale.setTotalPrice(saleDTO.getCopy().stream().mapToDouble(copy_id -> entityManager.find(Copy.class, copy_id).getPublication().getMediatype().getPrice()).sum());
+        // sum all Prices from copies with the mediatype Price and set it to TotalPrice
+        double totalPrice = saleDTO.getCopyList().stream().mapToDouble(copy_id -> entityManager.find(Copy.class, copy_id).getPublication().getMediatype().getPrice()).sum();
+        sale.setTotalPrice(totalPrice);
 
         // if Client is null the total price is minus 20%
         if (saleDTO.getClient() == null) {
-            sale.setTotalPrice(saleDTO.getTotalPrice() * 0.8);
+            sale.setTotalPrice(totalPrice * 0.8);
         }
         else {
             sale.setClient(entityManager.find(Client.class, saleDTO.getClient()));
         }
         sale.setEmployee(entityManager.find(Employee.class, saleDTO.getEmployee()));
         // create sale for each copy
-        for (Integer copy_id : saleDTO.getCopy()) {
+        for (var copy : saleDTO.getCopyList()) {
+            var copy_id = copy.getId();
             sale.getCopyList().add(entityManager.find(Copy.class, copy_id));
         }
         entityManager.persist(sale);
