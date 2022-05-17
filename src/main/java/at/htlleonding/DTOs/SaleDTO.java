@@ -8,7 +8,6 @@ public class SaleDTO implements Serializable {
     private final List<CopyDTO> copyList;
     private final ClientDTO client;
     private final EmployeeDTO employee;
-    private final int totalPrice;
 
     public SaleDTO(List<CopyDTO> copyList, ClientDTO client, EmployeeDTO employee) {
         this.copyList = copyList;

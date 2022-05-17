@@ -26,8 +26,8 @@ public class InvoiceLogicTest {
         var employee2 = new Employee("Peter", "Mayer", 1203);
         var employee3 = new Employee("Buble", "Holzer", 1204);
 
-        InvoiceDTO invoice1 = new InvoiceDTO();
+        //InvoiceDTO invoice1 = new InvoiceDTO();
 
-        target.createInvoice(invoice1);
+        //target.createInvoice(invoice1);
     }
 }
