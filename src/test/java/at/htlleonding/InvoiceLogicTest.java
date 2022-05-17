@@ -1,6 +1,6 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOsOLD.InvoiceDTO;
+import at.htlleonding.DTOs.InvoiceDTO;
 import at.htlleonding.Logic.InvoiceLogic;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Employee;
@@ -25,7 +25,6 @@ public class InvoiceLogicTest {
         var employee1 = new Employee("Hans", "Müller", 1202);
         var employee2 = new Employee("Peter", "Mayer", 1203);
         var employee3 = new Employee("Buble", "Holzer", 1204);
-
 
         InvoiceDTO invoice1 = new InvoiceDTO();
 

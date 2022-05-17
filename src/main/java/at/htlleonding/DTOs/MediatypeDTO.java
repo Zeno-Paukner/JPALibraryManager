@@ -42,4 +42,8 @@ public class MediatypeDTO implements Serializable {
                 "mediatypeEnum = " + mediatypeEnum + ", " +
                 "price = " + price + ")";
     }
+
+    public MediatypeEnum getMediatype() {
+        return mediatypeEnum;
+    }
 }

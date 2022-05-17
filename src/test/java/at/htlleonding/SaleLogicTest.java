@@ -1,6 +1,6 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOsOLD.SaleDTO;
+import at.htlleonding.DTOs.SaleDTO;
 import at.htlleonding.Logic.SaleLogic;
 
 import io.quarkus.test.TestTransaction;

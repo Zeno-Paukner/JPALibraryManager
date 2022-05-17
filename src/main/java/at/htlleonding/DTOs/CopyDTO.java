@@ -6,6 +6,7 @@ import java.util.Objects;
 public class CopyDTO implements Serializable {
     private final PublicationDTO publication;
     private final SaleDTO sale;
+    private final int id;
 
     public CopyDTO(PublicationDTO publication, SaleDTO sale) {
         this.publication = publication;
@@ -40,4 +41,5 @@ public class CopyDTO implements Serializable {
                 "publication = " + publication + ", " +
                 "sale = " + sale + ")";
     }
+    
 }

@@ -1,5 +1,5 @@
 package at.htlleonding.Logic;
-import at.htlleonding.DTOsOLD.*;
+import at.htlleonding.DTOs.*;
 import at.htlleonding.persistence.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -33,7 +33,7 @@ public class PublicationLogic {
 
         publication.setPublisher(entityManager.find(Publisher.class, publicationDTO.getPublisher()));
         publication.setLanguage(entityManager.find(Language.class, publicationDTO.getLanguage()));
-        publication.setTranslated(publicationDTO.isTranslated());
+        publication.setTranslated(publicationDTO.getIsTranslated());
         publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO.getMediatype()));
         //set genre in publication
         publication.setGenre(entityManager.find(Genre.class, publicationDTO.getGenre()));
@@ -41,7 +41,7 @@ public class PublicationLogic {
 
         publication.setPublisher(entityManager.find(Publisher.class, publicationDTO));
         publication.setLanguage(entityManager.find(Language.class, publicationDTO));
-        publication.setTranslated(publicationDTO.isTranslated());
+        publication.setTranslated(publicationDTO.getIsTranslated());
         publication.setMediatype(entityManager.find(Mediatype.class, publicationDTO));
         //set genre in publication
         publication.setGenre(entityManager.find(Genre.class, publicationDTO));

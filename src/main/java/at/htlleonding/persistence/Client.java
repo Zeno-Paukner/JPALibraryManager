@@ -1,6 +1,8 @@
 package at.htlleonding.persistence;
 
 
+import at.htlleonding.DTOs.ClientDTO;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ public class Client extends Person{
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
     public Client() {
 
     }

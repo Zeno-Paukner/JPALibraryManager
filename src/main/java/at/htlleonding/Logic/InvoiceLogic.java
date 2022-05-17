@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOsOLD.InvoiceDTO;
+import at.htlleonding.DTOs.InvoiceDTO;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Invoice;
 import at.htlleonding.persistence.Sale;
@@ -26,7 +26,7 @@ public class InvoiceLogic {
         Double totalSalePrice = 0.0;
         //create a list of all Sales
         List<Sale> sales = entityManager.createQuery("SELECT s FROM Sale s WHERE s.id IN (:sale_ids)", Sale.class)
-                .setParameter("sale_ids", invoiceDTO.getSale()).getResultList();
+                .setParameter("sale_ids", invoiceDTO.getSales()).getResultList();
 
         //sum all TotalPrice from Sales_id and save it to TotalPrice2
         for (Sale sale : sales) {
