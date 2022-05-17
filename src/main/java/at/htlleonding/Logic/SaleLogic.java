@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOsOLD.SaleDTO;
+import at.htlleonding.DTOs.SaleDTO;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Copy;
 import at.htlleonding.persistence.Employee;
@@ -26,17 +26,21 @@ public class SaleLogic {
     @Transactional
     public Sale createSale(SaleDTO saleDTO) {
         Sale sale = new Sale();
-        //check if all copys are available to purchase
-        for (Integer copy_id : saleDTO.getCopy()) {
+
+        // check if all copies are available to purchase
+
+        saleDTO.getCopyList();
+
+        for (Integer copy_id : saleDTO.getCopyList()) {
             if (!checkIfCopyIsAvailableToPurchase(copy_id)) {
                 throw new RuntimeException("Das Buch " + copy_id + " kann noch nicht verkauft werden");
             }
         }
         sale.setSaleDate(new Date());
-        //sum all Prices form Copys with the Mediatype Price and set it to TotalPrice
+        // sum all Prices form copies with the mediatype Price and set it to TotalPrice
         sale.setTotalPrice(saleDTO.getCopy().stream().mapToDouble(copy_id -> entityManager.find(Copy.class, copy_id).getPublication().getMediatype().getPrice()).sum());
 
-        //if Client is null the Totalprice is minus 20%
+        // if Client is null the total price is minus 20%
         if (saleDTO.getClient() == null) {
             sale.setTotalPrice(saleDTO.getTotalPrice() * 0.8);
         }
@@ -44,7 +48,7 @@ public class SaleLogic {
             sale.setClient(entityManager.find(Client.class, saleDTO.getClient()));
         }
         sale.setEmployee(entityManager.find(Employee.class, saleDTO.getEmployee()));
-        //create sale for each copy
+        // create sale for each copy
         for (Integer copy_id : saleDTO.getCopy()) {
             sale.getCopyList().add(entityManager.find(Copy.class, copy_id));
         }

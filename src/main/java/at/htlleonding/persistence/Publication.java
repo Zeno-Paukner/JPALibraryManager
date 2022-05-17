@@ -62,6 +62,16 @@ public class Publication    {
     public Publication() {
     }
 
+    public Publication(String title, int publishYear, boolean isTranslated, Language language, Genre genre, Mediatype mediatype, Publisher publisher) {
+        this.title = title;
+        this.publishYear = publishYear;
+        this.isTranslated = isTranslated;
+        this.language = language;
+        this.genre = genre;
+        this.mediatype = mediatype;
+        this.publisher = publisher;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -1,4 +1,6 @@
 package at.htlleonding.persistence;
+import at.htlleonding.DTOs.CopyDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 

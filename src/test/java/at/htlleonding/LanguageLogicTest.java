@@ -1,6 +1,6 @@
 package at.htlleonding;
 
-import at.htlleonding.DTOsOLD.*;
+import at.htlleonding.DTOs.*;
 import at.htlleonding.Logic.*;
 import io.quarkus.test.TestTransaction;
 import io.quarkus.test.junit.QuarkusTest;

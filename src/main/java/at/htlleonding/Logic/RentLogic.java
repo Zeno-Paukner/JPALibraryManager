@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOsOLD.RentDTO;
+import at.htlleonding.DTOs.RentDTO;
 import at.htlleonding.persistence.Client;
 import at.htlleonding.persistence.Copy;
 import at.htlleonding.persistence.Employee;
@@ -17,6 +17,7 @@ import java.util.List;
 public class RentLogic {
     @Inject
     EntityManager entityManager;
+    LibraryLogic libraryLogic;
 
 
     //check if a publication has a copy available
@@ -43,7 +44,7 @@ public class RentLogic {
     @Transactional
     public void rentCopy(RentDTO rentDTO) {
         //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
-        if (!checkifCopyIsAvailable(rentDTO.getCopy())) {
+        if (!checkifCopyIsAvailable(libraryLogic.createCopy(rentDTO.getCopy()))) {
 
             //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy_id()).getPublication().getId())) {
             //if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {

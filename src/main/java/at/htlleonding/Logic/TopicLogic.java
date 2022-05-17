@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOsOLD.TopicDTO;
+import at.htlleonding.DTOs.TopicDTO;
 import at.htlleonding.persistence.Topic;
 
 import javax.enterprise.context.ApplicationScoped;

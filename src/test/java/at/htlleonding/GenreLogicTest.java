@@ -1,7 +1,7 @@
 package at.htlleonding;
 
 
-import at.htlleonding.DTOsOLD.GenreDTO;
+import at.htlleonding.DTOs.GenreDTO;
 import at.htlleonding.Logic.GenreLogic;
 import at.htlleonding.Logic.LibraryLogic;
 import at.htlleonding.Logic.SaleLogic;

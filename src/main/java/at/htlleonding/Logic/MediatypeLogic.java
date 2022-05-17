@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOsOLD.MediatypeDTO;
+import at.htlleonding.DTOs.MediatypeDTO;
 import at.htlleonding.persistence.Mediatype;
 import at.htlleonding.persistence.MediatypeEnum;
 

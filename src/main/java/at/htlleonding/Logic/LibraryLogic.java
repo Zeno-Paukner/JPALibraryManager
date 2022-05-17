@@ -2,7 +2,7 @@ package at.htlleonding.Logic;
 
 import at.htlleonding.DTOs.CopyDTO;
 import at.htlleonding.DTOs.ReservationDTO;
-import at.htlleonding.DTOsOLD.*;
+import at.htlleonding.DTOs.*;
 import at.htlleonding.persistence.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -10,12 +10,17 @@ import javax.inject.Inject;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.spi.LocaleNameProvider;
 
 @ApplicationScoped
 public class LibraryLogic {
 
     @Inject
     EntityManager entityManager;
+    LanguageLogic languageLogic;
+    GenreLogic genreLogic;
+    RentLogic rentLogic;
+    MediatypeLogic mediatypeLogic;
 
 
     @Transactional
@@ -66,11 +71,15 @@ public class LibraryLogic {
     //createCopy
     public Copy createCopy(CopyDTO copyDTO) {
         Copy copy = new Copy();
-        copy.setPublication(entityManager.find(Publication.class, copyDTO.getPublication_id()));
+        PublicationDTO DTO = copyDTO.getPublication();
+        Language language = languageLogic.createLanguage(DTO.getLanguage());
+        Genre genre = genreLogic.createGenre(DTO.getGenre());
+        Mediatype mediatype = mediatypeLogic.createMediatype(DTO.getMediatype());
+        Publisher publisher = createPublisher(DTO.getPublisher());
+        copy.setPublication(new Publication(DTO.getTitle(), DTO.getPublishYear(), DTO.getIsTranslated(), language, genre, mediatype, publisher));
         copy.setDateOfPurchase(new Date());
         entityManager.persist(copy);
         return copy;
-
     }
 
     //createPublisher
@@ -81,7 +90,6 @@ public class LibraryLogic {
         entityManager.persist(publisher);
         return publisher;
     }
-
 }
 
 
