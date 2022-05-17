@@ -86,12 +86,12 @@ public class LibraryTest {
         var topic6 = new Topic("Wirtschaft");
 
         //---Publications and Topics
-        target.add(pub1, topic1);
-        target.add(pub2, topic2);
-        target.add(pub3, topic3);
-        target.add(pub4, topic4);
-        target.add(pub5, topic5);
-        target.add(pub6, topic6);
+        //target.add(pub1, topic1);
+        //target.add(pub2, topic2);
+        //target.add(pub3, topic3);
+        //target.add(pub4, topic4);
+        //target.add(pub5, topic5);
+        //target.add(pub6, topic6);
     }
 
     private void createPublicationsAndGenres(){
@@ -308,12 +308,12 @@ public class LibraryTest {
         target.add(pub6, author6);
 
         //---Publications and Topics
-        target.add(pub1, topic1);
-        target.add(pub2, topic2);
-        target.add(pub3, topic3);
-        target.add(pub4, topic4);
-        target.add(pub5, topic5);
-        target.add(pub6, topic6);
+        //target.add(pub1, topic1);
+        //target.add(pub2, topic2);
+        //target.add(pub3, topic3);
+        //target.add(pub4, topic4);
+        //target.add(pub5, topic5);
+        //target.add(pub6, topic6);
 
         //---Publications and Genres
         target.add(pub1, genre1);

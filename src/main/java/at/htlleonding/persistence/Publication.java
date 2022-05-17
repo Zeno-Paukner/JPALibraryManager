@@ -72,6 +72,7 @@ public class Publication    {
         this.publisher = publisher;
     }
 
+
     public String getTitle() {
         return title;
     }
