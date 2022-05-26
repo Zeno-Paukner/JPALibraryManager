@@ -73,7 +73,7 @@ public class LibraryLogic {
     public Copy createCopy(CopyDTO copyDTO) {
         Copy copy = new Copy();
         PublicationDTO DTO = copyDTO.getPublication();
-        copy.setPublication(entityManager.find(Publication.class, copyDTO.getPublication()));
+        copy.setPublication(entityManager.find(Publication.class, DTO.getId()));
         copy.setDateOfPurchase(new Date());
         entityManager.persist(copy);
         return copy;
