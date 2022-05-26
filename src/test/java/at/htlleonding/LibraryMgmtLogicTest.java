@@ -61,17 +61,20 @@ public class LibraryMgmtLogicTest {
         var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
         var rent1 = new RentDTO(copy1, employee1, client1);
 
+        target.FlushAndClear();
 
         mediaTarget.createMediatype(mediatypeBOOK);
         languageTarget.createLanguage(languageEN);
         genreTarget.createGenre(genreFantasy);
-        libTarget.createCopy(copy1);
+        // libTarget.createCopy(copy1);
         libTarget.createPublisher(publisherIrgendwas);
         pubTarget.createPublication(pub1);
         libTarget.createAuthor(author1);
         libTarget.createClient(client1);
 
         rentTarget.rentCopy(rent1);
+
+
     }
 
     @Test
@@ -125,7 +128,7 @@ public class LibraryMgmtLogicTest {
     @TestTransaction
     public void addLibraryCustomer_isAvailable()
     {
-        Assertions.fail("Not implemented yet");
+        ClientDTO client1 = new ClientDTO("Romeo", "Bhuiyan", "3242903412303", "romeobhuiyan@gmail.com");
     }
 
     @Test
