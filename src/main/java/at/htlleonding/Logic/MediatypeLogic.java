@@ -20,7 +20,7 @@ public class MediatypeLogic {
         Mediatype mediatype = new Mediatype();
         //compare String Mediatype with enum MediatypeEnum
         for (MediatypeEnum mediatypeEnum : MediatypeEnum.values()) {
-            if (mediatypeDTO.getMediatype().equals(mediatypeEnum.toString())) {
+            if (mediatypeDTO.getMediatype().equals(mediatypeEnum)) {
                 mediatype.setMediatypeEnum(mediatypeEnum);
             }
         }

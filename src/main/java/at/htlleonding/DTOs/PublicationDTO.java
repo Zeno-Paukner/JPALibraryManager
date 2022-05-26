@@ -29,7 +29,7 @@ public class PublicationDTO implements Serializable {
         this.id = id;
     }
 
-    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, List<AuthorDTO> authors) {
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;

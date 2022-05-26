@@ -2,6 +2,7 @@ package at.htlleonding.persistence;
 import at.htlleonding.DTOs.CopyDTO;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,10 +29,16 @@ public class Copy {
     @Column
     Boolean isRented = false;
 
-    public Copy(Publication publication, Sale sale, Rent rent, Date dateOfPurchase, Boolean isRented) {
+    public Copy(Publication publication, Rent rent, Date dateOfPurchase, Boolean isRented) {
+        this.publication = publication;
+        this.rent = rent;
+        this.dateOfPurchase = dateOfPurchase;
+        this.isRented = isRented;
+    }
+
+    public Copy(Publication publication, Sale sale, Date dateOfPurchase, Boolean isRented) {
         this.publication = publication;
         this.sale = sale;
-        this.rent = rent;
         this.dateOfPurchase = dateOfPurchase;
         this.isRented = isRented;
     }
@@ -44,6 +51,9 @@ public class Copy {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Publication getPublication() {
         return publication;

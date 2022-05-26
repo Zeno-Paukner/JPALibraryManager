@@ -74,14 +74,14 @@ public class LibraryLogic {
         Copy copy = new Copy();
         PublicationDTO DTO = copyDTO.getPublication();
         copy.setPublication(entityManager.find(Publication.class, DTO.getId()));
-        copy.setDateOfPurchase(new Date());
+        copy.setDateOfPurchase(copyDTO.getDateOfPurchase());
         entityManager.persist(copy);
         return copy;
     }
 
     @Transactional
     public Publisher createPublisher(PublisherDTO publisherDTO) {
-        Publisher publisher = new Publisher(publisherDTO.getId(), publisherDTO.getPublisherName());
+        Publisher publisher = new Publisher(publisherDTO.getPublisherName());
         entityManager.persist(publisher);
         return publisher;
     }

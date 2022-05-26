@@ -39,15 +39,22 @@ public class RentLogic {
     public void rentCopy(RentDTO rentDTO) {
         //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
 
-        var copy = entityManager.find(Copy.class, rentDTO.getCopy().getId());
-        var client = entityManager.find(Client.class, rentDTO.getClient().getId());
+        var copy = entityManager.createQuery("SELECT c FROM Copy c WHERE c.dateOfPurchase = ?1", Copy.class)
+                .setParameter(1, rentDTO.getCopy().getDateOfPurchase())
+                .getSingleResult();
+        var client = entityManager.createQuery("SELECT c FROM Client c WHERE c.firstName = ?1 and c.lastName = ?2 and c.phoneNumber = ?3 and c.email = ?4", Client.class)
+                .setParameter(1, rentDTO.getClient().getFirstName())
+                .setParameter(2, rentDTO.getClient().getLastName())
+                .setParameter(3, rentDTO.getClient().getPhoneNumber())
+                .setParameter(4, rentDTO.getClient().getEmail())
+                .getSingleResult();
 
         if (!copy.getRented()) {
 
             Rent rent = new Rent();
-            List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = ?1 AND r.copy = ?2", Rent.class)
-                    .setParameter(1, client.getId())
-                    .setParameter(2, copy.getId())
+            List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.client.phoneNumber = ?1 AND r.copy.dateOfPurchase = ?2", Rent.class)
+                    .setParameter(1, client.getPhoneNumber())
+                    .setParameter(2, copy.getDateOfPurchase())
                     .getResultList();
             if (rents.size() > 3) {
                 rent.setNeedEmployeeToRentAgain(true);
@@ -57,8 +64,11 @@ public class RentLogic {
             rent.setCopy(copy);
             rent.setStartDate(new Date());
             rent.setDeadline(new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000));
-            rent.setClient(entityManager.find(Client.class, rentDTO.getClient()));
-            rent.setEmployee(entityManager.find(Employee.class, rentDTO.getEmployee()));
+            rent.setClient(client);
+            rent.setEmployee(entityManager.createQuery("SELECT e FROM Employee e WHERE e.lastName = ?1 and e.firstName = ?2", Employee.class)
+                    .setParameter(1, rentDTO.getEmployee().getLastName())
+                    .setParameter(2, rentDTO.getEmployee().getFirstName())
+                    .getSingleResult());
             copy.setRented(true);
             entityManager.persist(copy);
             entityManager.persist(rent);
