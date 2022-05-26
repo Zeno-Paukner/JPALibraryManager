@@ -17,14 +17,14 @@ public class PublicationLogic {
     public Publication createPublication(PublicationDTO publicationDTO) {
         //when the mediatype is a BOOK or EBOOK or AUDIOBOOK or REFERENCEBOOK then Author, Publisher Language isTranslated is required
         Publication publication = new Publication();
-        if (publication.getMediatype().getId() == 1 || publication.getMediatype().getId() == 2 || publication.getMediatype().getId() == 3 || publication.getMediatype().getId() == 4) {
-            if ((publication.getAuthors() == null) || (publication.getPublisher() == null) || (publication.getLanguage() == null)) {
+        if (publicationDTO.getMediatype().getId() == 1 || publicationDTO.getMediatype().getId() == 2 || publicationDTO.getMediatype().getId() == 3 || publicationDTO.getMediatype().getId() == 4) {
+            if ((publicationDTO.getAuthors() == null) || (publicationDTO.getPublisher() == null) || (publicationDTO.getLanguage() == null)) {
                 throw new RuntimeException("Author, Publisher, Language and isTranslated are required for this publication");
             }
         }
         //when the mediatype is a NEWSPAPER, MAGAZINE , Publisher Language isTranslated is required
-        if (publication.getMediatype().getId() == 5 || publication.getMediatype().getId() == 6 || publication.getMediatype().getId() == 7) {
-            if ((publication.getPublisher() == null) || (publication.getLanguage() == null)) {
+        if (publicationDTO.getMediatype().getId() == 5 || publicationDTO.getMediatype().getId() == 6 || publicationDTO.getMediatype().getId() == 7) {
+            if ((publicationDTO.getPublisher() == null) || (publicationDTO.getLanguage() == null)) {
                 throw new RuntimeException("Publisher, Language and isTranslated are required for this publication");
             }
         }

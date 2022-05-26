@@ -1,10 +1,7 @@
 package at.htlleonding.Logic;
 
 import at.htlleonding.DTOs.RentDTO;
-import at.htlleonding.persistence.Client;
-import at.htlleonding.persistence.Copy;
-import at.htlleonding.persistence.Employee;
-import at.htlleonding.persistence.Rent;
+import at.htlleonding.persistence.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,12 +28,6 @@ public class RentLogic {
     //    return copies.size() > 0;
     //}
 
-    //check if a copy is available with copy object with  isRented
-    public Boolean checkifCopyIsAvailable(Copy copy) {
-        return copy.getRented();
-    }
-
-
 
     /*@Transactional
     public Boolean checkIfCopyIsRented(Integer copy_id) {
@@ -47,45 +38,40 @@ public class RentLogic {
     @Transactional
     public void rentCopy(RentDTO rentDTO) {
         //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
-        if (!checkifCopyIsAvailable(libraryLogic.createCopy(rentDTO.getCopy()))) {
 
-            //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy_id()).getPublication().getId())) {
-            //if (!checkIfCopyIsRented(rentDTO.getCopy_id())) {
+        var copy = entityManager.find(Copy.class, rentDTO.getCopy().getId());
+        var client = entityManager.find(Client.class, rentDTO.getClient().getId());
 
-                Rent rent = new Rent();
-                List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = ?1 AND r.copy = ?2", Rent.class)
-                        .setParameter(1, clientLogic.createClient(rentDTO.getClient()))
-                        .setParameter(2, rentDTO.getCopy())
-                        .getResultList();
-                if (rents.size() > 3) {
-                    rent.setNeedEmployeeToRentAgain(true);
-                    throw new RuntimeException("Der Kunde muss zu einen Mitarbeiter um das Buch ein weiteres Mal auszuleihen");
-                }
+        if (!copy.getRented()) {
 
-                rent.setCopy(entityManager.find(Copy.class, rentDTO.getCopy()));
-                rent.setStartDate(new Date());
-                rent.setDeadline(new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000));
-                rent.setClient(entityManager.find(Client.class, rentDTO.getClient()));
-                rent.setEmployee(entityManager.find(Employee.class, rentDTO.getEmployee()));
-                entityManager.find(Copy.class, rentDTO.getCopy()).setRented(true);
-                entityManager.persist(rent);
-
-            } else {
-                throw new RuntimeException("Das Buch ist bereits ausgeliehen");
+            Rent rent = new Rent();
+            List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.client = ?1 AND r.copy = ?2", Rent.class)
+                    .setParameter(1, client.getId())
+                    .setParameter(2, copy.getId())
+                    .getResultList();
+            if (rents.size() > 3) {
+                rent.setNeedEmployeeToRentAgain(true);
+                throw new RuntimeException("Der Kunde muss zu einen Mitarbeiter um das Buch ein weiteres Mal auszuleihen");
             }
-            //} else {
-            //    throw new RuntimeException("Das Buch ist nicht mehr verfügbar");
-            //}
+
+            rent.setCopy(copy);
+            rent.setStartDate(new Date());
+            rent.setDeadline(new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000));
+            rent.setClient(entityManager.find(Client.class, rentDTO.getClient()));
+            rent.setEmployee(entityManager.find(Employee.class, rentDTO.getEmployee()));
+            copy.setRented(true);
+            entityManager.persist(copy);
+            entityManager.persist(rent);
+
+        } else {
+            throw new RuntimeException("Das Buch ist bereits ausgeliehen");
         }
-
-
-
+    }
 
     //end Rent by Copy object
     @Transactional
-    public void endRentCopy(Copy copy) {
-        Rent rent = entityManager.find(Rent.class, copy.getRent().getId());
+    public void returnCopy(Copy copy) {
+        Rent rent = entityManager.find(Rent.class, copy.getRent());
         rent.getCopy().setRented(false);
     }
-
 }

@@ -20,8 +20,17 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher", cascade=CascadeType.ALL)
     private final List<Publication> publications = new ArrayList<>();
 
+    public Publisher(Integer id, String publisherName) {
+        this.id = id;
+        this.publisherName = publisherName;
+    }
+
     public Publisher(String publisherName) {
         this.publisherName = publisherName;
+    }
+
+    public Publisher(Integer id) {
+        this.id = id;
     }
 
     public Publisher() {

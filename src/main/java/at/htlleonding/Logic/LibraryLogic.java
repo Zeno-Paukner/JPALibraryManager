@@ -28,7 +28,6 @@ public class LibraryLogic {
 
 
     @Transactional
-    //create Client
     public Client createClient(ClientDTO clientDTO) {
         Client client = new Client();
         client.setFirstName(clientDTO.getFirstName());
@@ -49,7 +48,6 @@ public class LibraryLogic {
     }
 
     @Transactional
-    // Reservation
     public Reservation createReservation(ReservationDTO reservationDTO) {
         Reservation reservation = new Reservation();
         reservation.setClient(entityManager.find(Client.class, reservationDTO.getClient()));
@@ -72,25 +70,18 @@ public class LibraryLogic {
     }
 
     @Transactional
-    //createCopy
     public Copy createCopy(CopyDTO copyDTO) {
         Copy copy = new Copy();
         PublicationDTO DTO = copyDTO.getPublication();
-        Language language = languageLogic.createLanguage(DTO.getLanguage());
-        Genre genre = genreLogic.createGenre(DTO.getGenre());
-        Mediatype mediatype = mediatypeLogic.createMediatype(DTO.getMediatype());
-        Publisher publisher = createPublisher(DTO.getPublisher());
-        copy.setPublication(new Publication(DTO.getTitle(), DTO.getPublishYear(), DTO.getIsTranslated(), language, genre, mediatype, publisher));
+        copy.setPublication(entityManager.find(Publication.class, copyDTO.getPublication()));
         copy.setDateOfPurchase(new Date());
         entityManager.persist(copy);
         return copy;
     }
 
-    //createPublisher
     @Transactional
     public Publisher createPublisher(PublisherDTO publisherDTO) {
-        Publisher publisher = new Publisher();
-        publisher.setPublisherName(publisherDTO.getPublisherName());
+        Publisher publisher = new Publisher(publisherDTO.getId(), publisherDTO.getPublisherName());
         entityManager.persist(publisher);
         return publisher;
     }

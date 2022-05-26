@@ -7,11 +7,20 @@ public class RentDTO implements Serializable {
     private final CopyDTO copy;
     private final EmployeeDTO employee;
     private final ClientDTO client;
+    private final Integer id;
 
     public RentDTO(CopyDTO copy, EmployeeDTO employee, ClientDTO client) {
         this.copy = copy;
         this.employee = employee;
         this.client = client;
+        this.id = 0;
+    }
+
+    public RentDTO(CopyDTO copy, EmployeeDTO employee, ClientDTO client, Integer id) {
+        this.copy = copy;
+        this.employee = employee;
+        this.client = client;
+        this.id = id;
     }
 
     public CopyDTO getCopy() {
@@ -47,5 +56,9 @@ public class RentDTO implements Serializable {
                 "copy = " + copy + ", " +
                 "employee = " + employee + ", " +
                 "client = " + client + ")";
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

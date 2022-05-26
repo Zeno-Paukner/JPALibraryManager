@@ -34,8 +34,10 @@ public class LibraryMgmtLogicTest {
     RentLogic rentTarget;
     @Inject
     ClientLogic clientTarget;
-
-
+    @Inject
+    MediatypeLogic mediaTarget;
+    @Inject
+    LanguageLogic languageTarget;
 
     /*
     Add rentable items to the library, of each media type, with multiple authors and attributes.
@@ -49,16 +51,25 @@ public class LibraryMgmtLogicTest {
         var languageEN = new LanguageDTO("EN");
         var genreFantasy = new GenreDTO("Fantasy");
         var publisherIrgendwas = new PublisherDTO("IrgendwasHilfe");
-        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeBOOK, publisherIrgendwas);
-
-        var publicationsRomy = new ArrayList<PublicationDTO>();
-        publicationsRomy.add(pub1);
-        var author1 = new AuthorDTO("Romeo", "Bhuiyan", publicationsRomy);
+        var author1 = new AuthorDTO("Romeo", "Bhuiyan");
+        List<AuthorDTO> authorDTOList = new ArrayList<>();
+        authorDTOList.add(author1);
+        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeBOOK, publisherIrgendwas, authorDTOList);
 
         var copy1 = new CopyDTO(pub1, null, 0);
         var employee1 = new EmployeeDTO("Zeno", "Paukner", 1000);
         var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
         var rent1 = new RentDTO(copy1, employee1, client1);
+
+
+        mediaTarget.createMediatype(mediatypeBOOK);
+        languageTarget.createLanguage(languageEN);
+        genreTarget.createGenre(genreFantasy);
+        libTarget.createCopy(copy1);
+        libTarget.createPublisher(publisherIrgendwas);
+        pubTarget.createPublication(pub1);
+        libTarget.createAuthor(author1);
+        libTarget.createClient(client1);
 
         rentTarget.rentCopy(rent1);
     }

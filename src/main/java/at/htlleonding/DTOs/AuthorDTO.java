@@ -1,18 +1,18 @@
 package at.htlleonding.DTOs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AuthorDTO implements Serializable {
     private final String firstName;
     private final String lastName;
-    private final List<PublicationDTO> publications;
+    private final List<PublicationDTO> publications = new ArrayList<>();
 
-    public AuthorDTO(String firstName, String lastName, List<PublicationDTO> publications) {
+    public AuthorDTO(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.publications = publications;
     }
 
     public String getFirstName() {

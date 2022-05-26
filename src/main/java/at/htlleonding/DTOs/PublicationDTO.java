@@ -1,6 +1,10 @@
 package at.htlleonding.DTOs;
 
+import at.htlleonding.persistence.Author;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PublicationDTO implements Serializable {
@@ -11,9 +15,10 @@ public class PublicationDTO implements Serializable {
     private final GenreDTO genre;
     private final MediatypeDTO mediatype;
     private final PublisherDTO publisher;
+    private final List<AuthorDTO> authors = new ArrayList<>();
     private final Integer id;
 
-    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, Integer id) {
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, Integer id, List<AuthorDTO> authors) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;
@@ -24,7 +29,7 @@ public class PublicationDTO implements Serializable {
         this.id = id;
     }
 
-    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher) {
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, List<AuthorDTO> authors) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;
@@ -35,6 +40,13 @@ public class PublicationDTO implements Serializable {
         this.id = 0;
     }
 
+    public boolean isTranslated() {
+        return isTranslated;
+    }
+
+    public List<AuthorDTO> getAuthors() {
+        return authors;
+    }
 
     public String getTitle() {
         return title;
