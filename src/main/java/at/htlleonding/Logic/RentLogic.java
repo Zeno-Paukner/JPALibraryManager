@@ -1,6 +1,6 @@
 package at.htlleonding.Logic;
 
-import at.htlleonding.DTOs.RentDTO;
+import at.htlleonding.DTOs.*;
 import at.htlleonding.persistence.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -39,8 +39,8 @@ public class RentLogic {
     public void rentCopy(RentDTO rentDTO) {
         //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
 
-        var copy = entityManager.createQuery("SELECT c FROM Copy c WHERE c.dateOfPurchase = ?1", Copy.class)
-                .setParameter(1, rentDTO.getCopy().getDateOfPurchase())
+        var copy = entityManager.createQuery("SELECT c FROM Copy c WHERE c.id = ?1", Copy.class)
+                .setParameter(1, rentDTO.getCopy().getId())
                 .getSingleResult();
         var client = entityManager.createQuery("SELECT c FROM Client c WHERE c.firstName = ?1 and c.lastName = ?2 and c.phoneNumber = ?3 and c.email = ?4", Client.class)
                 .setParameter(1, rentDTO.getClient().getFirstName())
@@ -49,12 +49,12 @@ public class RentLogic {
                 .setParameter(4, rentDTO.getClient().getEmail())
                 .getSingleResult();
 
-        if (!copy.getRented()) {
+        if (!copy.getForSale() && !copy.getRented()) {
 
             Rent rent = new Rent();
-            List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.client.phoneNumber = ?1 AND r.copy.dateOfPurchase = ?2", Rent.class)
-                    .setParameter(1, client.getPhoneNumber())
-                    .setParameter(2, copy.getDateOfPurchase())
+            List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.copy.id = ?1 and r.client.phoneNumber = ?2", Rent.class)
+                    .setParameter(1, copy.getId())
+                    .setParameter(2, client.getPhoneNumber())
                     .getResultList();
             if (rents.size() > 3) {
                 rent.setNeedEmployeeToRentAgain(true);

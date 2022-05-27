@@ -1,6 +1,7 @@
 package at.htlleonding.persistence;
 import at.htlleonding.DTOs.CopyDTO;
 
+import javax.inject.Inject;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -28,6 +29,9 @@ public class Copy {
 
     @Column
     Boolean isRented = false;
+
+    @Column
+    Boolean isForSale = false;
 
     public Copy(Publication publication, Rent rent, Date dateOfPurchase, Boolean isRented) {
         this.publication = publication;
@@ -95,5 +99,13 @@ public class Copy {
         isRented = rented;
     }
 
+    public Boolean getForSale() {
+        return isForSale || new Date().getTime() - dateOfPurchase.getTime() > 7 * 365 * 24 * 60 * 60 * 1000;
+    }
 
+    public void setForSale(Boolean forSale, Employee e) {
+        if (e != null){
+            isForSale = forSale;
+        }
+    }
 }

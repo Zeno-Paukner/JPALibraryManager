@@ -44,4 +44,8 @@ public class Employee extends Person {
     public void setSalary(Integer salary) {
         this.salary = salary;
     }
+
+    public void setCopyAsForSale(Copy copy){
+        copy.setForSale(true, this);
+    }
 }

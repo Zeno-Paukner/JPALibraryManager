@@ -1,5 +1,7 @@
 package at.htlleonding.DTOs;
 
+import at.htlleonding.persistence.Copy;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,12 +11,14 @@ import java.util.Objects;
 public class CopyDTO implements Serializable {
     private final PublicationDTO publication;
     private final SaleDTO sale;
+    private final RentDTO rent;
     private final Integer id;
     private final Date dateOfPurchase;
 
     public CopyDTO(PublicationDTO publication, SaleDTO sale, Date dateOfPurchase) {
         this.publication = publication;
         this.sale = sale;
+        this.rent = null;
         this.dateOfPurchase = dateOfPurchase;
         this.id = 0;
     }
@@ -22,6 +26,23 @@ public class CopyDTO implements Serializable {
     public CopyDTO(PublicationDTO publication, SaleDTO sale, Date dateOfPurchase, int id) {
         this.publication = publication;
         this.sale = sale;
+        this.rent = null;
+        this.dateOfPurchase = dateOfPurchase;
+        this.id = id;
+    }
+
+    public CopyDTO(PublicationDTO publication, RentDTO rent, Date dateOfPurchase) {
+        this.publication = publication;
+        this.rent = rent;
+        this.sale = null;
+        this.dateOfPurchase = dateOfPurchase;
+        this.id = 0;
+    }
+
+    public CopyDTO(PublicationDTO publication, RentDTO rent, Date dateOfPurchase, int id) {
+        this.publication = publication;
+        this.rent = rent;
+        this.sale = null;
         this.dateOfPurchase = dateOfPurchase;
         this.id = id;
     }

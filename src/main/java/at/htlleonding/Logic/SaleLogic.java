@@ -20,7 +20,7 @@ public class SaleLogic {
     @Transactional
     public boolean checkIfCopyIsAvailableToPurchase(Integer copy_id) {
         //if the dateOfPurchase is 7 years ago the copy could be purchased
-        return new Date().getTime() - entityManager.find(Copy.class, copy_id).getDateOfPurchase().getTime() > 7 * 365 * 24 * 60 * 60 * 1000;
+        return entityManager.find(Copy.class, copy_id).getForSale();
     }
 
     @Transactional

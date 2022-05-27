@@ -18,7 +18,7 @@ public class PublicationDTO implements Serializable {
     private final List<AuthorDTO> authors = new ArrayList<>();
     private final Integer id;
 
-    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, Integer id, List<AuthorDTO> authors) {
+    public PublicationDTO(String title, int publishYear, boolean isTranslated, LanguageDTO language, GenreDTO genre, MediatypeDTO mediatype, PublisherDTO publisher, Integer id) {
         this.title = title;
         this.publishYear = publishYear;
         this.isTranslated = isTranslated;
