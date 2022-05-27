@@ -36,7 +36,7 @@ public class RentLogic {
     }*/
 
     @Transactional
-    public void rentCopy(RentDTO rentDTO) {
+    public Rent rentCopy(RentDTO rentDTO) {
         //if (checkifCopyofPublicationIsAvailable(entityManager.find(Copy.class, rentDTO.getCopy()).getPublication().getId())) {
 
         var copy = entityManager.createQuery("SELECT c FROM Copy c WHERE c.id = ?1", Copy.class)
@@ -72,16 +72,21 @@ public class RentLogic {
             copy.setRented(true);
             entityManager.persist(copy);
             entityManager.persist(rent);
-
+            return rent;
         } else {
-            throw new RuntimeException("Das Buch ist bereits ausgeliehen");
+            if (copy.getRented())
+                throw new RuntimeException("Das Buch ist bereits ausgeliehen");
+            else
+                throw new RuntimeException("Das Buch ist zum Verkauf");
         }
     }
 
     //end Rent by Copy object
     @Transactional
-    public void returnCopy(Copy copy) {
-        Rent rent = entityManager.find(Rent.class, copy.getRent());
+    public void returnCopy(RentDTO rentDTO) {
+        Rent rent = entityManager.createQuery("SELECT r FROM Rent r WHERE r.id = ?1", Rent.class)
+                .setParameter(1, rentDTO.getId())
+                .getSingleResult();
         rent.getCopy().setRented(false);
     }
 }

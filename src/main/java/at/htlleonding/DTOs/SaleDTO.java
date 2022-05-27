@@ -1,18 +1,26 @@
 package at.htlleonding.DTOs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class SaleDTO implements Serializable {
-    private final List<CopyDTO> copyList;
+    private final List<CopyDTO> copyList = new ArrayList<>();
     private final ClientDTO client;
     private final EmployeeDTO employee;
+    private final Integer id;
 
-    public SaleDTO(List<CopyDTO> copyList, ClientDTO client, EmployeeDTO employee) {
-        this.copyList = copyList;
+    public SaleDTO(ClientDTO client, EmployeeDTO employee) {
         this.client = client;
         this.employee = employee;
+        this.id = 0;
+    }
+
+    public SaleDTO(ClientDTO client, EmployeeDTO employee, Integer id) {
+        this.client = client;
+        this.employee = employee;
+        this.id = id;
     }
 
     public List<CopyDTO> getCopyList() {

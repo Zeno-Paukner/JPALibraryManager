@@ -42,6 +42,8 @@ public class LibraryMgmtLogicTest {
     MediatypeLogic mediaTarget;
     @Inject
     LanguageLogic languageTarget;
+    @Inject
+    SaleLogic saleTarget;
 
     /*
     Add rentable items to the library, of each media type, with multiple authors and attributes.
@@ -675,7 +677,7 @@ public class LibraryMgmtLogicTest {
             rentTarget.rentCopy(rent1);
         }
         catch (RuntimeException e){
-            Assertions.assertEquals(e.getMessage(), "Das Buch ist bereits ausgeliehen");
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
         }
 
         Assertions.assertNotNull(publication);
@@ -694,7 +696,55 @@ public class LibraryMgmtLogicTest {
     @TestTransaction
     public void customerRentsSingleAvailableItem_RentNotPossible_BringsBackItem_RentPossible()
     {
-        Assertions.fail("Not implemented yet");
+        Date date = new Date(System.currentTimeMillis());
+        var mediatypeJOURNAL = new MediatypeDTO(JOURNAL, 0.99);
+        var languageEN = new LanguageDTO("EN");
+        var genreFantasy = new GenreDTO("Fantasy");
+        var publisherIrgendwas = new PublisherDTO("IrgendwasHilfe");
+        var author1 = new AuthorDTO("Romeo", "Bhuiyan");
+        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeJOURNAL, publisherIrgendwas);
+        pub1.getAuthors().add(author1);
+
+
+        var copy1 = new CopyDTO(pub1, (RentDTO) null, date);
+        var employee1 = new EmployeeDTO("Zeno", "Paukner", 1000);
+        var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
+
+
+        target.FlushAndClear();
+
+        mediaTarget.createMediatype(mediatypeJOURNAL);
+        languageTarget.createLanguage(languageEN);
+
+        libTarget.createEmployee(employee1);
+        genreTarget.createGenre(genreFantasy);
+        libTarget.createPublisher(publisherIrgendwas);
+        var copyCheck = libTarget.createCopy(copy1);
+        copy1 = new CopyDTO(copy1.getPublication(), copy1.getSale(), copy1.getDateOfPurchase(), copyCheck.getId());
+        var rent1 = new RentDTO(copy1, employee1, client1);
+        libTarget.createAuthor(author1);
+        libTarget.createClient(client1);
+        var publication = pubTarget.createPublication(pub1);
+        var rentCheck = rentTarget.rentCopy(rent1);
+        rent1 = new RentDTO(rent1.getCopy(), rent1.getEmployee(), rent1.getClient(), rentCheck.getId());
+
+        Assertions.assertNotNull(publication);
+        Assertions.assertEquals(true, copyCheck.getRented());
+        Assertions.assertEquals(mediatypeJOURNAL.getMediatypeEnum(), publication.getMediatype().getMediatypeEnum());
+
+
+        try {
+            rentTarget.rentCopy(rent1);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist bereits ausgeliehen");
+        }
+
+        rentTarget.returnCopy(rent1);
+        rentTarget.rentCopy(rent1);
+        Assertions.assertNotNull(publication);
+        Assertions.assertEquals(true, copyCheck.getRented());
+        Assertions.assertEquals(mediatypeJOURNAL.getMediatypeEnum(), publication.getMediatype().getMediatypeEnum());
     }
 
     @Test
@@ -727,20 +777,224 @@ public class LibraryMgmtLogicTest {
     @TestTransaction
     public void setItemForSale_cannotBeRented()
     {
-        Assertions.fail("Not implemented yet");
+        Date date = new Date(System.currentTimeMillis());
+        var mediatypeJOURNAL = new MediatypeDTO(JOURNAL, 0.99);
+        var mediatypeEBOOK = new MediatypeDTO(EBOOK, 0.99);
+        var languageEN = new LanguageDTO("EN");
+        var genreFantasy = new GenreDTO("Fantasy");
+        var publisherIrgendwas = new PublisherDTO("IrgendwasHilfe");
+        var author1 = new AuthorDTO("Romeo", "Bhuiyan");
+        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeJOURNAL, publisherIrgendwas);
+        var pub2 = new PublicationDTO("Romy ausm Wunderland",900, false, languageEN, genreFantasy, mediatypeEBOOK, publisherIrgendwas);
+        pub1.getAuthors().add(author1);
+        pub2.getAuthors().add(author1);
+
+        var copy1 = new CopyDTO(pub1, (SaleDTO) null, date);
+        var copy2 = new CopyDTO(pub1, (SaleDTO) null, date);
+        var copy3 = new CopyDTO(pub1, (SaleDTO) null, date);
+        var copy4 = new CopyDTO(pub2, (SaleDTO) null, date);
+        var employee1 = new EmployeeDTO("Zeno", "Paukner", 1000);
+        var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
+
+        target.FlushAndClear();
+
+        mediaTarget.createMediatype(mediatypeJOURNAL);
+        languageTarget.createLanguage(languageEN);
+
+        var employee = libTarget.createEmployee(employee1);
+        genreTarget.createGenre(genreFantasy);
+        libTarget.createPublisher(publisherIrgendwas);
+        var copyCheck1 = libTarget.createCopy(copy1);
+        var copyCheck2 = libTarget.createCopy(copy2);
+        var copyCheck3 = libTarget.createCopy(copy3);
+        var copyCheck4 = libTarget.createCopy(copy4);
+        employee.setCopyAsForSale(copyCheck1);
+        employee.setCopyAsForSale(copyCheck2);
+        employee.setCopyAsForSale(copyCheck3);
+        employee.setCopyAsForSale(copyCheck4);
+        copy1 = new CopyDTO(copy1.getPublication(), copy1.getSale(), copy1.getDateOfPurchase(), copyCheck1.getId());
+        copy2 = new CopyDTO(copy2.getPublication(), copy2.getSale(), copy2.getDateOfPurchase(), copyCheck2.getId());
+        copy3 = new CopyDTO(copy3.getPublication(), copy3.getSale(), copy3.getDateOfPurchase(), copyCheck3.getId());
+        copy4 = new CopyDTO(copy4.getPublication(), copy4.getSale(), copy4.getDateOfPurchase(), copyCheck4.getId());
+        var rent1 = new RentDTO(copy1, employee1, client1);
+        var rent2 = new RentDTO(copy2, employee1, client1);
+        libTarget.createAuthor(author1);
+        libTarget.createClient(client1);
+        var publication = pubTarget.createPublication(pub1);
+
+        try {
+            rentTarget.rentCopy(rent1);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+
+        Assertions.assertNotNull(publication);
+        Assertions.assertEquals(false, copyCheck1.getRented());
+        Assertions.assertEquals(mediatypeJOURNAL.getMediatypeEnum(), publication.getMediatype().getMediatypeEnum());
+
+        SaleDTO saleDTO = new SaleDTO(client1, employee1);
+        saleDTO.getCopyList().add(copy2);
+        var saleCheck = saleTarget.createSale(saleDTO);
+        saleDTO = new SaleDTO(saleDTO.getClient(), saleDTO.getEmployee(), saleCheck.getId());
+        try {
+            rentTarget.rentCopy(rent1);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+
+        var salesList = new ArrayList<SaleDTO>();
+        salesList.add(saleDTO);
+        InvoiceDTO invoiceDTO = new InvoiceDTO(client1, employee1, salesList);
+        try {
+            rentTarget.rentCopy(rent2);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+        saleDTO = new SaleDTO(client1, employee1);
+        saleDTO.getCopyList().add(copy3);
+        saleDTO.getCopyList().add(copy4);
+        saleTarget.createSale(saleDTO);
     }
 
     @Test
     @TestTransaction
     public void setOneOfTwoItemsForSale_onlyOneCanBeRented()
     {
-        Assertions.fail("Not implemented yet");
+        Date date = new Date(System.currentTimeMillis());
+        var mediatypeJOURNAL = new MediatypeDTO(JOURNAL, 0.99);
+        var languageEN = new LanguageDTO("EN");
+        var genreFantasy = new GenreDTO("Fantasy");
+        var publisherIrgendwas = new PublisherDTO("IrgendwasHilfe");
+        var author1 = new AuthorDTO("Romeo", "Bhuiyan");
+        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeJOURNAL, publisherIrgendwas);
+        pub1.getAuthors().add(author1);
+
+        var copy1 = new CopyDTO(pub1, (SaleDTO) null, date);
+        var copy2 = new CopyDTO(pub1, (SaleDTO) null, date);
+        var employee1 = new EmployeeDTO("Zeno", "Paukner", 1000);
+        var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
+
+        target.FlushAndClear();
+
+        mediaTarget.createMediatype(mediatypeJOURNAL);
+        languageTarget.createLanguage(languageEN);
+
+        var employee = libTarget.createEmployee(employee1);
+        genreTarget.createGenre(genreFantasy);
+        libTarget.createPublisher(publisherIrgendwas);
+        var copyCheck1 = libTarget.createCopy(copy1);
+        var copyCheck2 = libTarget.createCopy(copy2);
+        employee.setCopyAsForSale(copyCheck1);
+        copy1 = new CopyDTO(copy1.getPublication(), copy1.getSale(), copy1.getDateOfPurchase(), copyCheck1.getId());
+        copy2 = new CopyDTO(copy2.getPublication(), copy2.getSale(), copy2.getDateOfPurchase(), copyCheck2.getId());
+        var rent1 = new RentDTO(copy1, employee1, client1);
+        var rent2 = new RentDTO(copy2, employee1, client1);
+        libTarget.createAuthor(author1);
+        libTarget.createClient(client1);
+        var publication = pubTarget.createPublication(pub1);
+
+        try {
+            rentTarget.rentCopy(rent1);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+
+        Assertions.assertNotNull(publication);
+        Assertions.assertEquals(false, copyCheck1.getRented());
+        Assertions.assertEquals(mediatypeJOURNAL.getMediatypeEnum(), publication.getMediatype().getMediatypeEnum());
+
+        rentTarget.rentCopy(rent2);
+        Assertions.assertNotNull(publication);
+        Assertions.assertEquals(true, copyCheck2.getRented());
+        Assertions.assertEquals(mediatypeJOURNAL.getMediatypeEnum(), publication.getMediatype().getMediatypeEnum());
     }
 
     @Test
     @TestTransaction
     public void setThreeDifferentItemsForSale_CustomerBuys2_InvoiceHasTwoItems_OnlyOneItemForRent()
     {
-        Assertions.fail("Not implemented yet");
+        Date date = new Date(System.currentTimeMillis());
+        var mediatypeJOURNAL = new MediatypeDTO(JOURNAL, 0.99);
+        var mediatypeEBOOK = new MediatypeDTO(EBOOK, 0.99);
+        var mediatypeBOOK = new MediatypeDTO(BOOK, 0.99);
+        var languageEN = new LanguageDTO("EN");
+        var genreFantasy = new GenreDTO("Fantasy");
+        var publisherIrgendwas = new PublisherDTO("IrgendwasHilfe");
+        var author1 = new AuthorDTO("Romeo", "Bhuiyan");
+        var pub1 = new PublicationDTO("Romy im Wunderland",1900, true, languageEN, genreFantasy, mediatypeJOURNAL, publisherIrgendwas);
+        var pub2 = new PublicationDTO("Romy ausm Wunderland",900, false, languageEN, genreFantasy, mediatypeEBOOK, publisherIrgendwas);
+        var pub3 = new PublicationDTO("Romy ins Wunderland",4900, false, languageEN, genreFantasy, mediatypeBOOK, publisherIrgendwas);
+        pub1.getAuthors().add(author1);
+        pub2.getAuthors().add(author1);
+        pub3.getAuthors().add(author1);
+
+        var copy1 = new CopyDTO(pub1, (SaleDTO) null, date);
+        var copy2 = new CopyDTO(pub2, (SaleDTO) null, date);
+        var copy3 = new CopyDTO(pub3, (SaleDTO) null, date);
+        var employee1 = new EmployeeDTO("Zeno", "Paukner", 1000);
+        var client1 = new ClientDTO("Martin", "Hausleitner", "+43 03123923912", "martin@waffal.at");
+
+        target.FlushAndClear();
+
+        mediaTarget.createMediatype(mediatypeJOURNAL);
+        languageTarget.createLanguage(languageEN);
+
+        var employee = libTarget.createEmployee(employee1);
+        genreTarget.createGenre(genreFantasy);
+        libTarget.createPublisher(publisherIrgendwas);
+        var copyCheck1 = libTarget.createCopy(copy1);
+        var copyCheck2 = libTarget.createCopy(copy2);
+        var copyCheck3 = libTarget.createCopy(copy3);
+        employee.setCopyAsForSale(copyCheck1);
+        employee.setCopyAsForSale(copyCheck2);
+        employee.setCopyAsForSale(copyCheck3);
+        copy1 = new CopyDTO(copy1.getPublication(), copy1.getSale(), copy1.getDateOfPurchase(), copyCheck1.getId());
+        copy2 = new CopyDTO(copy2.getPublication(), copy2.getSale(), copy2.getDateOfPurchase(), copyCheck2.getId());
+        copy3 = new CopyDTO(copy3.getPublication(), copy3.getSale(), copy3.getDateOfPurchase(), copyCheck3.getId());
+        var rent1 = new RentDTO(copy1, employee1, client1);
+        var rent2 = new RentDTO(copy2, employee1, client1);
+        libTarget.createAuthor(author1);
+        libTarget.createClient(client1);
+        var publication = pubTarget.createPublication(pub1);
+
+        try {
+            rentTarget.rentCopy(rent1);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+
+        Assertions.assertNotNull(publication);
+        Assertions.assertEquals(false, copyCheck1.getRented());
+        Assertions.assertEquals(mediatypeJOURNAL.getMediatypeEnum(), publication.getMediatype().getMediatypeEnum());
+
+        SaleDTO saleDTO = new SaleDTO(client1, employee1);
+        saleDTO.getCopyList().add(copy2);
+        var saleCheck = saleTarget.createSale(saleDTO);
+        saleDTO = new SaleDTO(saleDTO.getClient(), saleDTO.getEmployee(), saleCheck.getId());
+        try {
+            rentTarget.rentCopy(rent1);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+
+        var salesList = new ArrayList<SaleDTO>();
+        salesList.add(saleDTO);
+        InvoiceDTO invoiceDTO = new InvoiceDTO(client1, employee1, salesList);
+        try {
+            rentTarget.rentCopy(rent2);
+        }
+        catch (RuntimeException e){
+            Assertions.assertEquals(e.getMessage(), "Das Buch ist zum Verkauf");
+        }
+        saleDTO = new SaleDTO(client1, employee1);
+        saleDTO.getCopyList().add(copy3);
+        saleDTO.getCopyList().add(copy4);
+        saleTarget.createSale(saleDTO);
     }
 }

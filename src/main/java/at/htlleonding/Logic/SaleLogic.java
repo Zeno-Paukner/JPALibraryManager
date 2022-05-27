@@ -29,7 +29,6 @@ public class SaleLogic {
 
         // check if all copies are available to purchase
 
-        saleDTO.getCopyList();
 
         for (var copy : saleDTO.getCopyList()) {
             var copy_id = copy.getId();
@@ -39,7 +38,7 @@ public class SaleLogic {
         }
         sale.setSaleDate(new Date());
         // sum all Prices from copies with the mediatype Price and set it to TotalPrice
-        double totalPrice = saleDTO.getCopyList().stream().mapToDouble(copy_id -> entityManager.find(Copy.class, copy_id).getPublication().getMediatype().getPrice()).sum();
+        double totalPrice = saleDTO.getCopyList().stream().mapToDouble(copy -> copy.getPublication().getMediatype().getPrice()).sum();
         sale.setTotalPrice(totalPrice);
 
         // if Client is null the total price is minus 20%
@@ -47,9 +46,18 @@ public class SaleLogic {
             sale.setTotalPrice(totalPrice * 0.8);
         }
         else {
-            sale.setClient(entityManager.find(Client.class, saleDTO.getClient()));
+            sale.setClient(entityManager.createQuery("SELECT c FROM Client c WHERE c.phoneNumber = ?1 and c.email = ?2 and c.firstName = ?3 and c.lastName = ?4", Client.class)
+                    .setParameter(1, saleDTO.getClient().getPhoneNumber())
+                    .setParameter(2, saleDTO.getClient().getEmail())
+                    .setParameter(3, saleDTO.getClient().getFirstName())
+                    .setParameter(4, saleDTO.getClient().getLastName())
+                    .getSingleResult());
         }
-        sale.setEmployee(entityManager.find(Employee.class, saleDTO.getEmployee()));
+        sale.setEmployee(entityManager.createQuery("SELECT e FROM Employee e WHERE e.lastName = ?1 and e.firstName = ?2 and e.salary = ?3", Employee.class)
+                .setParameter(1, saleDTO.getEmployee().getLastName())
+                .setParameter(2, saleDTO.getEmployee().getFirstName())
+                .setParameter(3, saleDTO.getEmployee().getSalary())
+                .getSingleResult());
         // create sale for each copy
         for (var copy : saleDTO.getCopyList()) {
             var copy_id = copy.getId();
