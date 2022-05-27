@@ -39,16 +39,17 @@ public class Rent {
     private Date deadline;
 
     @Column
-    private boolean needEmployeeToRentAgain;
+    private int prolongedCounter = 0;
 
-    public Rent(Copy copy, Employee employee, Client client, Date startDate, Date endDate, Date deadline, boolean needEmployeeToRentAgain) {
+
+
+    public Rent(Copy copy, Employee employee, Client client, Date startDate, Date endDate, Date deadline) {
         this.copy = copy;
         this.employee = employee;
         this.client = client;
         this.startDate = startDate;
         this.endDate = endDate;
         this.deadline = deadline;
-        this.needEmployeeToRentAgain = needEmployeeToRentAgain;
     }
 
     public Rent() {
@@ -106,12 +107,16 @@ public class Rent {
         this.deadline = deadline;
     }
 
-    public boolean isNeedEmployeeToRentAgain() {
-        return needEmployeeToRentAgain;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNeedEmployeeToRentAgain(boolean needEmployeeToRentAgain) {
-        this.needEmployeeToRentAgain = needEmployeeToRentAgain;
+    public int getProlongedCounter() {
+        return prolongedCounter;
+    }
+
+    public void setProlongedCounter(int prolongedCounter) {
+        this.prolongedCounter = prolongedCounter;
     }
 }
 

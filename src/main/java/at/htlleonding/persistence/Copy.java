@@ -1,4 +1,5 @@
 package at.htlleonding.persistence;
+import at.htlleonding.DTOs.ClientDTO;
 import at.htlleonding.DTOs.CopyDTO;
 
 import javax.inject.Inject;
@@ -27,11 +28,17 @@ public class Copy {
     @Column
     private Date dateOfPurchase;
 
-    @Column
-    Boolean isRented = false;
+    @OneToOne
+    private Client clientReservedBy = null;
 
     @Column
-    Boolean isForSale = false;
+    private Boolean isRented = false;
+
+    @Column
+    private Boolean isForSale = false;
+
+    @Column
+    private Boolean onDisplay = false;
 
     public Copy(Publication publication, Rent rent, Date dateOfPurchase, Boolean isRented) {
         this.publication = publication;
@@ -50,6 +57,21 @@ public class Copy {
     public Copy() {
     }
 
+    public Boolean getOnDisplay() {
+        return onDisplay;
+    }
+
+    public void setOnDisplay(Boolean onDisplay) {
+        this.onDisplay = onDisplay;
+    }
+
+    public Client getClientReservedBy() {
+        return clientReservedBy;
+    }
+
+    public void setClientReservedBy(Client clientReservedBy) {
+        this.clientReservedBy = clientReservedBy;
+    }
 
     public Integer getId() {
         return id;

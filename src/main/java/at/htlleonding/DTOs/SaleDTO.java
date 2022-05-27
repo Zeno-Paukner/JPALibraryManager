@@ -50,6 +50,10 @@ public class SaleDTO implements Serializable {
         return Objects.hash(copyList, client, employee);
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +

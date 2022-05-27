@@ -14,6 +14,7 @@ public class CopyDTO implements Serializable {
     private final RentDTO rent;
     private final Integer id;
     private final Date dateOfPurchase;
+    private ClientDTO clientReservedBy;
 
     public CopyDTO(PublicationDTO publication, SaleDTO sale, Date dateOfPurchase) {
         this.publication = publication;

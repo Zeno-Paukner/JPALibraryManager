@@ -49,7 +49,7 @@ public class RentLogic {
                 .setParameter(4, rentDTO.getClient().getEmail())
                 .getSingleResult();
 
-        if (!copy.getForSale() && !copy.getRented()) {
+        if ((copy.getClientReservedBy() == null || copy.getClientReservedBy() == client) &&!copy.getOnDisplay() && !copy.getForSale() && !copy.getRented()) {
 
             Rent rent = new Rent();
             List<Rent> rents = entityManager.createQuery("SELECT r FROM Rent r WHERE r.copy.id = ?1 and r.client.phoneNumber = ?2", Rent.class)
@@ -57,7 +57,6 @@ public class RentLogic {
                     .setParameter(2, client.getPhoneNumber())
                     .getResultList();
             if (rents.size() > 3) {
-                rent.setNeedEmployeeToRentAgain(true);
                 throw new RuntimeException("Der Kunde muss zu einen Mitarbeiter um das Buch ein weiteres Mal auszuleihen");
             }
 
@@ -70,14 +69,21 @@ public class RentLogic {
                     .setParameter(2, rentDTO.getEmployee().getFirstName())
                     .getSingleResult());
             copy.setRented(true);
+            copy.setClientReservedBy(null);
             entityManager.persist(copy);
             entityManager.persist(rent);
             return rent;
         } else {
             if (copy.getRented())
                 throw new RuntimeException("Das Buch ist bereits ausgeliehen");
-            else
+            else if (copy.getForSale())
                 throw new RuntimeException("Das Buch ist zum Verkauf");
+            else if (copy.getOnDisplay())
+                throw new RuntimeException("Das Buch ist ausgestellt");
+            else if (copy.getClientReservedBy() != client)
+                throw new RuntimeException("Das Buch ist reserviert");
+            else
+                throw new RuntimeException();
         }
     }
 
@@ -88,5 +94,51 @@ public class RentLogic {
                 .setParameter(1, rentDTO.getId())
                 .getSingleResult();
         rent.getCopy().setRented(false);
+    }
+
+    @Transactional
+    public void reserveCopy(RentDTO rentDTO){
+        var copy = entityManager.createQuery("SELECT c FROM Copy c WHERE c.id = ?1", Copy.class)
+                .setParameter(1, rentDTO.getCopy().getId())
+                .getSingleResult();
+
+        var client = entityManager.createQuery("SELECT c FROM Client c WHERE c.firstName = ?1 and c.lastName = ?2 and c.phoneNumber = ?3 and c.email = ?4", Client.class)
+                .setParameter(1, rentDTO.getClient().getFirstName())
+                .setParameter(2, rentDTO.getClient().getLastName())
+                .setParameter(3, rentDTO.getClient().getPhoneNumber())
+                .setParameter(4, rentDTO.getClient().getEmail())
+                .getSingleResult();
+
+        copy.setClientReservedBy(client);
+    }
+
+    @Transactional
+    public void prolongRent(RentDTO rentDTO){
+        Rent rent = entityManager.createQuery("SELECT r FROM Rent r WHERE r.id = ?1", Rent.class)
+                .setParameter(1, rentDTO.getId())
+                .getSingleResult();
+
+        if (rent.getProlongedCounter() < 2){
+            rent.getDeadline().setTime(rent.getDeadline().getTime() + 1000 * 60 * 60 * 24 * 7 * 2);
+            rent.setProlongedCounter(rent.getProlongedCounter()+1);
+        }
+        else{
+            throw new RuntimeException("Muss von Mitarbeiter verlängert werden");
+        }
+    }
+
+    @Transactional
+    public void prolongRent(RentDTO rentDTO, Employee employee){
+        Rent rent = entityManager.createQuery("SELECT r FROM Rent r WHERE r.id = ?1", Rent.class)
+                .setParameter(1, rentDTO.getId())
+                .getSingleResult();
+
+        if (employee != null){
+            rent.getDeadline().setTime(rent.getDeadline().getTime() + 1000 * 60 * 60 * 24 * 7 * 2);
+            rent.setProlongedCounter(rent.getProlongedCounter()+1);
+        }
+        else{
+            throw new RuntimeException("Muss von Mitarbeiter verlängert werden");
+        }
     }
 }

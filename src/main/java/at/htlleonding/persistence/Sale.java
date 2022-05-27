@@ -30,11 +30,7 @@ public class Sale {
     private double totalPrice;
 
     public Integer getTotalCopiesAmount() {
-        return totalCopiesAmount;
-    }
-
-    public void setTotalCopiesAmount(Integer totalCopiesAmount) {
-        this.totalCopiesAmount = totalCopiesAmount;
+        return copyList.size();
     }
 
     @Column
@@ -53,10 +49,6 @@ public class Sale {
         this.saleDate = saleDate;
         this.totalPrice = totalPrice;
         this.invoice = invoice;
-        this.totalCopiesAmount = copyList.size();
-    }
-
-    public void totalCopiesAmount(){
         this.totalCopiesAmount = copyList.size();
     }
 
