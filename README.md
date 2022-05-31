@@ -1,6 +1,8 @@
 # JPALibraryManager
 A simple Quarkus JPA exercise for a library management system.
+
 ###ERD
+
 ![ERD](ERD.svg)
 
 
