@@ -1,6 +1,12 @@
 package at.htlleonding.repository;
 //
+import at.htlleonding.XMLDTOs.WorksOfAuthorDTO;
 import at.htlleonding.persistence.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.util.List;
 
@@ -417,6 +423,18 @@ public class LibraryRepository {
         } catch (Exception e) {
             System.out.println(e);
             return null;
+        }
+    }
+
+    public String convertToXml(WorksOfAuthorDTO worksOfAuthorDTO) {
+        ObjectMapper xmlMapper = new XmlMapper();
+        xmlMapper.registerModule(new JavaTimeModule());
+        xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        try {
+            return xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(worksOfAuthorDTO);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
         }
     }
 }

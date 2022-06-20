@@ -1,0 +1,17 @@
+<WorksOfAuthors>
+  <Author firstName="Romeo" lastName="Bhuiyan" dob="2004-02-15" dod="2022-06-12">
+    <Work title="Romy im Wunderland" genre="at.htlleonding.persistence.Genre@1537c744">
+      <Publication publisher="IrgendwasHilfe" pubYear="2022-06-12" type="BOOK"/>
+    </Work>
+  </Author>
+  <Author firstName="Zeno" lastName="Paukner" dob="2004-02-15" dod="2022-06-12">
+    <Work title="Zeno im Wunderland" genre="at.htlleonding.persistence.Genre@1537c744">
+      <Publication publisher="IrgendwasHilfe" pubYear="2022-06-12" type="BOOK"/>
+    </Work>
+  </Author>
+  <Author firstName="Martin" lastName="Hausleitner" dob="2004-02-15" dod="2022-06-12">
+    <Work title="Martin im Wunderland" genre="at.htlleonding.persistence.Genre@1537c744">
+      <Publication publisher="IrgendwasHilfe" pubYear="2022-06-12" type="BOOK"/>
+    </Work>
+  </Author>
+</WorksOfAuthors>
