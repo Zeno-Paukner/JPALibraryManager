@@ -191,13 +191,13 @@ public class WorksOfAuthorsXmlTest {
         var author3 = new AuthorDTO(aut3.getFirstName(), aut3.getLastName(), LocalDate.parse("15.02.2004", dtf), LocalDate.parse("12.06.2022", dtf));
 
         //First Book
-        var book1 = new AuthorWorkDTO(publication1.getTitle(), publication1.getGenre().toString());
+        var book1 = new AuthorWorkDTO(publication1.getTitle(), publication1.getGenre().getGenre());
         book1.getPublications().add(new WorkPublicationDTO(publication1.getPublisher().getPublisherName(), LocalDate.parse("12.06.2022", dtf), publication1.getMediatype().getMediatypeEnum().toString()));
 
-        var book2 = new AuthorWorkDTO(publication2.getTitle(), publication2.getGenre().toString());
+        var book2 = new AuthorWorkDTO(publication2.getTitle(), publication2.getGenre().getGenre());
         book2.getPublications().add(new WorkPublicationDTO(publication2.getPublisher().getPublisherName(), LocalDate.parse("12.06.2022", dtf), publication2.getMediatype().getMediatypeEnum().toString()));
 
-        var book3 = new AuthorWorkDTO(publication3.getTitle(), publication3.getGenre().toString());
+        var book3 = new AuthorWorkDTO(publication3.getTitle(), publication3.getGenre().getGenre());
         book3.getPublications().add(new WorkPublicationDTO(publication3.getPublisher().getPublisherName(), LocalDate.parse("12.06.2022", dtf), publication3.getMediatype().getMediatypeEnum().toString()));
 
         author1.getWorks().add(book1);
@@ -215,9 +215,8 @@ public class WorksOfAuthorsXmlTest {
         String xsdFile = "xsd/report.xsd";
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = null;
-        Path path = Paths.get("C:\\Users\\bhuiy\\Documents\\Github\\JPALibraryManager\\output\\out.xml");
+        target.exportToXml("./output/out.xml", xml);
 
-        Files.writeString(path, xml, StandardCharsets.UTF_8);
         try {
             schema = schemaFactory.newSchema(new Source[] {
                     new StreamSource(new File(xsdFile))

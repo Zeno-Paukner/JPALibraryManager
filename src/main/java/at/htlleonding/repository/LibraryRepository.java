@@ -8,6 +8,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -50,6 +55,11 @@ public class LibraryRepository {
     @Transactional
     public void clear() {
         entityManager.clear();
+    }
+
+    @Transactional
+    public <T> void add(T entity) {
+        entityManager.persist(entity);
     }
 
     @Transactional
@@ -436,5 +446,10 @@ public class LibraryRepository {
             e.printStackTrace();
             return "";
         }
+    }
+    public void exportToXml(String filepath, String data) throws IOException {
+        Path path = Paths.get(filepath);
+
+        Files.writeString(path, data, StandardCharsets.UTF_8);
     }
 }
