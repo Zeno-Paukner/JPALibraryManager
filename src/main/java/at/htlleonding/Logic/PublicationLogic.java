@@ -49,8 +49,7 @@ public class PublicationLogic {
         //publication.setMediatype(entityManager.createQuery("select media from Mediatype media where media = ?1", Mediatype.class)
         //        .setParameter(1, publicationDTO.getMediatype().getId()).getSingleResult());
 
-        //TODO: Set all Authors and Topics
-        //set authors in publication
+
 
 
         //publication.setAuthor(entityManager.find(Genre.class, publicationDTO.getGenre_id()));

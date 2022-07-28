@@ -28,8 +28,6 @@ public class SaleLogic {
         Sale sale = new Sale();
 
         // check if all copies are available to purchase
-
-
         for (var copy : saleDTO.getCopyList()) {
             var copy_id = copy.getId();
             if (!checkIfCopyIsAvailableToPurchase(copy_id)) {
